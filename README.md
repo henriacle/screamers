@@ -1,2 +1,2 @@
-# screamers
-Screamers game
+# Game Project : InHuman
+References: Screamers
