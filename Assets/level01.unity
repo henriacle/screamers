@@ -2204,6 +2204,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _idleTimeRange: {x: 5, y: 10}
+--- !u!114 &1922406332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1922406325}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 082fd7f591226de488b315715851e3ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _AIWaypointNetwork: {fileID: 312534643}
+  _randomPatrol: 0
+  _currentWaypoint: 0
+  _speed: 1
+  _turnOnSpotThreshold: 360
+  _slerpSpeed: 5
 --- !u!1 &2095361762
 GameObject:
   m_ObjectHideFlags: 0
