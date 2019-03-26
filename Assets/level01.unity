@@ -2972,7 +2972,7 @@ GameObject:
   - component: {fileID: 1748716957}
   m_Layer: 9
   m_Name: Melee Zone Trigger
-  m_TagString: Untagged
+  m_TagString: Melee Zone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3485,21 +3485,6 @@ MonoBehaviour:
   _intelligence: 1
   _weaponType: 2
   _weapon: {fileID: 362745018}
---- !u!114 &1922406335
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1922406325}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8393dd17ecad7ca4ab9761b2fc4d6553, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _speed: 0
-  _slerpSpeed: 5
-  _maxDuration: 40
 --- !u!114 &1922406336
 MonoBehaviour:
   m_ObjectHideFlags: 0
