@@ -5,7 +5,7 @@ using UnityEngine;
 public class AIHumanRobot_Fire1 : AIHumanRobotState
 {
     [SerializeField] [Range(0, 10)] float _speed = 0.0f;
-    [SerializeField] float _stoppingDistance = 10.0f;
+    [SerializeField] float _stoppingDistance = 1.0f;
     [SerializeField] [Range(0.0f, 1.0f)] float _lookAtWeight = 0.7f;
     [SerializeField] [Range(0.0f, 90.0f)] float _lookAtAngleThreshold = 15.0f;
     [SerializeField] float _slerpSpeed = 5.0f;
@@ -21,19 +21,19 @@ public class AIHumanRobot_Fire1 : AIHumanRobotState
 
     public override void OnEnterState()
     {
-        Debug.Log("Entering fire state");
-
         if (_humanRobotStateMachine == null)
             return;
 
         _humanRobotStateMachine.NavAgentControl(true, false);
         _humanRobotStateMachine.seeking = 0;
+        _humanRobotStateMachine.firing = true;
         _humanRobotStateMachine.attackType = 0;
+        _humanRobotStateMachine.reloading = false;
     }
 
     public override void OnExitState()
     {
-        _humanRobotStateMachine.firing = false;
+        _humanRobotStateMachine.attackType = 0;
     }
 
     public override AIStateType OnUpdate()
@@ -43,7 +43,6 @@ public class AIHumanRobot_Fire1 : AIHumanRobotState
 
         if (Vector3.Distance(_humanRobotStateMachine.transform.position, _humanRobotStateMachine.targetPosition) < _stoppingDistance)
         {
-            _humanRobotStateMachine.firing = true;
             _humanRobotStateMachine.speed = 0;
         }
         else
@@ -63,33 +62,21 @@ public class AIHumanRobot_Fire1 : AIHumanRobotState
 
             if (!_humanRobotStateMachine.useRootRotation)
             {
+                Debug.Log("NOT USING ROOT ROTATION");
                 targetPos = _humanRobotStateMachine.targetPosition;
                 targetPos.y = _humanRobotStateMachine.transform.position.y;
                 newRot = Quaternion.LookRotation(targetPos - _humanRobotStateMachine.transform.position);
                 _humanRobotStateMachine.transform.rotation = Quaternion.Slerp(_humanRobotStateMachine.transform.rotation, newRot, Time.deltaTime * _slerpSpeed);
-            }
 
-            return AIStateType.Fire;
+                _humanRobotStateMachine.attackType = 0;
+
+                return AIStateType.Fire;
+            } else
+            {
+                Debug.Log("USING ROOT ROTATION");
+            }
         }
 
         return AIStateType.Alerted;
-    }
-
-    public override void OnAnimatorIKUpdated()
-    {
-        if (_humanRobotStateMachine == null)
-            return;
-
-        if (Vector3.Angle(_humanRobotStateMachine.transform.forward, _humanRobotStateMachine.targetPosition - _humanRobotStateMachine.transform.position) < _lookAtAngleThreshold)
-        {
-            _humanRobotStateMachine.animator.SetLookAtPosition(_humanRobotStateMachine.targetPosition + Vector3.up);
-            _currentLookAtWeight = Mathf.Lerp(_currentLookAtWeight, _lookAtWeight, Time.deltaTime);
-            _humanRobotStateMachine.animator.SetLookAtWeight(_currentLookAtWeight);
-        }
-        else
-        {
-            _currentLookAtWeight = Mathf.Lerp(_currentLookAtWeight, 0.0f, Time.deltaTime);
-            _humanRobotStateMachine.animator.SetLookAtWeight(_currentLookAtWeight);
-        }
     }
 }

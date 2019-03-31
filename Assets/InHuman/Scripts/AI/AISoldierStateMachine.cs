@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum WeaponType { PISTOL, RIFLE, UNARMED };
+public enum EnemyWeaponType { UNARMED, RIFLE, PISTOL };
 
 public class AISoldierStateMachine : AIStateMachine
 {
@@ -13,7 +13,7 @@ public class AISoldierStateMachine : AIStateMachine
     [SerializeField] [Range(0.0f, 1.0f)]    float       _agression      = 0.5f;
     [SerializeField] [Range(0, 100)]        int         _health         = 100;
     [SerializeField] [Range(0.0f, 1.0f)]    float       _intelligence   = 1.0f;
-    [SerializeField]                        WeaponType  _weaponType     = WeaponType.UNARMED;
+    [SerializeField]                        EnemyWeaponType   _weaponType     = EnemyWeaponType.UNARMED;
     [SerializeField]                        GameObject   _weapon        = null;
     AttachWeapon attachWeapon = null;
 
@@ -44,7 +44,7 @@ public class AISoldierStateMachine : AIStateMachine
     public float        intelligence    { get { return _intelligence; } }
     public bool         headShot        { get { return _headShot; }}
     public bool         dying           { get { return _dying; }}
-    public WeaponType   weaponType      {
+    public EnemyWeaponType weaponType      {
         get { return _weaponType; }
         set { _weaponType = value; }
     }
@@ -72,11 +72,11 @@ public class AISoldierStateMachine : AIStateMachine
     {
         base.Update();
 
-        if(_weaponType == WeaponType.UNARMED)
+        if(_weaponType == EnemyWeaponType.UNARMED)
         {
             attachWeapon.weaponStatus(false);
         }
-        else if (_weaponType == WeaponType.RIFLE)
+        else if (_weaponType == EnemyWeaponType.RIFLE)
         {
             attachWeapon.weaponStatus(true);
         }
@@ -89,6 +89,7 @@ public class AISoldierStateMachine : AIStateMachine
             _animator.SetBool(_crouchingHash, _crouching);
             _animator.SetInteger(_seekingHash, _seeking);
             _animator.SetInteger(_attackHash, _attackType);
+            _animator.SetInteger(_weaponTypeHash, (int)_weaponType);
         }
     }
 }

@@ -55,11 +55,11 @@ public class AIHumanRobot_Pursuit1 : AIHumanRobotState
         if (_timer > _maxDuration)
             return AIStateType.Patrol;
 
-        /*
+        
         if (_stateMachine.targetType == AITargetType.Visual_Player && _humanRobotStateMachine.inFireRange)
         {
             return AIStateType.Fire;
-        }*/
+        }
 
         if (_stateMachine.targetType == AITargetType.Visual_Player && _humanRobotStateMachine.inMeleeRange)
         {

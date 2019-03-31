@@ -10,7 +10,6 @@ public class MeleeZone : MonoBehaviour
 
         if(machine && gameObject.CompareTag("Melee Zone"))
             machine.inMeleeRange    = true;
-            machine.inFireRange     = false;
     }
 
     private void OnTriggerExit(Collider other)
