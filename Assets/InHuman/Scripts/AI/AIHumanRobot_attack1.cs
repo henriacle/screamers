@@ -36,6 +36,11 @@ public class AIHumanRobot_attack1 : AIHumanRobotState
         _humanRobotStateMachine.attackType = 0;
     }
 
+    void OnEasyWeaponsFire()
+    {
+        Debug.Log("Teste");
+    }
+
     public override AIStateType OnUpdate()
     {
         Vector3     targetPos;
