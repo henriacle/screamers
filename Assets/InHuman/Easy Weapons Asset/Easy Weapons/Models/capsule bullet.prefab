@@ -113,7 +113,7 @@ MonoBehaviour:
   initialForce: 1000
   lifetime: 30
   seekRate: 1
-  seekTag: Enemy
+  seekTag: Player
   explosion: {fileID: 0}
   targetListUpdateRate: 1
   clusterBomb: {fileID: 0}

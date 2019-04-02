@@ -29,16 +29,28 @@ public class AIHumanRobot_Fire1 : AIHumanRobotState
 
         _humanRobotStateMachine.NavAgentControl(true, false);
         _humanRobotStateMachine.seeking = 0;
-        _humanRobotStateMachine.firing = true;
+        _humanRobotStateMachine.firing = false;
         _humanRobotStateMachine.attackType = 0;
         _humanRobotStateMachine.reloading = false;
         _weaponSystem = gameObject.GetComponentInChildren<OriginalWeaponSystem>();
         _npcWeapon = _weaponSystem.weapons[0].GetComponent<Weapon>();
+        _npcWeapon.reloadAutomatically = true;
     }
 
     public override void OnExitState()
     {
         _humanRobotStateMachine.attackType = 0;
+    }
+
+    public void OnEasyWeaponsFire()
+    {
+        Debug.Log("firing");
+    }
+
+    public void OnEasyWeaponsReload()
+    {
+        _humanRobotStateMachine.firing = false;
+        _humanRobotStateMachine.reloading = true;
     }
 
     public override AIStateType OnUpdate()
@@ -60,6 +72,11 @@ public class AIHumanRobot_Fire1 : AIHumanRobotState
         {
             _humanRobotStateMachine.SetTarget(_stateMachine.VisualThreat);
 
+            if (_humanRobotStateMachine.inMeleeRange)
+            {
+                return AIStateType.Attack;
+            };
+
             if (!_humanRobotStateMachine.inFireRange)
             {
                 return AIStateType.Pursuit;
@@ -73,7 +90,17 @@ public class AIHumanRobot_Fire1 : AIHumanRobotState
                 _humanRobotStateMachine.transform.rotation = Quaternion.Slerp(_humanRobotStateMachine.transform.rotation, newRot, Time.deltaTime * _slerpSpeed);
 
                 _humanRobotStateMachine.attackType = 0;
-                _npcWeapon.RemoteFire();
+
+                if(_npcWeapon.canFire)
+                {
+                    _humanRobotStateMachine.reloading = false;
+                    _humanRobotStateMachine.firing = true;
+                    _npcWeapon.RemoteFire();
+                } else
+                {
+                    _humanRobotStateMachine.reloading = false;
+                    _humanRobotStateMachine.firing = true;
+                }
 
                 return AIStateType.Fire;
             } else
@@ -84,4 +111,5 @@ public class AIHumanRobot_Fire1 : AIHumanRobotState
 
         return AIStateType.Alerted;
     }
+
 }

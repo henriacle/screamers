@@ -55,15 +55,14 @@ public class AIHumanRobot_Pursuit1 : AIHumanRobotState
         if (_timer > _maxDuration)
             return AIStateType.Patrol;
 
-        
-        if (_stateMachine.targetType == AITargetType.Visual_Player && _humanRobotStateMachine.inFireRange)
-        {
-            return AIStateType.Fire;
-        }
-
         if (_stateMachine.targetType == AITargetType.Visual_Player && _humanRobotStateMachine.inMeleeRange)
         {
             return AIStateType.Attack;
+        }
+
+        if (_stateMachine.targetType == AITargetType.Visual_Player && _humanRobotStateMachine.inFireRange && _humanRobotStateMachine.weaponType == EnemyWeaponType.RIFLE)
+        {
+            return AIStateType.Fire;
         }
 
         if (_humanRobotStateMachine.isTargetReached)
@@ -215,7 +214,7 @@ public class AIHumanRobot_Pursuit1 : AIHumanRobotState
         return AIStateType.Pursuit;
     }
 
-    public override void OnAnimatorIKUpdated()
+   /* public override void OnAnimatorIKUpdated()
     {
         if (_humanRobotStateMachine == null)
             return;
@@ -231,5 +230,5 @@ public class AIHumanRobot_Pursuit1 : AIHumanRobotState
             _currentLookAtWeight = Mathf.Lerp(_currentLookAtWeight, 0.0f, Time.deltaTime);
             _humanRobotStateMachine.animator.SetLookAtWeight(_currentLookAtWeight);
         }
-    }
+    }*/
 }
