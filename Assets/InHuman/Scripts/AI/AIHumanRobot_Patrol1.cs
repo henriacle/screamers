@@ -104,7 +104,7 @@ public class AIHumanRobot_Patrol1 : AIHumanRobotState
         if (!_humanRobotStateMachine.useRootRotation)
         {
             // Generate a new Quaternion representing the rotation we should have
-            if (_humanRobotStateMachine.navAgent.velocity != Vector3.zero)
+            if (_humanRobotStateMachine.navAgent.desiredVelocity != Vector3.zero)
             {
                 Quaternion newRot = Quaternion.LookRotation(_humanRobotStateMachine.navAgent.desiredVelocity);
                 // Smoothly rotate to that new rotation over time

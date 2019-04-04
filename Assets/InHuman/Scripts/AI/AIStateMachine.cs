@@ -17,11 +17,13 @@ public struct AITarget
     private Collider _collider;     // The collider
     private Vector3 _position;      // Current position in the world
     private float _distance;        // Distance from player
+    private Quaternion _rotation;        // angle between target
     private float _time;            // Time the target was last ping'd
 
     public AITargetType type { get { return _type; } }
     public Collider collider { get { return _collider; } }
     public Vector3 position { get { return _position; } }
+    public Quaternion rotation { get { return _rotation; } }
     public float distance { get { return _distance; } set { _distance = value; } }
     public float time { get { return _time; } }
 
@@ -34,11 +36,22 @@ public struct AITarget
         _time = Time.time;
     }
 
+    public void Set(AITargetType t, Collider c, Vector3 p, float d, Quaternion r)
+    {
+        _type = t;
+        _collider = c;
+        _position = p;
+        _distance = d;
+        _rotation = r;
+        _time = Time.time;
+    }
+
     public void Clear()
     {
         _type = AITargetType.None;
         _collider = null;
         _position = Vector3.zero;
+        _rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
         _time = 0.0f;
         _distance = Mathf.Infinity;
     }
@@ -114,6 +127,7 @@ public abstract class AIStateMachine : MonoBehaviour
     public bool useRootRotation { get { return _rootRotationRefCount > 0; } }
     public AITargetType targetType { get { return _target.type; } }
     public Vector3 targetPosition { get { return _target.position; } }
+    public Quaternion rotationAngle { get { return _target.rotation; } }
     public int targetColliderID
     {
         get

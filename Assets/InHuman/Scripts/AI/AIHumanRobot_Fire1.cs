@@ -42,15 +42,26 @@ public class AIHumanRobot_Fire1 : AIHumanRobotState
         _humanRobotStateMachine.attackType = 0;
     }
 
-    public void OnEasyWeaponsFire()
+    public void OnEasyWeaponsLaunch()
     {
-        Debug.Log("firing");
+        Debug.Log("easy weapons launch");
     }
 
-    public void OnEasyWeaponsReload()
+
+    IEnumerator OnEasyWeaponsFire()
     {
-        _humanRobotStateMachine.firing = false;
+        Debug.Log("fire !");
+        yield return new WaitForSeconds(1.5f);
+        _npcWeapon.canFire = true;
+    }
+
+    IEnumerator OnEasyWeaponsReload()
+    {
+        Debug.Log("reload");
         _humanRobotStateMachine.reloading = true;
+        yield return new WaitForSeconds(1.5f);
+        _npcWeapon.currentAmmo = _npcWeapon.ammoCapacity;
+        _npcWeapon.canFire = true;
     }
 
     public override AIStateType OnUpdate()
@@ -91,25 +102,18 @@ public class AIHumanRobot_Fire1 : AIHumanRobotState
 
                 _humanRobotStateMachine.attackType = 0;
 
-                if(_npcWeapon.canFire)
+                if (_npcWeapon.currentAmmo > 0)
                 {
-                    _humanRobotStateMachine.reloading = false;
                     _humanRobotStateMachine.firing = true;
                     _npcWeapon.RemoteFire();
-                } else
-                {
-                    _humanRobotStateMachine.reloading = false;
-                    _humanRobotStateMachine.firing = true;
+                    Debug.Log(_npcWeapon.canFire);
                 }
 
                 return AIStateType.Fire;
-            } else
-            {
-                Debug.Log("USING ROOT ROTATION");
             }
         }
 
-        return AIStateType.Alerted;
+        return AIStateType.Fire;
     }
 
 }

@@ -30,7 +30,6 @@ public class AIHumanRobot_alerted1 : AIHumanRobotState
     // ------------------------------------------------------------------
     public override void OnEnterState()
     {
-        Debug.Log("Entering Alerted State");
         base.OnEnterState();
         if (_humanRobotStateMachine == null)
             return;
@@ -128,6 +127,8 @@ public class AIHumanRobot_alerted1 : AIHumanRobotState
                                             _humanRobotStateMachine.navAgent.steeringTarget - _humanRobotStateMachine.transform.position);
 
             if (Mathf.Abs(angle) < _waypointAngleThreshold) return AIStateType.Patrol;
+
+
             if (_directionChangeTimer > _directionChangeTime)
             {
                 _humanRobotStateMachine.seeking = (int)Mathf.Sign(angle);
@@ -138,8 +139,13 @@ public class AIHumanRobot_alerted1 : AIHumanRobotState
             if (_directionChangeTimer > _directionChangeTime)
             {
                 _humanRobotStateMachine.seeking = (int)Mathf.Sign(Random.Range(-1.0f, 1.0f));
-                _directionChangeTimer = 0.0f;
+                _directionChangeTimer = 0.0f;       
             }
+        }
+
+        if(_directionChangeTimer > _directionChangeTime - 0.50f)
+        {
+            _humanRobotStateMachine.seeking = 0;
         }
 
         return AIStateType.Alerted;

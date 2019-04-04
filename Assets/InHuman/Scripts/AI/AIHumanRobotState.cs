@@ -43,7 +43,7 @@ public abstract class AIHumanRobotState : AIState
                     RaycastHit hitInfo;
                     if (ColliderIsVisible (other, out hitInfo, _playerLayerMask)) 
                     {
-                        _humanRobotStateMachine.VisualThreat.Set(AITargetType.Visual_Player, other, other.transform.position, distance);
+                        _humanRobotStateMachine.VisualThreat.Set(AITargetType.Visual_Player, other, other.transform.position, distance, other.transform.rotation);
                     }
                 }
             } else if(other.CompareTag("Flash Light") && curType != AITargetType.Visual_Player)
