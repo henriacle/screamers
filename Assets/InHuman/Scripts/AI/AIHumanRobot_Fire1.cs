@@ -61,6 +61,7 @@ public class AIHumanRobot_Fire1 : AIHumanRobotState
         _humanRobotStateMachine.reloading = true;
         yield return new WaitForSeconds(1.5f);
         _npcWeapon.currentAmmo = _npcWeapon.ammoCapacity;
+        _humanRobotStateMachine.reloading = false;
         _npcWeapon.canFire = true;
     }
 
