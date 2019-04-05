@@ -68,22 +68,25 @@ public abstract class AIStateMachine : MonoBehaviour
     public AITarget AudioThreat = new AITarget();
 
     // Protected
-    protected AIState _currentState = null;
+    protected AIState           _currentState = null;
     protected Dictionary<AIStateType, AIState> _states  = new Dictionary<AIStateType, AIState>();
-    protected AITarget _target                          = new AITarget();
-    protected int _rootPositionRefCount                 = 0;
-    protected int _rootRotationRefCount                 = 0;
-    protected bool _isTargetReached                     = false;
-    protected bool _isFireRange                         = false;
-    protected bool _isMeleeRange                        = false;
+    protected AITarget          _target                          = new AITarget();
+    protected int               _rootPositionRefCount   = 0;
+    protected int               _rootRotationRefCount   = 0;
+    protected bool              _isTargetReached        = false;
+    protected List<Rigidbody>   _bodyParts              = new List<Rigidbody>();
+    protected bool              _isFireRange            = false;
+    protected bool              _isMeleeRange           = false;
+    protected int               _aiBodyPartLayer        = -1;
 
     // Protected Inspector Assigned
-    [SerializeField] protected AIStateType _currentStateType            = AIStateType.Idle;
-    [SerializeField] protected SphereCollider _targetTrigger            = null;
-    [SerializeField] protected SphereCollider _sensorTrigger            = null;
-    [SerializeField] protected AIWaypointNetwork _waypointNetwork       = null;
-    [SerializeField] protected bool _randomPatrol                       = false;
-    [SerializeField] protected int _currentWaypoint                     = -1;
+    [SerializeField] protected AIStateType          _currentStateType   = AIStateType.Idle;
+    [SerializeField] Transform _rootBone                                = null;
+    [SerializeField] protected SphereCollider       _targetTrigger      = null;
+    [SerializeField] protected SphereCollider       _sensorTrigger      = null;
+    [SerializeField] protected AIWaypointNetwork    _waypointNetwork    = null;
+    [SerializeField] protected bool                 _randomPatrol       = false;
+    [SerializeField] protected int                  _currentWaypoint    = -1;
     [SerializeField] [Range(0, 15)] protected float _stoppingDistance   = 1.0f;
 
     // Component Cache
@@ -151,6 +154,9 @@ public abstract class AIStateMachine : MonoBehaviour
         _navAgent = GetComponent<NavMeshAgent>();
         _collider = GetComponent<Collider>();
 
+        //get body part layer
+        _aiBodyPartLayer = LayerMask.NameToLayer("AI Body Part");
+
         // Do we have a valid Game Scene Manager
         if (GameSceneManager.instance != null)
         {
@@ -159,6 +165,17 @@ public abstract class AIStateMachine : MonoBehaviour
             if (_sensorTrigger) GameSceneManager.instance.RegisterAIStateMachine(_sensorTrigger.GetInstanceID(), this);
         }
 
+        if (_rootBone != null)
+        {
+            Rigidbody[] bodies = _rootBone.GetComponentsInChildren<Rigidbody>();
+            foreach(Rigidbody bodypart in bodies)
+            {
+                if(bodypart != null && bodypart.gameObject.layer == _aiBodyPartLayer)
+                {
+                    _bodyParts.Add(bodypart);
+                }
+            }
+        }
     }
 
     // -----------------------------------------------------------------
@@ -448,5 +465,10 @@ public abstract class AIStateMachine : MonoBehaviour
     {
         _rootPositionRefCount += rootPosition;
         _rootRotationRefCount += rootRotation;
+    }
+
+    public virtual void takeDamage(Vector3 position, float force, float damage, Rigidbody bodyPart, int hitDirection = 0)
+    {
+
     }
 }

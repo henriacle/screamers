@@ -11,11 +11,11 @@ public class AISoldierStateMachine : AIStateMachine
     [SerializeField] [Range(0.0f, 1.0f)]    float       _sight          = 0.5f;
     [SerializeField] [Range(0.0f, 1.0f)]    float       _hearing        = 0.5f;
     [SerializeField] [Range(0.0f, 1.0f)]    float       _agression      = 0.5f;
-    [SerializeField] [Range(0, 100)]        int         _health         = 100;
+    [SerializeField] [Range(0, 100)]        float       _health         = 100.0f;
     [SerializeField] [Range(0.0f, 1.0f)]    float       _intelligence   = 1.0f;
     [SerializeField]                        EnemyWeaponType   _weaponType     = EnemyWeaponType.UNARMED;
-    [SerializeField]                        GameObject   _weapon        = null;
-    AttachWeapon attachWeapon = null;
+    GameObject   _weapon                                                = null;
+    AttachWeapon attachWeapon                                           = null;
 
     //private
     private int     _seeking    = 0;
@@ -36,6 +36,8 @@ public class AISoldierStateMachine : AIStateMachine
     private int _attackHash     = Animator.StringToHash("Attack");
     private int _crouchingHash  = Animator.StringToHash("Crouching");
     private int _weaponTypeHash  = Animator.StringToHash("Weapon Type");
+    private OriginalWeaponSystem _weaponSystem = null;
+    private Weapon _npcWeapon = null;
 
     //public properties
     public float        fov             { get { return _fov; } }
@@ -48,11 +50,12 @@ public class AISoldierStateMachine : AIStateMachine
         get { return _weaponType; }
         set { _weaponType = value; }
     }
-    public int          seeking         { get { return _seeking; }      set { _seeking = value; } }
-    public bool         firing          { get { return _firing; }       set { _firing = value; } }
-    public bool         reloading       { get { return _reloading; }    set { _reloading = value; } }
-    public bool         crouching       { get { return _crouching; }    set { _crouching = value; } }
-    public int          hitType         { get { return _hitType; }      set { _hitType = value; } }
+    public int          seeking         { get { return _seeking; }          set { _seeking = value; } }
+    public bool         firing          { get { return _firing; }           set { _firing = value; } }
+    public bool         reloading       { get { return _reloading; }        set { _reloading = value; } }
+    public bool         crouching       { get { return _crouching; }        set { _crouching = value; } }
+    public float        health          { get { return _health; }           set { _health = value; } }
+    public int          hitType         { get { return _hitType; }          set { _hitType = value; } }
     public int          attackType      { get { return _attackType; }       set { _attackType = value; } }
     public float        speed
     {
@@ -64,8 +67,10 @@ public class AISoldierStateMachine : AIStateMachine
     protected override void Start()
     {
         base.Start();
+        _weaponSystem = gameObject.transform.root.GetComponentInChildren<OriginalWeaponSystem>();
+        _npcWeapon = _weaponSystem.weapons[_weaponSystem.weaponIndex].GetComponent<Weapon>();
         attachWeapon = GetComponent<AttachWeapon>();
-        attachWeapon.setWeapon(_weapon);
+        attachWeapon.setWeapon(_npcWeapon.gameObject);
     }
 
     protected override void Update()
@@ -90,6 +95,35 @@ public class AISoldierStateMachine : AIStateMachine
             _animator.SetInteger(_seekingHash, _seeking);
             _animator.SetInteger(_attackHash, _attackType);
             _animator.SetInteger(_weaponTypeHash, (int)_weaponType);
+        }
+    }
+
+    public override void takeDamage(Vector3 position, float force, float damage, Rigidbody bodyPart, int hitDirection = 0)
+    {
+        base.takeDamage(position, force, damage, bodyPart, hitDirection);
+
+        health = _health + damage;
+        bool shouldRagdoll = (health <= 0) ? true : false;
+
+        if (_navAgent)
+            _navAgent.speed = 0;
+
+        if (shouldRagdoll)
+        {
+            _navAgent.enabled = false;
+            _animator.enabled = false;
+            _collider.enabled = false;
+
+            inMeleeRange    = false;
+            inFireRange     = false;
+
+            foreach (Rigidbody body in _bodyParts)
+            {
+                if (body)
+                {
+                    body.isKinematic = false;
+                }
+            }
         }
     }
 }

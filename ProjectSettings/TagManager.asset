@@ -10,6 +10,10 @@ TagManager:
   - Flash Light
   - Melee Zone
   - Fire Zone
+  - Weapon
+  - Upper Body
+  - Lower Body
+  - Head
   layers:
   - Default
   - TransparentFX

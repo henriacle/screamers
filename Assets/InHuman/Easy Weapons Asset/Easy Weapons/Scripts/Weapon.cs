@@ -38,6 +38,13 @@ public enum BulletHoleSystem
 }
 
 
+public class HitInfo {
+    public float force;
+    public RaycastHit hit;
+    public Ray ray;
+    public float damage;
+}
+
 [System.Serializable]
 public class SmartBulletHoleGroup
 {
@@ -618,11 +625,18 @@ public class Weapon : MonoBehaviour
 					damage *= heat * powerMultiplier;
 					heat = 0.0f;
 				}
-				
-				// Damage
-				hit.collider.gameObject.SendMessageUpwards("ChangeHealth", -damage, SendMessageOptions.DontRequireReceiver);
-				
-				if (shooterAIEnabled)
+
+                HitInfo hitInfo = new HitInfo();
+                hitInfo.damage = -damage;
+                hitInfo.hit = hit;
+                hitInfo.force = power;
+                hitInfo.ray = ray;
+
+                // Damage
+                hit.collider.gameObject.SendMessageUpwards("ChangeHealth", -damage, SendMessageOptions.DontRequireReceiver);
+                hit.collider.gameObject.SendMessageUpwards("gameObjectHit", hitInfo, SendMessageOptions.DontRequireReceiver);
+
+                if (shooterAIEnabled)
 				{
 					hit.transform.SendMessageUpwards("Damage", damage / 100, SendMessageOptions.DontRequireReceiver);
 				}

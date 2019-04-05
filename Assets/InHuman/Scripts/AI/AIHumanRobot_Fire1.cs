@@ -29,11 +29,11 @@ public class AIHumanRobot_Fire1 : AIHumanRobotState
 
         _humanRobotStateMachine.NavAgentControl(true, false);
         _humanRobotStateMachine.seeking = 0;
-        _humanRobotStateMachine.firing = false;
+        _humanRobotStateMachine.firing = true;
         _humanRobotStateMachine.attackType = 0;
         _humanRobotStateMachine.reloading = false;
         _weaponSystem = gameObject.GetComponentInChildren<OriginalWeaponSystem>();
-        _npcWeapon = _weaponSystem.weapons[0].GetComponent<Weapon>();
+        _npcWeapon = _weaponSystem.weapons[_weaponSystem.weaponIndex].GetComponent<Weapon>();
         _npcWeapon.reloadAutomatically = true;
     }
 
@@ -47,6 +47,10 @@ public class AIHumanRobot_Fire1 : AIHumanRobotState
         Debug.Log("easy weapons launch");
     }
 
+    public void gameObjectHit(HitInfo hit)
+    {
+        _humanRobotStateMachine.takeDamage(hit.hit.point, 5.0f, hit.damage, hit.hit.rigidbody);
+    }
 
     IEnumerator OnEasyWeaponsFire()
     {
@@ -89,10 +93,15 @@ public class AIHumanRobot_Fire1 : AIHumanRobotState
                 return AIStateType.Attack;
             };
 
+            Debug.Log(_humanRobotStateMachine.inFireRange);
             if (!_humanRobotStateMachine.inFireRange)
             {
                 return AIStateType.Pursuit;
             };
+
+            if(!_humanRobotStateMachine.reloading) {
+                _humanRobotStateMachine.firing = true;
+            }
 
             if (!_humanRobotStateMachine.useRootRotation)
             {
@@ -103,18 +112,16 @@ public class AIHumanRobot_Fire1 : AIHumanRobotState
 
                 _humanRobotStateMachine.attackType = 0;
 
-                if (_npcWeapon.currentAmmo > 0)
+                if (_npcWeapon.currentAmmo > 0 && _npcWeapon.canFire)
                 {
-                    _humanRobotStateMachine.firing = true;
                     _npcWeapon.RemoteFire();
-                    Debug.Log(_npcWeapon.canFire);
                 }
 
                 return AIStateType.Fire;
             }
         }
 
-        return AIStateType.Fire;
+        return AIStateType.Alerted;
     }
 
 }

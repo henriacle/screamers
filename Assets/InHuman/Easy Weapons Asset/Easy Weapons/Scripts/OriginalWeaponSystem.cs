@@ -6,7 +6,7 @@ public class OriginalWeaponSystem : MonoBehaviour
 {
     public GameObject[] weapons;                // The array that holds all the weapons that the player has
     public int startingWeaponIndex = 0;         // The weapon index that the player will start with
-    private int weaponIndex;                    // The current index of the active weapon
+    public int weaponIndex;                    // The current index of the active weapon
 
 
     // Use this for initialization

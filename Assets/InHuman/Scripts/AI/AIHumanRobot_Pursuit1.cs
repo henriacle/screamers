@@ -42,8 +42,11 @@ public class AIHumanRobot_Pursuit1 : AIHumanRobotState
         _repathTimer = 0.0f;
 
 
-        _humanRobotStateMachine.navAgent.SetDestination(_humanRobotStateMachine.targetPosition);
-        _humanRobotStateMachine.navAgent.isStopped = false;
+        if(_humanRobotStateMachine.navAgent.enabled)
+        {
+            _humanRobotStateMachine.navAgent.SetDestination(_humanRobotStateMachine.targetPosition);
+            _humanRobotStateMachine.navAgent.isStopped = false;
+        }
 
     }
 

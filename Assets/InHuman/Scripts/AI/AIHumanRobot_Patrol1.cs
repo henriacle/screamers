@@ -41,11 +41,14 @@ public class AIHumanRobot_Patrol1 : AIHumanRobotState
         _humanRobotStateMachine.reloading = false;
         _humanRobotStateMachine.attackType = 0;
 
-        // Set Destination
-        _humanRobotStateMachine.navAgent.SetDestination(_humanRobotStateMachine.GetWaypointPosition(false));
+        if(_humanRobotStateMachine.navAgent.enabled)
+        {
+            // Set Destination
+            _humanRobotStateMachine.navAgent.SetDestination(_humanRobotStateMachine.GetWaypointPosition(false));
 
-        // Make sure NavAgent is switched on
-        _humanRobotStateMachine.navAgent.isStopped = false;
+            // Make sure NavAgent is switched on
+            _humanRobotStateMachine.navAgent.isStopped = false;
+        }
     }
 
 
@@ -114,11 +117,14 @@ public class AIHumanRobot_Patrol1 : AIHumanRobotState
 
         // If for any reason the nav agent has lost its path then call the NextWaypoint function
         // so a new waypoint is selected and a new path assigned to the nav agent.
-        if (_humanRobotStateMachine.navAgent.isPathStale ||
-            !_humanRobotStateMachine.navAgent.hasPath ||
-            _humanRobotStateMachine.navAgent.pathStatus != NavMeshPathStatus.PathComplete)
+        if(_humanRobotStateMachine.navAgent.enabled)
         {
-            _humanRobotStateMachine.navAgent.SetDestination(_humanRobotStateMachine.GetWaypointPosition(true));
+            if (_humanRobotStateMachine.navAgent.isPathStale ||
+                !_humanRobotStateMachine.navAgent.hasPath ||
+                _humanRobotStateMachine.navAgent.pathStatus != NavMeshPathStatus.PathComplete)
+            {
+                _humanRobotStateMachine.navAgent.SetDestination(_humanRobotStateMachine.GetWaypointPosition(true));
+            }
         }
 
 

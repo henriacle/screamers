@@ -59,8 +59,11 @@ public class AIHumanRobot_alerted1 : AIHumanRobotState
         // Transition into a patrol state if available
         if (_timer <= 0.0f)
         {
-            _humanRobotStateMachine.navAgent.SetDestination(_humanRobotStateMachine.GetWaypointPosition(false));
-            _humanRobotStateMachine.navAgent.isStopped = false;
+            if(_humanRobotStateMachine.navAgent.enabled)
+            {
+                _humanRobotStateMachine.navAgent.SetDestination(_humanRobotStateMachine.GetWaypointPosition(false));
+                _humanRobotStateMachine.navAgent.isStopped = false;
+            }
             _timer = _maxDuration;
         }
 
