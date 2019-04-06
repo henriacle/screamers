@@ -36,6 +36,7 @@ public class AISoldierStateMachine : AIStateMachine
     private int _attackHash     = Animator.StringToHash("Attack");
     private int _crouchingHash  = Animator.StringToHash("Crouching");
     private int _weaponTypeHash  = Animator.StringToHash("Weapon Type");
+    private GameSceneManager _gameSceneManager = null;
     private OriginalWeaponSystem _weaponSystem = null;
     private Weapon _npcWeapon = null;
 
@@ -69,6 +70,7 @@ public class AISoldierStateMachine : AIStateMachine
         base.Start();
         _weaponSystem = gameObject.transform.root.GetComponentInChildren<OriginalWeaponSystem>();
         _npcWeapon = _weaponSystem.weapons[_weaponSystem.weaponIndex].GetComponent<Weapon>();
+        _gameSceneManager = GameSceneManager.instance;
         attachWeapon = GetComponent<AttachWeapon>();
         attachWeapon.setWeapon(_npcWeapon.gameObject);
     }
@@ -96,6 +98,12 @@ public class AISoldierStateMachine : AIStateMachine
             _animator.SetInteger(_attackHash, _attackType);
             _animator.SetInteger(_weaponTypeHash, (int)_weaponType);
         }
+    }
+
+    public void gameObjectHit(HitInfo hit)
+    {
+        AIStateMachine stateMachine = _gameSceneManager.GetAIStateMachine(hit.hit.rigidbody.GetInstanceID());
+        takeDamage(hit.hit.point, 5.0f, hit.damage, hit.hit.rigidbody);
     }
 
     public override void takeDamage(Vector3 position, float force, float damage, Rigidbody bodyPart, int hitDirection = 0)

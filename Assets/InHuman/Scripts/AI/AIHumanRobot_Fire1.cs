@@ -47,11 +47,6 @@ public class AIHumanRobot_Fire1 : AIHumanRobotState
         Debug.Log("easy weapons launch");
     }
 
-    public void gameObjectHit(HitInfo hit)
-    {
-        _humanRobotStateMachine.takeDamage(hit.hit.point, 5.0f, hit.damage, hit.hit.rigidbody);
-    }
-
     IEnumerator OnEasyWeaponsFire()
     {
         Debug.Log("fire !");
@@ -93,7 +88,6 @@ public class AIHumanRobot_Fire1 : AIHumanRobotState
                 return AIStateType.Attack;
             };
 
-            Debug.Log(_humanRobotStateMachine.inFireRange);
             if (!_humanRobotStateMachine.inFireRange)
             {
                 return AIStateType.Pursuit;
@@ -106,7 +100,7 @@ public class AIHumanRobot_Fire1 : AIHumanRobotState
             if (!_humanRobotStateMachine.useRootRotation)
             {
                 targetPos = _humanRobotStateMachine.targetPosition;
-                targetPos.y = _humanRobotStateMachine.transform.position.y;
+                targetPos.y = _humanRobotStateMachine.transform.position.y - 20.0f;
                 newRot = Quaternion.LookRotation(targetPos - _humanRobotStateMachine.transform.position);
                 _humanRobotStateMachine.transform.rotation = Quaternion.Slerp(_humanRobotStateMachine.transform.rotation, newRot, Time.deltaTime * _slerpSpeed);
 
@@ -114,7 +108,7 @@ public class AIHumanRobot_Fire1 : AIHumanRobotState
 
                 if (_npcWeapon.currentAmmo > 0 && _npcWeapon.canFire)
                 {
-                    _npcWeapon.RemoteFire();
+                    _npcWeapon.AIFiring();
                 }
 
                 return AIStateType.Fire;

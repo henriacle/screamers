@@ -6522,7 +6522,7 @@ PrefabInstance:
     - target: {fileID: 1475185821506072221, guid: 1998706517d4ac842bdab071f9248d7e,
         type: 3}
       propertyPath: m_Name
-      value: Omni Soldier (1)
+      value: Omni Soldier
       objectReference: {fileID: 0}
     - target: {fileID: 1475185821573418785, guid: 1998706517d4ac842bdab071f9248d7e,
         type: 3}
@@ -6819,6 +6819,16 @@ PrefabInstance:
       propertyPath: type
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4596117250843922716, guid: 1998706517d4ac842bdab071f9248d7e,
+        type: 3}
+      propertyPath: delayBeforeFire
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596117250843922716, guid: 1998706517d4ac842bdab071f9248d7e,
+        type: 3}
+      propertyPath: shooterAIEnabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1998706517d4ac842bdab071f9248d7e, type: 3}
 --- !u!1 &1475185821261620639 stripped
@@ -7105,6 +7115,7 @@ GameObject:
   - component: {fileID: 3433540222969195079}
   - component: {fileID: 3433540222969195081}
   - component: {fileID: 3433540222969195082}
+  - component: {fileID: 3433540222969195084}
   m_Layer: 11
   m_Name: Player
   m_TagString: Player
@@ -7197,6 +7208,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3433540222969195084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3433540222969195078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c508b6827924fc4994ccc02b507b293, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3433540223096516745
 GameObject:
   m_ObjectHideFlags: 0
@@ -7803,7 +7826,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3433540224417334886}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 0
   m_Radius: 0.5000001
   m_Height: 2

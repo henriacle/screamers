@@ -134,7 +134,7 @@ public class Weapon : MonoBehaviour
 	// Rate of Fire
 	public float rateOfFire = 10;						// The number of rounds this weapon fires per second
 	private float actualROF;							// The frequency between shots based on the rateOfFire
-	public float fireTimer;							// Timer used to fire at a set frequency
+	public float fireTimer;							    // Timer used to fire at a set frequency
 
 	// Ammo
 	public bool infiniteAmmo = false;					// Whether or not this weapon should have unlimited ammo
@@ -215,15 +215,16 @@ public class Weapon : MonoBehaviour
 
 	// Other
 	public bool canFire = true;						// Whether or not the weapon can currently fire (used for semi-auto weapons)
+    private int _aiBodyPartLayer = -1;
 
-
-	// Use this for initialization
-	void Start()
+    // Use this for initialization
+    void Start()
 	{
-		// Calculate the actual ROF to be used in the weapon systems.  The rateOfFire variable is
-		// designed to make it easier on the user - it represents the number of rounds to be fired
-		// per second.  Here, an actual ROF decimal value is calculated that can be used with timers.
-		if (rateOfFire != 0)
+        _aiBodyPartLayer = LayerMask.NameToLayer("AI Body Part");
+        // Calculate the actual ROF to be used in the weapon systems.  The rateOfFire variable is
+        // designed to make it easier on the user - it represents the number of rounds to be fired
+        // per second.  Here, an actual ROF decimal value is calculated that can be used with timers.
+        if (rateOfFire != 0)
 			actualROF = 1.0f / rateOfFire;
 		else
 			actualROF = 0.01f;
@@ -616,7 +617,7 @@ public class Weapon : MonoBehaviour
 			Ray ray = new Ray(raycastStartSpot.position, direction);
 			RaycastHit hit;
 
-			if (Physics.Raycast(ray, out hit, range))
+			if (Physics.Raycast(ray, out hit, range, 1 << _aiBodyPartLayer))
 			{
 				// Warmup heat
 				float damage = power;
