@@ -43,6 +43,8 @@ public class HitInfo {
     public RaycastHit hit;
     public Ray ray;
     public float damage;
+    public int aiBodyPart;
+    public int playerLayer;
 }
 
 [System.Serializable]
@@ -216,11 +218,13 @@ public class Weapon : MonoBehaviour
 	// Other
 	public bool canFire = true;						// Whether or not the weapon can currently fire (used for semi-auto weapons)
     private int _aiBodyPartLayer = -1;
+    private int _playerLayer = -1;
 
     // Use this for initialization
     void Start()
 	{
         _aiBodyPartLayer = LayerMask.NameToLayer("AI Body Part");
+        _playerLayer = LayerMask.NameToLayer("Player");
         // Calculate the actual ROF to be used in the weapon systems.  The rateOfFire variable is
         // designed to make it easier on the user - it represents the number of rounds to be fired
         // per second.  Here, an actual ROF decimal value is calculated that can be used with timers.
@@ -617,7 +621,7 @@ public class Weapon : MonoBehaviour
 			Ray ray = new Ray(raycastStartSpot.position, direction);
 			RaycastHit hit;
 
-			if (Physics.Raycast(ray, out hit, range, 1 << _aiBodyPartLayer))
+			if (Physics.Raycast(ray, out hit, range))
 			{
 				// Warmup heat
 				float damage = power;
@@ -632,6 +636,8 @@ public class Weapon : MonoBehaviour
                 hitInfo.hit = hit;
                 hitInfo.force = power;
                 hitInfo.ray = ray;
+                hitInfo.aiBodyPart  = 1 << _aiBodyPartLayer;
+                hitInfo.playerLayer = 1 << _playerLayer;
 
                 // Damage
                 hit.collider.gameObject.SendMessageUpwards("ChangeHealth", -damage, SendMessageOptions.DontRequireReceiver);

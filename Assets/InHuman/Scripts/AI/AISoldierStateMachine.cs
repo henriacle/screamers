@@ -103,7 +103,10 @@ public class AISoldierStateMachine : AIStateMachine
     public void gameObjectHit(HitInfo hit)
     {
         AIStateMachine stateMachine = _gameSceneManager.GetAIStateMachine(hit.hit.rigidbody.GetInstanceID());
-        takeDamage(hit.hit.point, 5.0f, hit.damage, hit.hit.rigidbody);
+        if(hit.aiBodyPart > 0)
+        {
+            takeDamage(hit.hit.point, 5.0f, hit.damage, hit.hit.rigidbody);
+        }
     }
 
     public override void takeDamage(Vector3 position, float force, float damage, Rigidbody bodyPart, int hitDirection = 0)
