@@ -27,6 +27,7 @@ public class AIHumanRobot_Pursuit1 : AIHumanRobotState
     // Default Handlers
     public override void OnEnterState()
     {
+        Debug.Log("Entering Pursuit state");
         base.OnEnterState();
         if (_humanRobotStateMachine == null)
             return;

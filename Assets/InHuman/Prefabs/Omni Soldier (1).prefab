@@ -178,6 +178,7 @@ MonoBehaviour:
   weapons:
   - {fileID: 1475185820445263342}
   startingWeaponIndex: 0
+  weaponIndex: 0
 --- !u!1 &1475185820794872452
 GameObject:
   m_ObjectHideFlags: 0
@@ -397,6 +398,8 @@ MonoBehaviour:
   _lookAtWeight: 0.7
   _lookAtAngleThreshold: 15
   _slerpSpeed: 5
+  chest: {fileID: 0}
+  Offset: {x: 0, y: 60, z: -102}
 --- !u!114 &1475185821142362213
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -410,6 +413,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _currentStateType: 1
+  _rootBone: {fileID: 0}
   _targetTrigger: {fileID: 1475185821157606939}
   _sensorTrigger: {fileID: 1475185821610966264}
   _waypointNetwork: {fileID: 0}
@@ -423,7 +427,6 @@ MonoBehaviour:
   _health: 100
   _intelligence: 1
   _weaponType: 1
-  _weapon: {fileID: 1475185820445263342}
 --- !u!114 &1475185821142362215
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -723,10 +726,6 @@ PrefabInstance:
       propertyPath: Weapon
       value: 
       objectReference: {fileID: 1475185820445263342}
-    - target: {fileID: 148730, guid: cbd7931bdf3a3e942a49a282a8121ac0, type: 3}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 498476, guid: cbd7931bdf3a3e942a49a282a8121ac0, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0.010202003
@@ -758,6 +757,10 @@ PrefabInstance:
     - target: {fileID: 400506, guid: cbd7931bdf3a3e942a49a282a8121ac0, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.9934822
+      objectReference: {fileID: 0}
+    - target: {fileID: 148730, guid: cbd7931bdf3a3e942a49a282a8121ac0, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 433106, guid: cbd7931bdf3a3e942a49a282a8121ac0, type: 3}
       propertyPath: m_LocalRotation.x

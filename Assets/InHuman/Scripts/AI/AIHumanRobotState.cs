@@ -29,6 +29,7 @@ public abstract class AIHumanRobotState : AIState
         if (_humanRobotStateMachine == null)
             return;
 
+        Debug.Log(eventType);
         if (eventType != AITriggerEventType.Exit)
         {
             AITargetType curType = _humanRobotStateMachine.VisualThreat.type;
@@ -155,5 +156,10 @@ public abstract class AIHumanRobotState : AIState
         if (closestCollider && closestCollider.gameObject == other.gameObject) return true;
 
         return false;
+    }
+
+    public virtual void LateUpdate()
+    {
+        
     }
 }

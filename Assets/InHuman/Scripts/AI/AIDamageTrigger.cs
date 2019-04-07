@@ -27,7 +27,8 @@ public class AIDamageTrigger : MonoBehaviour
 
         if (other.gameObject.CompareTag("Player") && _animator.GetFloat(_parameterHash) > 0.9f)
         {
-            Debug.Log("damage player");
+            CharacterManager charManager = other.GetComponent<CharacterManager>();
+            charManager.meleeDamage(5);
         }
     }
 }

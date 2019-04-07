@@ -35,14 +35,23 @@ public class CharacterManager : MonoBehaviour
 
     public void takeDamage(Vector3 position, float force, float damage, Rigidbody bodyPart, int hitDirection = 0)
     {
+        doDamage(damage);
+    }
+
+    public void meleeDamage(float damage)
+    {
+        doDamage(damage);
+    }
+
+    private void doDamage(float damage)
+    {
         playerCurrentHealth = _currentHealth - damage;
-        _lifeRectWidth = _lifeRectWidth * playerCurrentHealth / 100;
+        _lifeRectWidth = 250 - (250 - (250 * playerCurrentHealth / 100));
         _lifeRect.sizeDelta = new Vector2(_lifeRectWidth, _lifeRect.rect.height);
         _lifeRect.ForceUpdateRectTransforms();
-
-        if(playerCurrentHealth <= 0)
+        if (playerCurrentHealth <= 0)
         {
-            SceneManager.LoadScene(0);
+            //SceneManager.LoadScene(0);
         }
     }
 }

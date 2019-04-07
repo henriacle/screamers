@@ -11,10 +11,13 @@ public class AIHumanRobot_Fire1 : AIHumanRobotState
     [SerializeField] float _slerpSpeed = 5.0f;
     private OriginalWeaponSystem _weaponSystem = null;
     private Weapon _npcWeapon = null;
+    [SerializeField] Transform chest;
+    private Transform rightHand;
+    private Transform leftHand;
 
     // Private Variables
     private float _currentLookAtWeight = 0.0f;
-
+    public Vector3 Offset;
 
     public override AIStateType GetStateType()
     {
@@ -23,9 +26,12 @@ public class AIHumanRobot_Fire1 : AIHumanRobotState
 
     public override void OnEnterState()
     {
-        Debug.Log("Entering Fire State");
         if (_humanRobotStateMachine == null)
             return;
+
+        chest = _humanRobotStateMachine.animator.GetBoneTransform(HumanBodyBones.Chest);
+        rightHand   = _humanRobotStateMachine.animator.GetBoneTransform(HumanBodyBones.RightUpperArm);
+        leftHand    = _humanRobotStateMachine.animator.GetBoneTransform(HumanBodyBones.LeftUpperArm);
 
         _humanRobotStateMachine.NavAgentControl(true, false);
         _humanRobotStateMachine.seeking = 0;
@@ -49,14 +55,12 @@ public class AIHumanRobot_Fire1 : AIHumanRobotState
 
     IEnumerator OnEasyWeaponsFire()
     {
-        Debug.Log("fire !");
         yield return new WaitForSeconds(1.5f);
         _npcWeapon.canFire = true;
     }
 
     IEnumerator OnEasyWeaponsReload()
     {
-        Debug.Log("reload");
         _humanRobotStateMachine.reloading = true;
         yield return new WaitForSeconds(1.5f);
         _npcWeapon.currentAmmo = _npcWeapon.ammoCapacity;
@@ -69,7 +73,7 @@ public class AIHumanRobot_Fire1 : AIHumanRobotState
         Vector3 targetPos;
         Quaternion newRot;
 
-        if (Vector3.Distance(_humanRobotStateMachine.transform.position, _humanRobotStateMachine.targetPosition) < _stoppingDistance)
+        if (Vector3.Distance(_humanRobotStateMachine.transform.position, _humanRobotStateMachine.targetPosition) < _npcWeapon.range)
         {
             _humanRobotStateMachine.speed = 0;
         }
@@ -97,25 +101,36 @@ public class AIHumanRobot_Fire1 : AIHumanRobotState
                 _humanRobotStateMachine.firing = true;
             }
 
-            if (!_humanRobotStateMachine.useRootRotation)
+            targetPos = _humanRobotStateMachine.targetPosition;
+            targetPos.y = _humanRobotStateMachine.transform.position.y - 20.0f;
+            newRot = Quaternion.LookRotation(targetPos - _humanRobotStateMachine.transform.position);
+            _humanRobotStateMachine.transform.rotation = Quaternion.Slerp(_humanRobotStateMachine.transform.rotation, newRot, Time.deltaTime * _slerpSpeed);
+
+            _humanRobotStateMachine.attackType = 0;
+
+            if (_npcWeapon.currentAmmo > 0 && _npcWeapon.canFire)
             {
-                targetPos = _humanRobotStateMachine.targetPosition;
-                targetPos.y = _humanRobotStateMachine.transform.position.y - 20.0f;
-                newRot = Quaternion.LookRotation(targetPos - _humanRobotStateMachine.transform.position);
-                _humanRobotStateMachine.transform.rotation = Quaternion.Slerp(_humanRobotStateMachine.transform.rotation, newRot, Time.deltaTime * _slerpSpeed);
+                _npcWeapon.AIFiring();
+            }
 
-                _humanRobotStateMachine.attackType = 0;
-
-                if (_npcWeapon.currentAmmo > 0 && _npcWeapon.canFire)
-                {
-                    _npcWeapon.AIFiring();
-                }
-
-                return AIStateType.Fire;
+            return AIStateType.Fire;
+        } else
+        {
+            if(_humanRobotStateMachine.targetType == AITargetType.Visual_Player)
+            {
+                return AIStateType.Pursuit;
             }
         }
 
         return AIStateType.Alerted;
     }
 
+    public override void LateUpdate()
+    {
+        if (_humanRobotStateMachine.VisualThreat.type == AITargetType.Visual_Player && _humanRobotStateMachine.targetPosition != null && chest != null)
+        {
+            chest.LookAt(_humanRobotStateMachine.targetPosition);
+            chest.rotation = chest.rotation * Quaternion.Euler(Offset);
+        }
+    }
 }
