@@ -68,9 +68,9 @@ public class AISoldierStateMachine : AIStateMachine
     protected override void Start()
     {
         base.Start();
+        _gameSceneManager = GameSceneManager.instance;
         _weaponSystem = gameObject.transform.root.GetComponentInChildren<OriginalWeaponSystem>();
         _npcWeapon = _weaponSystem.weapons[_weaponSystem.weaponIndex].GetComponent<Weapon>();
-        _gameSceneManager = GameSceneManager.instance;
         attachWeapon = GetComponent<AttachWeapon>();
         attachWeapon.setWeapon(_npcWeapon.gameObject);
     }
@@ -81,6 +81,7 @@ public class AISoldierStateMachine : AIStateMachine
 
         if(_weaponType == EnemyWeaponType.UNARMED)
         {
+            Debug.Log("dont have a weapon");
             attachWeapon.weaponStatus(false);
         }
         else if (_weaponType == EnemyWeaponType.RIFLE)

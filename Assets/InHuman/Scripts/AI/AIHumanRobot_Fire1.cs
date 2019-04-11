@@ -127,6 +127,8 @@ public class AIHumanRobot_Fire1 : AIHumanRobotState
 
     public override void LateUpdate()
     {
+        if (!_humanRobotStateMachine) return;
+
         if (_humanRobotStateMachine.VisualThreat.type == AITargetType.Visual_Player && _humanRobotStateMachine.targetPosition != null && chest != null)
         {
             chest.LookAt(_humanRobotStateMachine.targetPosition);

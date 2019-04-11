@@ -64,7 +64,7 @@ public class AIHumanRobot_Pursuit1 : AIHumanRobotState
             return AIStateType.Attack;
         }
 
-        if (_stateMachine.targetType == AITargetType.Visual_Player && _humanRobotStateMachine.inFireRange && _humanRobotStateMachine.weaponType == EnemyWeaponType.RIFLE)
+        if (_stateMachine.targetType == AITargetType.Visual_Player && _humanRobotStateMachine.inFireRange && _humanRobotStateMachine.weaponType != EnemyWeaponType.UNARMED)
         {
             _humanRobotStateMachine.firing = true;
             return AIStateType.Fire;
