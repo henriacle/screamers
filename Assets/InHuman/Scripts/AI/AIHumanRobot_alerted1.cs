@@ -141,6 +141,7 @@ public class AIHumanRobot_alerted1 : AIHumanRobotState
         {
             if (_directionChangeTimer > _directionChangeTime)
             {
+                Debug.Log("looking for a player!");
                 _humanRobotStateMachine.seeking = (int)Mathf.Sign(Random.Range(-1.0f, 1.0f));
                 _directionChangeTimer = 0.0f;       
             }

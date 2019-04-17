@@ -81,7 +81,6 @@ public class AISoldierStateMachine : AIStateMachine
 
         if(_weaponType == EnemyWeaponType.UNARMED)
         {
-            Debug.Log("dont have a weapon");
             attachWeapon.weaponStatus(false);
         }
         else if (_weaponType == EnemyWeaponType.RIFLE)
