@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+guid: 7788ab29c5deb0f46a19f1fff12bb2a5
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures:
+  - _MainTex: {instanceID: 0}
+  - _BloodTex: {fileID: 2800000, guid: 40ad6ef947726004fb65adb8dd43969e, type: 3}
+  - _BloodBump: {fileID: 2800000, guid: 77d59962f55070645ae90500642bf059, type: 3}
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
