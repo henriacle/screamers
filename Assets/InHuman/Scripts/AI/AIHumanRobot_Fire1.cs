@@ -7,6 +7,8 @@ public class AIHumanRobot_Fire1 : AIHumanRobotState
     [SerializeField] [Range(0, 10)] float _speed = 0.0f;
     [SerializeField] float _stoppingDistance = 1.0f;
     [SerializeField] [Range(0.0f, 1.0f)] float _lookAtWeight = 0.7f;
+    [SerializeField] float keepMinDistance = 5f;
+    [SerializeField] float keepMaxDistance = 9f;
     [SerializeField] [Range(0.0f, 90.0f)] float _lookAtAngleThreshold = 15.0f;
     [SerializeField] float _slerpSpeed = 5.0f;
     private OriginalWeaponSystem _weaponSystem = null;
@@ -73,13 +75,15 @@ public class AIHumanRobot_Fire1 : AIHumanRobotState
         Vector3 targetPos;
         Quaternion newRot;
 
-        if (Vector3.Distance(_humanRobotStateMachine.transform.position, _humanRobotStateMachine.targetPosition) < _npcWeapon.range)
+        if (Vector3.Distance(_humanRobotStateMachine.transform.position, _humanRobotStateMachine.targetPosition) < keepMinDistance)
+        {
+            _humanRobotStateMachine.speed = 4;
+        } else if (Vector3.Distance(_humanRobotStateMachine.transform.position, _humanRobotStateMachine.targetPosition) > keepMaxDistance)
+        {
+            _humanRobotStateMachine.speed = 3;
+        } else
         {
             _humanRobotStateMachine.speed = 0;
-        }
-        else
-        {
-            _humanRobotStateMachine.speed = _speed;
         }
 
 
