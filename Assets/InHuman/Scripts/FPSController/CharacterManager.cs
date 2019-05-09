@@ -3,23 +3,46 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
+using UnityStandardAssets.Characters.FirstPerson;
 
 public class CharacterManager : MonoBehaviour
 {
-    [SerializeField] [Range(0.0f, 100.0f)]  private float       _playerHealth   = 100.0f;
-    [SerializeField] private CameraBloodEffect                  _cameraBloodEffect = null;
-    [SerializeField]                        private GameObject  _healthBar      = null;
-    [SerializeField]                                float       _currentHealth  = 0.0f;
-                                                    RectTransform _lifeRect     = null;
+    [SerializeField] [Range(0.0f, 100.0f)]  private float  _playerHealth   = 100.0f;
+    [SerializeField] private CameraBloodEffect  _cameraBloodEffect = null;
+    [SerializeField] private AISoundEmitter     _soundEmitter = null;
+    [SerializeField] private GameObject         _healthBar      = null;
+    [SerializeField]         float              _currentHealth  = 0.0f;
+    [SerializeField] private CapsuleCollider    _meleeTrigger = null;
+    [SerializeField] private Camera             _camera = null;
+    [SerializeField] private float              _health = 100.0f;
+    [SerializeField] private float              _walkRadius = 0.0f;
+    [SerializeField] private float              _runRadius = 7.0f;
+    [SerializeField] private float              _landingRadius = 12.0f;
+    [SerializeField] private float              _bloodRadiusScale = 6.0f;
+
+    RectTransform _lifeRect     = null;
                                                     float _lifeRectWidth        = 0.0f;
                                                     float _lifeRectHeight       = 0.0f;
 
 
+    private Collider _collider = null;
+    private FirstPersonController _fpsController = null;
+    private CharacterController _characterController = null;
+    private GameSceneManager _gameSceneManager = null;
+    private int _aiBodyPartLayer = -1;
+
     public float playerHealth { get { return _playerHealth; }           set { _playerHealth     = value; } }
     public float playerCurrentHealth { get { return _currentHealth; }   set { _currentHealth    = value; } }
+    public UnityStandardAssets.Characters.FirstPerson.FirstPersonController controller;
 
     private void Start()
     {
+        _collider = GetComponent<Collider>();
+        _fpsController = GameObject.FindObjectOfType<FirstPersonController>();
+        _characterController = GetComponent<CharacterController>();
+        _gameSceneManager = GameSceneManager.instance;
+        _aiBodyPartLayer = LayerMask.NameToLayer("AI Body Part");
+
         _lifeRect = _healthBar.GetComponent<RectTransform>();
         if(_lifeRect)
         {
@@ -61,6 +84,20 @@ public class CharacterManager : MonoBehaviour
         if (playerCurrentHealth <= 0)
         {
             SceneManager.LoadScene(0);
+        }
+    }
+
+    private void Update()
+    {
+        if (_fpsController || _soundEmitter != null)
+        {
+            float newRadius = Mathf.Max(_walkRadius, (100.0f - _health) / _bloodRadiusScale);
+            if (!_fpsController.m_IsWalking)
+            {
+                newRadius = Mathf.Max(newRadius, _runRadius);
+            }
+
+            _soundEmitter.SetRadius(newRadius);
         }
     }
 }
