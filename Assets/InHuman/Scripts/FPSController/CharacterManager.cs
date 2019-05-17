@@ -30,6 +30,7 @@ public class CharacterManager : MonoBehaviour
     private CharacterController _characterController = null;
     private GameSceneManager _gameSceneManager = null;
     private int _aiBodyPartLayer = -1;
+    private int _interactiveMask = 0;
 
     public float playerHealth { get { return _playerHealth; }           set { _playerHealth     = value; } }
     public float playerCurrentHealth { get { return _currentHealth; }   set { _currentHealth    = value; } }
@@ -89,6 +90,63 @@ public class CharacterManager : MonoBehaviour
 
     private void Update()
     {
+        Ray ray;
+        RaycastHit hit;
+        RaycastHit[] hits;
+
+        // PROCESS INTERACTIVE OBJECTS
+        // Is the crosshair over a usuable item or descriptive item...first get ray from centre of screen
+        ray = _camera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
+
+        // Calculate Ray Length
+        float rayLength = Mathf.Lerp(1.0f, 1.8f, Mathf.Abs(Vector3.Dot(_camera.transform.forward, Vector3.up)));
+
+        // Cast Ray and collect ALL hits
+        hits = Physics.RaycastAll(ray, rayLength, _interactiveMask);
+
+        // Process the hits for the one with the highest priorty
+        if (hits.Length > 0)
+        {
+            // Used to record the index of the highest priorty
+            int highestPriority = int.MinValue;
+            InteractiveItem priorityObject = null;
+
+            // Iterate through each hit
+            for (int i = 0; i < hits.Length; i++)
+            {
+                // Process next hit
+                hit = hits[i];
+
+                // Fetch its InteractiveItem script from the database
+                InteractiveItem interactiveObject = _gameSceneManager.GetInteractiveItem(hit.collider.GetInstanceID());
+
+                // If this is the highest priority object so far then remember it
+                if (interactiveObject != null && interactiveObject.priority > highestPriority)
+                {
+                    priorityObject = interactiveObject;
+                    highestPriority = priorityObject.priority;
+                }
+            }
+
+            // If we found an object then display its text and process any possible activation
+            if (priorityObject != null)
+            {
+                if (_playerHUD)
+                    _playerHUD.SetInteractionText(priorityObject.GetText());
+
+                if (Input.GetButtonDown("Use"))
+                {
+                    priorityObject.Activate(this);
+                }
+            }
+        }
+        else
+        {
+            if (_playerHUD)
+                _playerHUD.SetInteractionText(null);
+        }
+
+
         if (_fpsController || _soundEmitter != null)
         {
             float newRadius = Mathf.Max(_walkRadius, (100.0f - _health) / _bloodRadiusScale);

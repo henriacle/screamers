@@ -18,7 +18,8 @@ public class GameSceneManager : MonoBehaviour
 
     //private
     private Dictionary<int, AIStateMachine> _stateMachines = new Dictionary<int, AIStateMachine>();
-    
+    private Dictionary<int, InteractiveItem> _interactiveItems = new Dictionary<int, InteractiveItem>();
+
     //Public Methods
     public void RegisterAIStateMachine(int key, AIStateMachine stateMachine)
     {
@@ -36,5 +37,31 @@ public class GameSceneManager : MonoBehaviour
             return machine;
         }
         return null;
+    }
+
+    // --------------------------------------------------------------------
+    // Name	:	RegisterInteractiveItem
+    // Desc	:	Stores the passed Interactive Item reference in the 
+    //			dictionary with the supplied key (usually the instanceID of
+    //			a collider)
+    // --------------------------------------------------------------------
+    public void RegisterInteractiveItem(int key, InteractiveItem script)
+    {
+        if (!_interactiveItems.ContainsKey(key))
+        {
+            _interactiveItems[key] = script;
+        }
+    }
+
+    // --------------------------------------------------------------------
+    // Name	:	GetInteractiveItem
+    // Desc	:	Given a collider instance ID returns the
+    //			Interactive Item_Base derived object attached to it.
+    // --------------------------------------------------------------------
+    public InteractiveItem GetInteractiveItem(int key)
+    {
+        InteractiveItem item = null;
+        _interactiveItems.TryGetValue(key, out item);
+        return item;
     }
 }
