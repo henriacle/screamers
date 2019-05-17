@@ -95,6 +95,13 @@ public abstract class AIStateMachine : MonoBehaviour
     protected Collider _collider        = null;
     protected Transform _transform      = null;
 
+	// Animation Layer Manager
+	protected Dictionary<string, bool>	_animLayersActive			= new Dictionary<string, bool>();
+
+	// Layered Audio Control
+	protected ILayeredAudioSource						_layeredAudioSource	=	null;
+
+
     // Public Properties
     public bool isTargetReached         { get { return _isTargetReached; } }
     public bool inMeleeRange            { get { return _isMeleeRange; }     set { _isMeleeRange = value; } }
@@ -460,6 +467,41 @@ public abstract class AIStateMachine : MonoBehaviour
             _navAgent.updateRotation = rotationUpdate;
         }
     }
+
+	public void SetLayerActive (string layerName, bool active )
+	{
+		 _animLayersActive[layerName] = active;
+		if (active==false && _layeredAudioSource!=null)
+		 	_layeredAudioSource.Stop( _animator.GetLayerIndex(layerName) );
+	} 
+
+	public bool IsLayerActive( string layerName ) 
+	{
+		bool result;
+		if (_animLayersActive.TryGetValue(layerName, out result)) 
+		{
+			return result;
+		}
+		return false;
+	}
+
+	public bool PlayAudio(AudioCollection clipPool, int bank, int layer, bool looping=true )
+	{
+		if (_layeredAudioSource==null) return false;
+		return _layeredAudioSource.Play( clipPool, bank, layer, looping );
+	}
+
+	public void StopAudio( int layer )
+	{
+		if (_layeredAudioSource!=null)
+			_layeredAudioSource.Stop( layer );
+	}
+
+	public void MuteAudio( bool mute )
+	{
+		if (_layeredAudioSource!=null)
+			_layeredAudioSource.Mute( mute );
+	}    
 
     public void AddRootMotionRequest(int rootPosition, int rootRotation)
     {

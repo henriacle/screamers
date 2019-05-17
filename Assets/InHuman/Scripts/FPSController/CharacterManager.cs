@@ -19,19 +19,30 @@ public class CharacterManager : MonoBehaviour
     [SerializeField] private float              _runRadius = 7.0f;
     [SerializeField] private float              _landingRadius = 12.0f;
     [SerializeField] private float              _bloodRadiusScale = 6.0f;
+	[SerializeField] private PlayerHUD			_playerHUD			= null;
+
+	// Pain Damage Audio
+	[SerializeField] private AudioCollection	_damageSounds		= null;
+	[SerializeField] private AudioCollection	_painSounds			= null;
+	[SerializeField] private AudioCollection	_tauntSounds		= null;
 
     RectTransform _lifeRect     = null;
                                                     float _lifeRectWidth        = 0.0f;
                                                     float _lifeRectHeight       = 0.0f;
 
+	[SerializeField] private float				_nextPainSoundTime	=	0.0f;
+	[SerializeField] private float				_painSoundOffset	=	0.35f;
+	[SerializeField] private float				_tauntRadius		= 	10.0f;
 
     private Collider _collider = null;
     private FirstPersonController _fpsController = null;
     private CharacterController _characterController = null;
     private GameSceneManager _gameSceneManager = null;
-    private int _aiBodyPartLayer = -1;
-    private int _interactiveMask = 0;
-
+	private int					_aiBodyPartLayer     = -1;
+	private int 				_interactiveMask	 = 0;
+	private float				_nextAttackTime		 = 0;
+	private float				_nextTauntTime		 = 0;
+    
     public float playerHealth { get { return _playerHealth; }           set { _playerHealth     = value; } }
     public float playerCurrentHealth { get { return _currentHealth; }   set { _currentHealth    = value; } }
     public UnityStandardAssets.Characters.FirstPerson.FirstPersonController controller;
@@ -43,6 +54,7 @@ public class CharacterManager : MonoBehaviour
         _characterController = GetComponent<CharacterController>();
         _gameSceneManager = GameSceneManager.instance;
         _aiBodyPartLayer = LayerMask.NameToLayer("AI Body Part");
+        _interactiveMask	= 1 << LayerMask.NameToLayer("Interactive");
 
         _lifeRect = _healthBar.GetComponent<RectTransform>();
         if(_lifeRect)

@@ -16,9 +16,10 @@ public class GameSceneManager : MonoBehaviour
         }
     }
 
-    //private
+    // Private
     private Dictionary<int, AIStateMachine> _stateMachines = new Dictionary<int, AIStateMachine>();
     private Dictionary<int, InteractiveItem> _interactiveItems = new Dictionary<int, InteractiveItem>();
+    private Dictionary<int, MaterialController> _materialControllers = new Dictionary<int, MaterialController>();
 
     //Public Methods
     public void RegisterAIStateMachine(int key, AIStateMachine stateMachine)
@@ -63,5 +64,21 @@ public class GameSceneManager : MonoBehaviour
         InteractiveItem item = null;
         _interactiveItems.TryGetValue(key, out item);
         return item;
+    }
+
+    public void RegisterMaterialController(int key, MaterialController controller)
+    {
+        if (!_materialControllers.ContainsKey(key))
+        {
+            _materialControllers[key] = controller;
+        }
+    }
+
+    protected void OnDestroy()
+    {
+        foreach (KeyValuePair<int, MaterialController> controller in _materialControllers)
+        {
+            controller.Value.OnReset();
+        }
     }
 }

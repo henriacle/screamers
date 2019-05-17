@@ -98,10 +98,10 @@ public class InteractiveKeypad : InteractiveItem
 
 			// Freeze the FPS motor so it can rotate/jump/croach but can
 			// not move off of the elevator.
-			if (characterManager.fpsController)
-			{
-				characterManager.fpsController.freezeMovement = true;
-			}
+			//if (characterManager.fpsController)
+			//{
+				//characterManager.fpsController.freezeMovement = true;
+			//}
 		}
 	}
 }
