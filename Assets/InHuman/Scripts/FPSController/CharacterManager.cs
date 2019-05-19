@@ -112,13 +112,14 @@ public class CharacterManager : MonoBehaviour
 
         // Calculate Ray Length
         float rayLength = Mathf.Lerp(1.0f, 1.8f, Mathf.Abs(Vector3.Dot(_camera.transform.forward, Vector3.up)));
-
         // Cast Ray and collect ALL hits
+        
         hits = Physics.RaycastAll(ray, rayLength, _interactiveMask);
 
         // Process the hits for the one with the highest priorty
         if (hits.Length > 0)
         {
+            Debug.Log("hit");
             // Used to record the index of the highest priorty
             int highestPriority = int.MinValue;
             InteractiveItem priorityObject = null;

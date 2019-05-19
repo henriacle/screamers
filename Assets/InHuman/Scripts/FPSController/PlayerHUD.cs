@@ -2,19 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public enum ScreenFadeType{ FadeIn, FadeOut }
 
 public class PlayerHUD : MonoBehaviour 
 {
 	// Inspector Assigned UI References
-	[SerializeField] private GameObject _crosshair			=	null;
-	[SerializeField] private Text		_healthText			=	null;
-	[SerializeField] private Text		_staminaText		=	null;
-	[SerializeField] private Text		_interactionText	=	null;
-	[SerializeField] private Image 		_screenFade			=	null;
-	[SerializeField] private Text		_missionText		=	null;
-	[SerializeField] private float		_missionTextDisplayTime	=	3.0f;
+	[SerializeField] private GameObject         _crosshair			        =	null;
+	[SerializeField] private TextMeshPro        _healthText			        =	null;
+	[SerializeField] private TextMeshPro        _staminaText		        =	null;
+	[SerializeField] private TextMeshProUGUI    _interactionText	        =	null;
+	[SerializeField] private Image 		        _screenFade			        =	null;
+	[SerializeField] private TextMeshPro        _missionText		        =	null;
+	[SerializeField] private float		        _missionTextDisplayTime	    =	3.0f;
 
 	// Internals
 	float _currentFadeLevel = 1.0f;

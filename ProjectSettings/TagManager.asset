@@ -14,6 +14,7 @@ TagManager:
   - Upper Body
   - Lower Body
   - Head
+  - AICars
   layers:
   - Default
   - TransparentFX
@@ -30,7 +31,7 @@ TagManager:
   - Visual Aggravator
   - Audio Aggravator
   - AI Body Part
-  - 
+  - Interactive
   - 
   - 
   - 
