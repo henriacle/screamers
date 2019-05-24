@@ -6,15 +6,15 @@ public class MainMenuSceneManager : MonoBehaviour
 {
 	public void LoadGame ()
 	{
-		if (ApplicationManager.instance)
-			ApplicationManager.instance.LoadGame();
+		//if (ApplicationManager.instance)
+			//ApplicationManager.instance.LoadGame();
 	}
 
 
 	public void QuitGame()
 	{
-		if (ApplicationManager.instance)
-			ApplicationManager.instance.QuitGame();
+		//if (ApplicationManager.instance)
+			//ApplicationManager.instance.QuitGame();
 	}
 	
 }

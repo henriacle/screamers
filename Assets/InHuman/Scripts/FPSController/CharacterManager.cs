@@ -39,8 +39,9 @@ public class CharacterManager : MonoBehaviour
     private CharacterController _characterController = null;
     private GameSceneManager _gameSceneManager = null;
 	private int					_aiBodyPartLayer     = -1;
-	private int 				_interactiveMask	 = 0;
-	private float				_nextAttackTime		 = 0;
+    private int                 _interactiveMask = 0;
+    private int                 _dialogMask = 0;
+    private float				_nextAttackTime		 = 0;
 	private float				_nextTauntTime		 = 0;
     
     public float playerHealth { get { return _playerHealth; }           set { _playerHealth     = value; } }
@@ -54,7 +55,8 @@ public class CharacterManager : MonoBehaviour
         _characterController = GetComponent<CharacterController>();
         _gameSceneManager = GameSceneManager.instance;
         _aiBodyPartLayer = LayerMask.NameToLayer("AI Body Part");
-        _interactiveMask	= 1 << LayerMask.NameToLayer("Interactive");
+        _interactiveMask = 1 << LayerMask.NameToLayer("Interactive");
+        _dialogMask = 1 << LayerMask.NameToLayer("Dialog");
 
         _lifeRect = _healthBar.GetComponent<RectTransform>();
         if(_lifeRect)
@@ -144,8 +146,16 @@ public class CharacterManager : MonoBehaviour
             // If we found an object then display its text and process any possible activation
             if (priorityObject != null)
             {
-                if (_playerHUD)
-                    _playerHUD.SetInteractionText(priorityObject.GetText());
+                if (_playerHUD) {
+                    bool doDialog;
+                    string text = priorityObject.GetText(out doDialog);
+                    if(doDialog)
+                    {
+                        _playerHUD.SetDialogText(text);
+                    } else {
+                        _playerHUD.SetInteractionText(priorityObject.GetText());
+                    }
+                }
 
                 if (Input.GetButtonDown("Use"))
                 {
@@ -157,6 +167,7 @@ public class CharacterManager : MonoBehaviour
         {
             if (_playerHUD)
                 _playerHUD.SetInteractionText(null);
+                _playerHUD.SetDialogText(null);
         }
 
 

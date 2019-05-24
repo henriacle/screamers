@@ -12,9 +12,13 @@ public class InteractiveItem : MonoBehaviour
 	protected GameSceneManager _gameSceneManager	=	null;
 	protected Collider		   _collider			=	null;
 
-	// Methods
-	public virtual string 	GetText		()	{ return null; }
-	public virtual void 	Activate 	( CharacterManager characterManager) { }
+    // Methods
+    public virtual string GetText() { return null; }
+    public virtual string GetText(out bool doDialog) {
+        doDialog = false;
+        return null;
+    }
+    public virtual void 	Activate 	( CharacterManager characterManager) { }
 	protected virtual void  Start()
 	{
 		_gameSceneManager = GameSceneManager.instance;

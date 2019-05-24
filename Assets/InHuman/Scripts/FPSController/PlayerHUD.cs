@@ -12,8 +12,9 @@ public class PlayerHUD : MonoBehaviour
 	[SerializeField] private GameObject         _crosshair			        =	null;
 	[SerializeField] private TextMeshPro        _healthText			        =	null;
 	[SerializeField] private TextMeshPro        _staminaText		        =	null;
-	[SerializeField] private TextMeshProUGUI    _interactionText	        =	null;
-	[SerializeField] private Image 		        _screenFade			        =	null;
+    [SerializeField] private TextMeshProUGUI    _interactionText            =   null;
+    [SerializeField] private TextMeshProUGUI    _dialogText                 =   null;
+    [SerializeField] private Image 		        _screenFade			        =	null;
 	[SerializeField] private TextMeshPro        _missionText		        =	null;
 	[SerializeField] private float		        _missionTextDisplayTime	    =	3.0f;
 
@@ -53,25 +54,50 @@ public class PlayerHUD : MonoBehaviour
 	//			InterationText because it is used to display messages
 	//			relating to interacting with objects.
 	// ---------------------------------------------------------------
-	public void SetInteractionText( string text )
+	public void SetInteractionText( string text, bool dialog = false )
 	{
-		if (_interactionText)
-		{
-			if (text==null)
-			{
-				_interactionText.text = null;
-				_interactionText.gameObject.SetActive (false);
-			}
-			else
-			{
-				_interactionText.text = text;
-				_interactionText.gameObject.SetActive (true);
-			}
-		}
-	}
+        if (_interactionText)
+        {
+            if (text == null)
+            {
+                _interactionText.text = null;
+                _interactionText.gameObject.SetActive(false);
+            }
+            else
+            {
+                _interactionText.text = text;
+                _interactionText.gameObject.SetActive(true);
+            }
+        }
+    }
 
+    // ---------------------------------------------------------------
+    // Name	:	SetInteractionText
+    // Desc	:	This function sets the text that is displayed at the
+    //			bottom of the display area. It is called the
+    //			InterationText because it is used to display messages
+    //			relating to interacting with objects.
+    // ---------------------------------------------------------------
+    public void SetDialogText(string text)
+    {
+        if (_dialogText)
+        {
+            if (text == null)
+            {
+                _dialogText.text = null;
+                _dialogText.transform.parent.gameObject.SetActive(false);
+                _dialogText.gameObject.SetActive(false);
+            }
+            else
+            {
+                _dialogText.text = text;
+                _dialogText.transform.parent.gameObject.SetActive(true);
+                _dialogText.gameObject.SetActive(true);
+            }
+        }
+    }
 
-	public void Fade ( float seconds, ScreenFadeType direction )
+    public void Fade ( float seconds, ScreenFadeType direction )
 	{
 		if (_coroutine!=null) StopCoroutine(_coroutine); 
 		float targetFade  = 0.0f;;

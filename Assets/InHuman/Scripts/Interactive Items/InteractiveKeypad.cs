@@ -100,7 +100,7 @@ public class InteractiveKeypad : InteractiveItem
 			// not move off of the elevator.
 			//if (characterManager.fpsController)
 			//{
-				//characterManager.fpsController.freezeMovement = true;
+			//	characterManager.fpsController.freezeMovement = true;
 			//}
 		}
 	}

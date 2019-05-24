@@ -13,6 +13,7 @@ public class InteractiveInfo : InteractiveItem
 	// ---------------------------------------------------------------------------
 	public override string	GetText()
 	{
+        Debug.Log("teste");
 		return _infoText;
 	}
 }

@@ -27,7 +27,13 @@ public class InteractiveGenericSwitch : InteractiveItem
 	[SerializeField] protected List<GameState>		_activateStates			= new List<GameState>();
 	[SerializeField] protected List<GameState>		_deactivateStates		= new List<GameState>();
 
-	[Header("Message")] 
+    [Header("Dialog")]
+    [SerializeField] protected bool                 _doDialog               = false;
+    [SerializeField] protected int                  _currentDialog          = 0;
+    [SerializeField] protected int                  _currentDialogIndex     = 0;
+    [SerializeField] protected List<DialogState>    _dialogLines            = new List<DialogState>();
+
+    [Header("Message")] 
 	[TextArea(3,10)]
 	[SerializeField] protected string 				_stateNotSetText   		= "";
 	[TextArea(3,10)]
@@ -109,16 +115,38 @@ public class InteractiveGenericSwitch : InteractiveItem
 	// Desc	:	Return different hint text depending on whether the object
 	//			is currently able to be activated
 	// --------------------------------------------------------------------------
-	public override string GetText	()
-	{ 
-		
-		// If we have no application database or this switch is disabled then return null
-		if (!enabled) return string.Empty;
+	public override string GetText	(out bool doDialog)
+	{
+        // If we have no application database or this switch is disabled then return null
+        doDialog = _doDialog;
+        if (!enabled) return string.Empty;
 
-		// If its already activated then just return the activated text
-		if (_activated)
+        // If its already activated then just return the activated text
+        if (_activated)
 		{
-			return _ObjectActiveText;
+            if (_doDialog)
+            {
+                if (_currentDialogIndex >= _dialogLines[_currentDialog].Value.Count)
+                {
+                    _activated = true;
+                    _canToggle = false;
+                    return _ObjectActiveText;
+                }
+
+                if(_activated)
+                {
+                    string text = _dialogLines[_currentDialog].Value[_currentDialogIndex];
+                    _stateSetText = text;
+
+                    if (_currentDialogIndex < _dialogLines[_currentDialog].Value.Count)
+                        _currentDialogIndex++;
+                    _activated = false;
+                }
+
+                return _stateSetText;
+            }
+            
+            return _ObjectActiveText;
 		}
 
 		// We need to test all the states that need to be set to see if this item can be activated
@@ -139,10 +167,11 @@ public class InteractiveGenericSwitch : InteractiveItem
 	protected bool AreRequiredStatesSet()
 	{
 		ApplicationManager appManager = ApplicationManager.instance;
-		if (appManager==null) return false;
+        if (appManager==null) return false;
 
-		// Assume the states are all set and then loop to find a state to disprove this
-		for(int i=0; i< _requiredStates.Count; i++)
+        // Assume the states are all set and then loop to find a state to disprove this
+
+        for (int i=0; i< _requiredStates.Count; i++)
 		{
 			GameState state = _requiredStates[i];
 
@@ -199,8 +228,8 @@ public class InteractiveGenericSwitch : InteractiveItem
 		_activated = !_activated;
 		_firstUse  = true;
 
-		// PLay the activation Sound Effect
-		if (_activationSounds!=null && _activated )
+        // play the activation Sound Effect
+        if (_activationSounds!=null && _activated )
 		{
 			AudioClip clipToPlay = _activationSounds[0];
 			if (clipToPlay==null) return;
@@ -209,6 +238,7 @@ public class InteractiveGenericSwitch : InteractiveItem
 			// or sounds that need to happen nowhere near the tigger source
 			if (_audioSource!=null && AudioManager.instance)
 			{
+                Debug.Log(_activationSounds[0]);
 				_audioSource.clip 					= clipToPlay;
 				_audioSource.volume 				= _activationSounds.volume;
 				_audioSource.spatialBlend 			= _activationSounds.spatialBlend;
