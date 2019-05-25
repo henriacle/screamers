@@ -7,45 +7,45 @@ using UnityStandardAssets.Characters.FirstPerson;
 
 public class CharacterManager : MonoBehaviour
 {
-    [SerializeField] [Range(0.0f, 100.0f)]  private float  _playerHealth   = 100.0f;
-    [SerializeField] private CameraBloodEffect  _cameraBloodEffect = null;
-    [SerializeField] private AISoundEmitter     _soundEmitter = null;
-    [SerializeField] private GameObject         _healthBar      = null;
-    [SerializeField]         float              _currentHealth  = 0.0f;
-    [SerializeField] private CapsuleCollider    _meleeTrigger = null;
-    [SerializeField] private Camera             _camera = null;
-    [SerializeField] private float              _health = 100.0f;
-    [SerializeField] private float              _walkRadius = 0.0f;
-    [SerializeField] private float              _runRadius = 7.0f;
-    [SerializeField] private float              _landingRadius = 12.0f;
-    [SerializeField] private float              _bloodRadiusScale = 6.0f;
-	[SerializeField] private PlayerHUD			_playerHUD			= null;
+    [SerializeField] [Range(0.0f, 100.0f)] private float _playerHealth = 100.0f;
+    [SerializeField] private CameraBloodEffect _cameraBloodEffect = null;
+    [SerializeField] private AISoundEmitter _soundEmitter = null;
+    [SerializeField] private GameObject _healthBar = null;
+    [SerializeField] float _currentHealth = 0.0f;
+    [SerializeField] private CapsuleCollider _meleeTrigger = null;
+    [SerializeField] private Camera _camera = null;
+    [SerializeField] private float _health = 100.0f;
+    [SerializeField] private float _walkRadius = 0.0f;
+    [SerializeField] private float _runRadius = 7.0f;
+    [SerializeField] private float _landingRadius = 12.0f;
+    [SerializeField] private float _bloodRadiusScale = 6.0f;
+    [SerializeField] private PlayerHUD _playerHUD = null;
 
-	// Pain Damage Audio
-	[SerializeField] private AudioCollection	_damageSounds		= null;
-	[SerializeField] private AudioCollection	_painSounds			= null;
-	[SerializeField] private AudioCollection	_tauntSounds		= null;
+    // Pain Damage Audio
+    [SerializeField] private AudioCollection _damageSounds = null;
+    [SerializeField] private AudioCollection _painSounds = null;
+    [SerializeField] private AudioCollection _tauntSounds = null;
 
-    RectTransform _lifeRect     = null;
-                                                    float _lifeRectWidth        = 0.0f;
-                                                    float _lifeRectHeight       = 0.0f;
+    RectTransform _lifeRect = null;
+    float _lifeRectWidth = 0.0f;
+    float _lifeRectHeight = 0.0f;
 
-	[SerializeField] private float				_nextPainSoundTime	=	0.0f;
-	[SerializeField] private float				_painSoundOffset	=	0.35f;
-	[SerializeField] private float				_tauntRadius		= 	10.0f;
+    [SerializeField] private float _nextPainSoundTime = 0.0f;
+    [SerializeField] private float _painSoundOffset = 0.35f;
+    [SerializeField] private float _tauntRadius = 10.0f;
 
     private Collider _collider = null;
     private FirstPersonController _fpsController = null;
     private CharacterController _characterController = null;
     private GameSceneManager _gameSceneManager = null;
-	private int					_aiBodyPartLayer     = -1;
-    private int                 _interactiveMask = 0;
-    private int                 _dialogMask = 0;
-    private float				_nextAttackTime		 = 0;
-	private float				_nextTauntTime		 = 0;
-    
-    public float playerHealth { get { return _playerHealth; }           set { _playerHealth     = value; } }
-    public float playerCurrentHealth { get { return _currentHealth; }   set { _currentHealth    = value; } }
+    private int _aiBodyPartLayer = -1;
+    private int _interactiveMask = 0;
+    private int _dialogMask = 0;
+    private float _nextAttackTime = 0;
+    private float _nextTauntTime = 0;
+
+    public float playerHealth { get { return _playerHealth; } set { _playerHealth = value; } }
+    public float playerCurrentHealth { get { return _currentHealth; } set { _currentHealth = value; } }
     public UnityStandardAssets.Characters.FirstPerson.FirstPersonController controller;
 
     private void Start()
@@ -59,9 +59,9 @@ public class CharacterManager : MonoBehaviour
         _dialogMask = 1 << LayerMask.NameToLayer("Dialog");
 
         _lifeRect = _healthBar.GetComponent<RectTransform>();
-        if(_lifeRect)
+        if (_lifeRect)
         {
-            _lifeRectWidth  = _lifeRect.rect.width;
+            _lifeRectWidth = _lifeRect.rect.width;
             _lifeRectHeight = _lifeRect.rect.height;
             playerCurrentHealth = playerHealth;
         }
@@ -80,6 +80,25 @@ public class CharacterManager : MonoBehaviour
     public void meleeDamage(float damage)
     {
         doDamage(damage);
+    }
+
+    public void freezeFPSController(bool freeze)
+    {
+        _fpsController.enabled = !freeze;
+        if(!_fpsController.enabled)
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            _fpsController.m_MouseLook.lockCursor = false;
+            _fpsController.m_MouseLook.UpdateCursorLock();
+        } else
+        {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+            _fpsController.m_MouseLook.lockCursor = true;
+            _fpsController.m_MouseLook.UpdateCursorLock();
+        }
+
     }
 
     private void doDamage(float damage)
@@ -115,7 +134,7 @@ public class CharacterManager : MonoBehaviour
         // Calculate Ray Length
         float rayLength = Mathf.Lerp(1.0f, 1.8f, Mathf.Abs(Vector3.Dot(_camera.transform.forward, Vector3.up)));
         // Cast Ray and collect ALL hits
-        
+
         hits = Physics.RaycastAll(ray, rayLength, _interactiveMask);
 
         // Process the hits for the one with the highest priorty
@@ -149,7 +168,7 @@ public class CharacterManager : MonoBehaviour
                 if (_playerHUD) {
                     bool doDialog;
                     string text = priorityObject.GetText(out doDialog);
-                    if(doDialog)
+                    if (doDialog)
                     {
                         _playerHUD.SetDialogText(text);
                     } else {
@@ -167,7 +186,7 @@ public class CharacterManager : MonoBehaviour
         {
             if (_playerHUD)
                 _playerHUD.SetInteractionText(null);
-                _playerHUD.SetDialogText(null);
+            _playerHUD.SetDialogText(null);
         }
 
 
@@ -181,5 +200,10 @@ public class CharacterManager : MonoBehaviour
 
             _soundEmitter.SetRadius(newRadius);
         }
+    }
+
+    public void setChoiceText(List<string> text)
+    {
+        _playerHUD.setChoiceText(text);
     }
 }

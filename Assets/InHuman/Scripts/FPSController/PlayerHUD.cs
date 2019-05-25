@@ -6,20 +6,27 @@ using TMPro;
 
 public enum ScreenFadeType{ FadeIn, FadeOut }
 
+public class ButtonChoice {
+    public GameObject button = null;
+    public Text         text = null;
+}
+
 public class PlayerHUD : MonoBehaviour 
 {
-	// Inspector Assigned UI References
-	[SerializeField] private GameObject         _crosshair			        =	null;
-	[SerializeField] private TextMeshPro        _healthText			        =	null;
+    // Inspector Assigned UI References
+    [SerializeField] private GameObject         _crosshair                  =   null;
+    [SerializeField] private List<ButtonChoice> _choices                    =   null;
+    [SerializeField] private TextMeshPro        _healthText			        =	null;
 	[SerializeField] private TextMeshPro        _staminaText		        =	null;
     [SerializeField] private TextMeshProUGUI    _interactionText            =   null;
     [SerializeField] private TextMeshProUGUI    _dialogText                 =   null;
     [SerializeField] private Image 		        _screenFade			        =	null;
 	[SerializeField] private TextMeshPro        _missionText		        =	null;
-	[SerializeField] private float		        _missionTextDisplayTime	    =	3.0f;
+    [SerializeField] private List<GameObject>       _playerChoices              =   null;
+    [SerializeField] private float              _missionTextDisplayTime     = 3.0f;
 
-	// Internals
-	float _currentFadeLevel = 1.0f;
+    // Internals
+    float _currentFadeLevel = 1.0f;
 	IEnumerator _coroutine	= null;
 
 	public void Start()
@@ -97,6 +104,11 @@ public class PlayerHUD : MonoBehaviour
         }
     }
 
+    public void setPlayerChoiceText(List<string> text)
+    {
+
+    }
+
     public void Fade ( float seconds, ScreenFadeType direction )
 	{
 		if (_coroutine!=null) StopCoroutine(_coroutine); 
@@ -156,4 +168,19 @@ public class PlayerHUD : MonoBehaviour
 			_missionText.gameObject.SetActive(false);
 		}
 	}
+
+    public void setChoiceText(List<string> text)
+    {
+        int currentIndex = 0; 
+
+        foreach (string curText in text)
+        {
+            GameObject button = _playerChoices[currentIndex];
+            button.SetActive(true);
+            Button btn = button.GetComponentInChildren<Button>();
+            Text btnText = btn.GetComponentInChildren<Text>();
+            btnText.text = text[currentIndex];
+            currentIndex++;
+        }
+    }
 }

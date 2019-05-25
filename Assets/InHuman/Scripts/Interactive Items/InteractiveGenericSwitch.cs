@@ -29,6 +29,7 @@ public class InteractiveGenericSwitch : InteractiveItem
 
     [Header("Dialog")]
     [SerializeField] protected bool                 _doDialog               = false;
+    [SerializeField] protected CharacterManager     _characterManager         = null;
     [SerializeField] protected int                  _currentDialog          = 0;
     [SerializeField] protected int                  _currentDialogIndex     = 0;
     [SerializeField] protected List<DialogState>    _dialogLines            = new List<DialogState>();
@@ -126,7 +127,26 @@ public class InteractiveGenericSwitch : InteractiveItem
 		{
             if (_doDialog)
             {
-                if (_currentDialogIndex >= _dialogLines[_currentDialog].Value.Count)
+
+                if (_dialogLines[_currentDialogIndex].Value.triggerPlayerChoice == true)
+                {
+                    _dialogLines[_currentDialogIndex].Value.WaitingForAnswer = true;
+                    _characterManager.freezeFPSController(true);
+                    _characterManager.setChoiceText(_dialogLines[_currentDialogIndex].Value.Choices);
+                }
+
+                if (_dialogLines[_currentDialogIndex].Value.WaitingForAnswer) {
+                    _stateSetText = _dialogLines[_currentDialogIndex].Text;
+                    return _stateSetText;
+                }
+
+                if(_dialogLines[_currentDialogIndex].Value.Answer > -1)
+                {
+                    _dialogLines[_currentDialogIndex].Value.WaitingForAnswer = false;
+                    _characterManager.freezeFPSController(false);
+                }
+
+                if (_currentDialogIndex > _dialogLines.Count - 1)
                 {
                     _activated = true;
                     _canToggle = false;
@@ -135,11 +155,14 @@ public class InteractiveGenericSwitch : InteractiveItem
 
                 if(_activated)
                 {
-                    string text = _dialogLines[_currentDialog].Value[_currentDialogIndex];
+                    string text = _dialogLines[_currentDialogIndex].Text;
                     _stateSetText = text;
 
-                    if (_currentDialogIndex < _dialogLines[_currentDialog].Value.Count)
+
+                    if (_currentDialogIndex < _dialogLines.Count)
                         _currentDialogIndex++;
+
+
                     _activated = false;
                 }
 

@@ -10,10 +10,24 @@ public class GameState
 }
 
 [System.Serializable]
+public class DialogConfig {
+    public bool triggerPlayerChoice = false;
+    public List<string> Choices = null;
+    public bool WaitingForAnswer = false;
+    public int Answer = -1;
+}
+
+[System.Serializable]
 public class DialogState
 {
-    public string Key = null;
-    public List<string> Value = null;
+    public string Text = null;
+    public DialogConfig Value = null;
+}
+
+public class Choices
+{
+    public string text = null;
+    public bool status = false;
 }
 
 public class ApplicationManager : MonoBehaviour 

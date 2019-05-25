@@ -15,6 +15,7 @@ TagManager:
   - Lower Body
   - Head
   - AICars
+  - Button Choice
   layers:
   - Default
   - TransparentFX
