@@ -61,18 +61,20 @@ public class PlayerHUD : MonoBehaviour
 	//			InterationText because it is used to display messages
 	//			relating to interacting with objects.
 	// ---------------------------------------------------------------
-	public void SetInteractionText( string text, bool dialog = false )
+	public void SetInteractionText( string text)
 	{
         if (_interactionText)
         {
             if (text == null)
             {
                 _interactionText.text = null;
+                _interactionText.transform.parent.gameObject.SetActive(false);
                 _interactionText.gameObject.SetActive(false);
             }
             else
             {
                 _interactionText.text = text;
+                _interactionText.transform.parent.gameObject.SetActive(true);
                 _interactionText.gameObject.SetActive(true);
             }
         }
@@ -169,18 +171,38 @@ public class PlayerHUD : MonoBehaviour
 		}
 	}
 
-    public void setChoiceText(List<string> text)
+    public void setChoiceText(List<Choice> choices, DialogConfig config)
     {
         int currentIndex = 0; 
 
-        foreach (string curText in text)
+        foreach (Choice choice in choices)
         {
             GameObject button = _playerChoices[currentIndex];
             button.SetActive(true);
             Button btn = button.GetComponentInChildren<Button>();
             Text btnText = btn.GetComponentInChildren<Text>();
-            btnText.text = text[currentIndex];
+            btnText.text = choice.Text;
+            btn.onClick.AddListener(delegate { updateChoiceText(choice, currentIndex, config); });
             currentIndex++;
+        }
+    }
+
+    public void updateChoiceText(Choice choice, int answerIndex, DialogConfig config)
+    {
+        ApplicationManager appDatabase = ApplicationManager.instance;
+
+        config.Answer = choice.jumpToDialogIndex;
+        if (choice.updateDatabase)
+        {
+            appDatabase.SetGameState(choice.newState.Key, choice.newState.Value);
+        }
+    }
+
+    public void clearPlayerChoices()
+    {
+        foreach(GameObject btn in _playerChoices)
+        {
+            btn.SetActive(false);
         }
     }
 }

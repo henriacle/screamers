@@ -12,18 +12,37 @@ public class GameState
 [System.Serializable]
 public class DialogConfig {
     public bool triggerPlayerChoice = false;
-    public List<string> Choices = null;
-    public bool WaitingForAnswer = false;
-    public int Answer = -1;
+    public List<Choice> Choices     = null;
+    public bool WaitingForAnswer    = false;
+    public int Answer               = -1;
+}
+
+[System.Serializable]
+public class Choice
+{
+    public string Text = null;
+    public int jumpToDialogIndex = 0;
+    public bool updateDatabase = false;
+    public GameState newState;
 }
 
 [System.Serializable]
 public class DialogState
 {
-    public string Text = null;
-    public DialogConfig Value = null;
+    public string           Text                    = null;
+    public bool             IncrementDialog         = true;
+    public bool             resetDialog             = true;
+    public DialogConfig     Value                   = null;
+    public bool             FinishDialog            = false;
+    public bool             WaitForVariableToChange = false;
+    public List<GameState>  GameStateToCheck        = null;
+    public bool             AreGameStatesSet        = false;
+    public List<GameState>  GameStateToSet          = null;
+    public int              jumpToDialogIndex       = 0;
+    public int              lastAnswer              = 0;
 }
 
+[System.Serializable]
 public class Choices
 {
     public string text = null;

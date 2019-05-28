@@ -202,8 +202,13 @@ public class CharacterManager : MonoBehaviour
         }
     }
 
-    public void setChoiceText(List<string> text)
+    public void setChoiceText(List<Choice> choices, DialogConfig config)
     {
-        _playerHUD.setChoiceText(text);
+        _playerHUD.setChoiceText(choices, config);
+    }
+
+    public void clearPlayerChoiceButtons()
+    {
+        _playerHUD.clearPlayerChoices();
     }
 }

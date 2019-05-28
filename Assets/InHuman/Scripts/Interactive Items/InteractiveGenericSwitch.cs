@@ -28,8 +28,10 @@ public class InteractiveGenericSwitch : InteractiveItem
 	[SerializeField] protected List<GameState>		_deactivateStates		= new List<GameState>();
 
     [Header("Dialog")]
+    [SerializeField] protected bool                 _incrementDialog        = true;
+    [SerializeField] protected int                  _jumpToIndex            = 0;
     [SerializeField] protected bool                 _doDialog               = false;
-    [SerializeField] protected CharacterManager     _characterManager         = null;
+    [SerializeField] protected CharacterManager     _characterManager       = null;
     [SerializeField] protected int                  _currentDialog          = 0;
     [SerializeField] protected int                  _currentDialogIndex     = 0;
     [SerializeField] protected List<DialogState>    _dialogLines            = new List<DialogState>();
@@ -69,12 +71,13 @@ public class InteractiveGenericSwitch : InteractiveItem
 	protected IEnumerator 				_coroutine				=	null;
 	protected bool						_activated				=	false;
 	protected bool						_firstUse				=	false;
+    protected int                       _previouslyDialogIndex  =   0;
 
-	// ---------------------------------------------------------------------------
-	// Name	: Start
-	// Desc	: Register this objects collider with the Activation Database
-	// ---------------------------------------------------------------------------
-	protected override void Start()
+    // ---------------------------------------------------------------------------
+    // Name	: Start
+    // Desc	: Register this objects collider with the Activation Database
+    // ---------------------------------------------------------------------------
+    protected override void Start()
 	{
 		// Call the base class (VERY IMPORTANT) as this registers the scene with the app database
 		base.Start();
@@ -109,72 +112,147 @@ public class InteractiveGenericSwitch : InteractiveItem
 		}
 	}
 
+    public override string GetText()
+    {
+        // If we have no application database or this switch is disabled then return null
+        if (!enabled) return string.Empty;
 
+        // If its already activated then just return the activated text
+        if (_activated)
+        {
+            return _ObjectActiveText;
+        }
 
-	// --------------------------------------------------------------------------
-	// Name	:	GetText
-	// Desc	:	Return different hint text depending on whether the object
-	//			is currently able to be activated
-	// --------------------------------------------------------------------------
-	public override string GetText	(out bool doDialog)
+        // We need to test all the states that need to be set to see if this item can be activated
+        // as that determines the text we send back
+        bool requiredStates = AreRequiredStatesSet();
+
+        // Return the desired text to reflect whether ot not we can use the object yet
+        if (!requiredStates)
+        {
+            return _stateNotSetText;
+        }
+        else
+        {
+            return _stateSetText;
+        }
+    }
+
+    // --------------------------------------------------------------------------
+    // Name	:	GetText
+    // Desc	:	Return different hint text depending on whether the object
+    //			is currently able to be activated
+    // --------------------------------------------------------------------------
+    public override string GetText	(out bool doDialog)
 	{
         // If we have no application database or this switch is disabled then return null
         doDialog = _doDialog;
         if (!enabled) return string.Empty;
 
+
         // If its already activated then just return the activated text
-        if (_activated)
+        if (_activated && _doDialog)
 		{
-            if (_doDialog)
+            if (_doDialog && _dialogLines[_currentDialogIndex].FinishDialog == false)
             {
-
-                if (_dialogLines[_currentDialogIndex].Value.triggerPlayerChoice == true)
+                if(_dialogLines[_currentDialogIndex].Value.Answer > 0)
                 {
-                    _dialogLines[_currentDialogIndex].Value.WaitingForAnswer = true;
-                    _characterManager.freezeFPSController(true);
-                    _characterManager.setChoiceText(_dialogLines[_currentDialogIndex].Value.Choices);
-                }
-
-                if (_dialogLines[_currentDialogIndex].Value.WaitingForAnswer) {
-                    _stateSetText = _dialogLines[_currentDialogIndex].Text;
-                    return _stateSetText;
-                }
-
-                if(_dialogLines[_currentDialogIndex].Value.Answer > -1)
-                {
-                    _dialogLines[_currentDialogIndex].Value.WaitingForAnswer = false;
+                    _dialogLines[_currentDialogIndex].Value.triggerPlayerChoice = false;
+                    _characterManager.clearPlayerChoiceButtons();
                     _characterManager.freezeFPSController(false);
+                    _previouslyDialogIndex = _currentDialogIndex;
+                    _currentDialogIndex = _dialogLines[_currentDialogIndex].Value.Answer - 1;
                 }
 
-                if (_currentDialogIndex > _dialogLines.Count - 1)
+                if (_dialogLines[_currentDialogIndex].WaitForVariableToChange)
                 {
                     _activated = true;
-                    _canToggle = false;
+                    ApplicationManager appDatabase = ApplicationManager.instance;
+                    bool allStatesTrue = false;
+
+                    if (!_dialogLines[_currentDialogIndex].AreGameStatesSet)
+                    {
+                        foreach (GameState state in _dialogLines[_currentDialogIndex].GameStateToSet)
+                        {
+                            appDatabase.SetGameState(state.Key, state.Value);
+                        }
+                    }
+
+                    _dialogLines[_currentDialogIndex].AreGameStatesSet = true;
+
+                    foreach (GameState state in _dialogLines[_currentDialogIndex].GameStateToCheck)
+                    {
+                        allStatesTrue = state.Value == appDatabase.GetGameState(state.Key);
+                    }
+
+                    if (allStatesTrue)
+                    {
+                        _currentDialogIndex = _dialogLines[_currentDialogIndex].jumpToDialogIndex - 1;
+                        _jumpToIndex = _dialogLines[_currentDialogIndex].jumpToDialogIndex;
+                        _stateSetText = _dialogLines[_currentDialogIndex].Text;
+                        return _stateSetText;
+                    }
+
+                    _ObjectActiveText = _dialogLines[_currentDialogIndex].Text;
                     return _ObjectActiveText;
                 }
+                else
+                {
+                    if (_dialogLines[_currentDialogIndex].Value.triggerPlayerChoice == true)
+                    {
+                        _dialogLines[_currentDialogIndex].Value.WaitingForAnswer = true;
+                        _characterManager.freezeFPSController(true);
+                        _characterManager.setChoiceText(_dialogLines[_currentDialogIndex].Value.Choices, _dialogLines[_currentDialogIndex].Value);
+                    }
 
-                if(_activated)
+                    if (_dialogLines[_currentDialogIndex].Value.WaitingForAnswer)
+                    {
+                        _stateSetText = _dialogLines[_currentDialogIndex].Text;
+                        _incrementDialog = _dialogLines[_currentDialogIndex].IncrementDialog;
+                        return _stateSetText;
+                    }
+
+                    if (_dialogLines[_currentDialogIndex].Value.Answer > -1)
+                    {
+                        _dialogLines[_currentDialogIndex].Value.WaitingForAnswer = false;
+                        _characterManager.freezeFPSController(false);
+                    }
+
+                    if (_currentDialogIndex > _dialogLines.Count - 1)
+                    {
+                        _activated = true;
+                        _canToggle = false;
+                        _incrementDialog = _dialogLines[_currentDialogIndex].IncrementDialog;
+                        return _ObjectActiveText;
+                    }
+                }
+
+                if (_activated)
                 {
                     string text = _dialogLines[_currentDialogIndex].Text;
                     _stateSetText = text;
-
-
-                    if (_currentDialogIndex < _dialogLines.Count)
-                        _currentDialogIndex++;
-
-
                     _activated = false;
                 }
-
+                _incrementDialog = _dialogLines[_currentDialogIndex].IncrementDialog;
                 return _stateSetText;
             }
-            
+
+            _ObjectActiveText = _dialogLines[_currentDialogIndex].Text;
             return _ObjectActiveText;
 		}
 
-		// We need to test all the states that need to be set to see if this item can be activated
-		// as that determines the text we send back
-		bool requiredStates = AreRequiredStatesSet();
+        // If we have no application database or this switch is disabled then return null
+        if (!enabled) return string.Empty;
+
+        // If its already activated then just return the activated text
+        if (_activated)
+        {
+            return _ObjectActiveText;
+        }
+
+        // We need to test all the states that need to be set to see if this item can be activated
+        // as that determines the text we send back
+        bool requiredStates = AreRequiredStatesSet();
 
 		// Return the desired text to reflect whether ot not we can use the object yet
 		if (!requiredStates)
@@ -239,7 +317,16 @@ public class InteractiveGenericSwitch : InteractiveItem
 		// If we are already in a different state to the starting state and
 		// we are not in toggle mode then this item has been switched on/ switched off
 		// and can not longer be altered
-		if (_firstUse && !_canToggle) return;
+        if (_doDialog)
+        {
+            if (_incrementDialog)
+                _currentDialogIndex++;
+
+            if (_jumpToIndex > 0)
+                _currentDialogIndex = _jumpToIndex - 1;
+        }
+
+        if (_firstUse && !_canToggle) return;
 
 		if (!_activated)
 		{ 
