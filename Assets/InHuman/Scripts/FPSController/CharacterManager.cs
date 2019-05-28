@@ -48,6 +48,8 @@ public class CharacterManager : MonoBehaviour
     public float playerCurrentHealth { get { return _currentHealth; } set { _currentHealth = value; } }
     public UnityStandardAssets.Characters.FirstPerson.FirstPersonController controller;
 
+    public FirstPersonController fpsController { get { return _fpsController; } }
+
     private void Start()
     {
         _collider = GetComponent<Collider>();

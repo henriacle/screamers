@@ -19,6 +19,7 @@ public class WeaponSystem : MonoBehaviour
     //public Weapon _wppistol;
 
     public GameObject _wp;
+        [SerializeField] CharacterManager charManager;
 
 
     public a_machinegun a_m;
