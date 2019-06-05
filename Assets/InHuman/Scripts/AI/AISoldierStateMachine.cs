@@ -69,21 +69,20 @@ public class AISoldierStateMachine : AIStateMachine
     {
         base.Start();
         _gameSceneManager = GameSceneManager.instance;
-        _weaponSystem = gameObject.transform.root.GetComponentInChildren<OriginalWeaponSystem>();
-        _npcWeapon = _weaponSystem.weapons[_weaponSystem.weaponIndex].GetComponent<Weapon>();
-        attachWeapon = GetComponent<AttachWeapon>();
-        attachWeapon.setWeapon(_npcWeapon.gameObject);
+        if(_weaponType != EnemyWeaponType.UNARMED)
+        {
+            _weaponSystem = gameObject.transform.root.GetComponentInChildren<OriginalWeaponSystem>();
+            _npcWeapon = _weaponSystem.weapons[_weaponSystem.weaponIndex].GetComponent<Weapon>();
+            attachWeapon = GetComponent<AttachWeapon>();
+            attachWeapon.setWeapon(_npcWeapon.gameObject);
+        }
     }
 
     protected override void Update()
     {
         base.Update();
 
-        if(_weaponType == EnemyWeaponType.UNARMED)
-        {
-            attachWeapon.weaponStatus(false);
-        }
-        else if (_weaponType == EnemyWeaponType.RIFLE)
+        if (_weaponType == EnemyWeaponType.PISTOL)
         {
             attachWeapon.weaponStatus(true);
         }
