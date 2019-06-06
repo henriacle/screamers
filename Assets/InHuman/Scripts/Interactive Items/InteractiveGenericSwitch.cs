@@ -323,7 +323,6 @@ public class InteractiveGenericSwitch : InteractiveItem
         // and can not longer be altered
         if (_doDialog)
         {
-            Debug.Log("ACTIVATE BITCH");
 
             if (_incrementDialog)
             {

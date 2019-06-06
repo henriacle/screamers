@@ -194,7 +194,10 @@ public class PlayerHUD : MonoBehaviour
         config.Answer = choice.jumpToDialogIndex;
         if (choice.updateDatabase)
         {
-            appDatabase.SetGameState(choice.newState.Key, choice.newState.Value);
+            foreach(GameState state in choice.newStates)
+            {
+                appDatabase.SetGameState(state.Key, state.Value);
+            }
         }
     }
 

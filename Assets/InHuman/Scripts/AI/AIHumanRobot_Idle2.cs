@@ -46,6 +46,10 @@ public class AIHumanRobot_Idle2 : AIHumanRobotState
 
         if(appManager != null)
         {
+
+
+            Debug.Log(_keyToDestinationReached);
+            Debug.Log(appManager.GetGameState(_keyToDestinationReached));
             if (appManager.GetGameState(_keyToDestinationReached) == null)
             {
                 appManager.SetGameState(_keyToDestinationReached, "FALSE");

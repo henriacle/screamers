@@ -9,7 +9,7 @@ public class AIHumanRobot_Patrol2 : AIHumanRobotState
     [SerializeField] float _slerpSpeed = 5.0f;
     [SerializeField] string _keyToDestinationReached = null;
 
-    [SerializeField] [Range(0.0f, 3.0f)] float _speed = 1.0f;
+    [SerializeField] [Range(0.0f, 3.0f)] float _speed = 3.0f;
 
     public override AIStateType GetStateType()
     {

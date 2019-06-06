@@ -23,7 +23,7 @@ public class Choice
     public string Text = null;
     public int jumpToDialogIndex = 0;
     public bool updateDatabase = false;
-    public GameState newState;
+    public List<GameState> newStates;
 }
 
 [System.Serializable]
