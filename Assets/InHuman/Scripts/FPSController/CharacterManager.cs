@@ -105,11 +105,10 @@ public class CharacterManager : MonoBehaviour
 
     private void doDamage(float damage)
     {
-
         playerCurrentHealth = _currentHealth - damage;
-        //_lifeRectWidth = 250 - (250 - (250 * playerCurrentHealth / 100));
-        //_lifeRect.sizeDelta = new Vector2(_lifeRectWidth, _lifeRect.rect.height);
-        //_lifeRect.ForceUpdateRectTransforms();
+        _lifeRectWidth = 250 - (250 - (250 * playerCurrentHealth / 100));
+        _lifeRect.sizeDelta = new Vector2(_lifeRectWidth, _lifeRect.rect.height);
+        _lifeRect.ForceUpdateRectTransforms();
 
         if (_cameraBloodEffect != null)
         {
