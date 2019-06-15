@@ -4727,21 +4727,15 @@ MonoBehaviour:
       - Text: Vou ajudar
         jumpToDialogIndex: 3
         updateDatabase: 1
-        newState:
-          Key: missionOne
-          Value: TRUE
+        newStates: []
       - Text: "N\xE3o Vou ajudar"
         jumpToDialogIndex: 4
         updateDatabase: 0
-        newState:
-          Key: 
-          Value: 
+        newStates: []
       - Text: Quero dinheiro
         jumpToDialogIndex: 5
         updateDatabase: 0
-        newState:
-          Key: 
-          Value: 
+        newStates: []
       WaitingForAnswer: 0
       Answer: 0
     FinishDialog: 0
@@ -4780,21 +4774,15 @@ MonoBehaviour:
       - Text: Vou ajudar
         jumpToDialogIndex: 0
         updateDatabase: 0
-        newState:
-          Key: 
-          Value: 
+        newStates: []
       - Text: "N\xE3o Vou ajudar"
         jumpToDialogIndex: 0
         updateDatabase: 0
-        newState:
-          Key: 
-          Value: 
+        newStates: []
       - Text: Me chupa
         jumpToDialogIndex: 0
         updateDatabase: 1
-        newState:
-          Key: 
-          Value: 
+        newStates: []
       WaitingForAnswer: 0
       Answer: 0
     FinishDialog: 0
@@ -5787,6 +5775,61 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1475185821157606939, guid: 1998706517d4ac842bdab071f9248d7e,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1475185821573390389, guid: 1998706517d4ac842bdab071f9248d7e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 1475185821573390389, guid: 1998706517d4ac842bdab071f9248d7e,
+        type: 3}
+      propertyPath: m_TagString
+      value: Lower Body
+      objectReference: {fileID: 0}
+    - target: {fileID: 1475185821573227997, guid: 1998706517d4ac842bdab071f9248d7e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 1475185821573227997, guid: 1998706517d4ac842bdab071f9248d7e,
+        type: 3}
+      propertyPath: m_TagString
+      value: Upper Body
+      objectReference: {fileID: 0}
+    - target: {fileID: 1475185821573430003, guid: 1998706517d4ac842bdab071f9248d7e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 1475185821573430003, guid: 1998706517d4ac842bdab071f9248d7e,
+        type: 3}
+      propertyPath: m_TagString
+      value: Head
+      objectReference: {fileID: 0}
+    - target: {fileID: 1475185821573397045, guid: 1998706517d4ac842bdab071f9248d7e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 1475185821573397045, guid: 1998706517d4ac842bdab071f9248d7e,
+        type: 3}
+      propertyPath: m_TagString
+      value: Upper Body
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596117250837340856, guid: 1998706517d4ac842bdab071f9248d7e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1475185821563774885, guid: 1998706517d4ac842bdab071f9248d7e,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1475185821506072219, guid: 1998706517d4ac842bdab071f9248d7e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5867,16 +5910,6 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Upper Body
       objectReference: {fileID: 0}
-    - target: {fileID: 1475185821573397045, guid: 1998706517d4ac842bdab071f9248d7e,
-        type: 3}
-      propertyPath: m_Layer
-      value: 14
-      objectReference: {fileID: 0}
-    - target: {fileID: 1475185821573397045, guid: 1998706517d4ac842bdab071f9248d7e,
-        type: 3}
-      propertyPath: m_TagString
-      value: Upper Body
-      objectReference: {fileID: 0}
     - target: {fileID: 1475185821573415445, guid: 1998706517d4ac842bdab071f9248d7e,
         type: 3}
       propertyPath: m_Layer
@@ -5887,32 +5920,12 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Lower Body
       objectReference: {fileID: 0}
-    - target: {fileID: 1475185821573430003, guid: 1998706517d4ac842bdab071f9248d7e,
-        type: 3}
-      propertyPath: m_Layer
-      value: 14
-      objectReference: {fileID: 0}
-    - target: {fileID: 1475185821573430003, guid: 1998706517d4ac842bdab071f9248d7e,
-        type: 3}
-      propertyPath: m_TagString
-      value: Head
-      objectReference: {fileID: 0}
     - target: {fileID: 1475185821573415725, guid: 1998706517d4ac842bdab071f9248d7e,
         type: 3}
       propertyPath: m_Layer
       value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 1475185821573415725, guid: 1998706517d4ac842bdab071f9248d7e,
-        type: 3}
-      propertyPath: m_TagString
-      value: Lower Body
-      objectReference: {fileID: 0}
-    - target: {fileID: 1475185821573390389, guid: 1998706517d4ac842bdab071f9248d7e,
-        type: 3}
-      propertyPath: m_Layer
-      value: 14
-      objectReference: {fileID: 0}
-    - target: {fileID: 1475185821573390389, guid: 1998706517d4ac842bdab071f9248d7e,
         type: 3}
       propertyPath: m_TagString
       value: Lower Body
@@ -5946,26 +5959,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TagString
       value: Upper Body
-      objectReference: {fileID: 0}
-    - target: {fileID: 1475185821573227997, guid: 1998706517d4ac842bdab071f9248d7e,
-        type: 3}
-      propertyPath: m_Layer
-      value: 14
-      objectReference: {fileID: 0}
-    - target: {fileID: 1475185821573227997, guid: 1998706517d4ac842bdab071f9248d7e,
-        type: 3}
-      propertyPath: m_TagString
-      value: Upper Body
-      objectReference: {fileID: 0}
-    - target: {fileID: 4596117250837340856, guid: 1998706517d4ac842bdab071f9248d7e,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1475185821563774885, guid: 1998706517d4ac842bdab071f9248d7e,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1475185821142362213, guid: 1998706517d4ac842bdab071f9248d7e,
         type: 3}
@@ -6211,11 +6204,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1475185821157606939, guid: 1998706517d4ac842bdab071f9248d7e,
-        type: 3}
-      propertyPath: m_Radius
-      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 1475185821157606938, guid: 1998706517d4ac842bdab071f9248d7e,
         type: 3}
@@ -12654,9 +12642,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3433540224053114109}
   - component: {fileID: 3433540224053114083}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Weponcam
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12696,7 +12684,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3433540224417334886}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1

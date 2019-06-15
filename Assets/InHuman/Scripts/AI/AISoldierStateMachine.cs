@@ -71,7 +71,10 @@ public class AISoldierStateMachine : AIStateMachine
         _gameSceneManager = GameSceneManager.instance;
         if(_weaponType != EnemyWeaponType.UNARMED)
         {
+            Debug.Log("caindo aqui");
             _weaponSystem = gameObject.transform.root.GetComponentInChildren<OriginalWeaponSystem>();
+            Debug.Log(_weaponSystem.weapons.Length);
+            Debug.Log(_weaponSystem.weaponIndex);
             _npcWeapon = _weaponSystem.weapons[_weaponSystem.weaponIndex].GetComponent<Weapon>();
             attachWeapon = GetComponent<AttachWeapon>();
             attachWeapon.setWeapon(_npcWeapon.gameObject);
@@ -82,7 +85,7 @@ public class AISoldierStateMachine : AIStateMachine
     {
         base.Update();
 
-        if (_weaponType == EnemyWeaponType.PISTOL)
+        if (_weaponType != EnemyWeaponType.UNARMED && attachWeapon != null)
         {
             attachWeapon.weaponStatus(true);
         }

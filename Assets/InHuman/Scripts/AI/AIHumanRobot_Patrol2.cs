@@ -62,9 +62,11 @@ public class AIHumanRobot_Patrol2 : AIHumanRobotState
                 !_humanRobotStateMachine.navAgent.hasPath ||
                 _humanRobotStateMachine.navAgent.pathStatus != NavMeshPathStatus.PathComplete)
             {
+                Debug.Log("pathcomplete");
                 ApplicationManager _appManager = ApplicationManager.instance;
                 if(_appManager != null)
                 {
+                    Debug.Log("finished");
                     _appManager.SetGameState(_keyToDestinationReached, "TRUE");
                     _appManager.GetGameState(_keyToDestinationReached);
                 }

@@ -20,6 +20,7 @@ public class CharacterManager : MonoBehaviour
     [SerializeField] private float _landingRadius = 12.0f;
     [SerializeField] private float _bloodRadiusScale = 6.0f;
     [SerializeField] private PlayerHUD _playerHUD = null;
+    [SerializeField] private bool invencible = false;
 
     // Pain Damage Audio
     [SerializeField] private AudioCollection _damageSounds = null;
@@ -76,6 +77,7 @@ public class CharacterManager : MonoBehaviour
 
     public void takeDamage(Vector3 position, float force, float damage, Rigidbody bodyPart, int hitDirection = 0)
     {
+        if (invencible) return;
         doDamage(damage);
     }
 

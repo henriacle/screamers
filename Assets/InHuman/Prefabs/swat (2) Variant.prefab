@@ -1,0 +1,782 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &805708314
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 805708315}
+  - component: {fileID: 805708319}
+  - component: {fileID: 805708318}
+  - component: {fileID: 805708317}
+  - component: {fileID: 805708316}
+  m_Layer: 15
+  m_Name: Cube
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &805708315
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 805708314}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.04, y: 0.87, z: 0}
+  m_LocalScale: {x: 1, y: 1.83, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8172132439431288496}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &805708319
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 805708314}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &805708318
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 805708314}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!65 &805708317
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 805708314}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1.46}
+  m_Center: {x: 0, y: 0, z: 0.35}
+--- !u!114 &805708316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 805708314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d7443580ae740e4fa3b9f44455d9938, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _priority: 0
+  _requiredStates: []
+  _activateStates:
+  - Key: BUSCARFILHO
+    Value: FALSE
+  - Key: EMBOSCADA
+    Value: FALSE
+  - Key: PRIMEIRAMISSAO
+    Value: FALSE
+  - Key: MAPA
+    Value: FALSE
+  - Key: CHAVE
+    Value: FALSE
+  _deactivateStates: []
+  _incrementDialog: 0
+  _jumpToIndex: 0
+  _doDialog: 1
+  _resetDialog: 0
+  _characterManager: {fileID: 0}
+  _currentDialog: 0
+  _currentDialogIndex: 0
+  _dialogLines:
+  - Text: "Quem... Morrice \xE9 voc\xEA?"
+    IncrementDialog: 0
+    resetDialog: 0
+    Value:
+      triggerPlayerChoice: 1
+      Choices:
+      - Text: "N\xE3o, n\xE3o sou Morrice."
+        jumpToDialogIndex: 2
+        updateDatabase: 0
+        newStates: []
+      - Text: '... Sim, sou eu. '
+        jumpToDialogIndex: 3
+        updateDatabase: 0
+        newStates: []
+      WaitingForAnswer: 0
+      Answer: 0
+    FinishDialog: 0
+    WaitForVariableToChange: 0
+    GameStateToCheck: []
+    AreGameStatesSet: 0
+    GameStateToSet: []
+    jumpToDialogIndex: 0
+    lastAnswer: 0
+  - Text: "-N\xE3o?... voc\xEA... voc\xEA viu meu filho? Ele se chama Morrice, ele
+      tem 20 anos, camiseta amarela com um cora\xE7\xE3o estampado, voc\xEA n\xE3o
+      viu ele mesmo? Ele n\xE3o volta para casa a dias."
+    IncrementDialog: 0
+    resetDialog: 0
+    Value:
+      triggerPlayerChoice: 1
+      Choices:
+      - Text: "Eu n\xE3o conhe\xE7o seu filho... por que ele te deixou sozinho? "
+        jumpToDialogIndex: 4
+        updateDatabase: 0
+        newStates: []
+      - Text: "Eu n\xE3o me importo, voc\xEA sabe onde fica a base Americana? "
+        jumpToDialogIndex: 6
+        updateDatabase: 0
+        newStates: []
+      WaitingForAnswer: 0
+      Answer: 0
+    FinishDialog: 0
+    WaitForVariableToChange: 0
+    GameStateToCheck: []
+    AreGameStatesSet: 0
+    GameStateToSet: []
+    jumpToDialogIndex: 0
+    lastAnswer: 0
+  - Text: "-... N\xE3o, essa n\xE3o \xE9 a voz do meu filho, quem \xE9 voc\xEA?"
+    IncrementDialog: 0
+    resetDialog: 0
+    Value:
+      triggerPlayerChoice: 1
+      Choices:
+      - Text: '-... Sou eu sim, minha voz ficou um pouco rouca por causa do ar. '
+        jumpToDialogIndex: 5
+        updateDatabase: 0
+        newStates: []
+      - Text: "...Ok, eu n\xE3o sou o Morrice. "
+        jumpToDialogIndex: 10
+        updateDatabase: 0
+        newStates: []
+      WaitingForAnswer: 0
+      Answer: 0
+    FinishDialog: 0
+    WaitForVariableToChange: 0
+    GameStateToCheck: []
+    AreGameStatesSet: 0
+    GameStateToSet: []
+    jumpToDialogIndex: 0
+    lastAnswer: 0
+  - Text: "Ele e minha mulhe... ele descobriu um reservat\xF3rio de comida enlatada
+      n\xE3o muito longe daqui, a alguns dias atr\xE1s ele foi buscar mais, mas ainda
+      n\xE3o voltou, por favor ache ele, eu n\xE3o posso ficar sozinho, aqui, eu te
+      dou o mapa dele, ele foi para o circulo vermelho, ele tem 20 anos, camiseta
+      amarela com um cora\xE7\xE3o estampado."
+    IncrementDialog: 0
+    resetDialog: 0
+    Value:
+      triggerPlayerChoice: 1
+      Choices:
+      - Text: Ok, eu te ajudo. [Pegar Mapa]
+        jumpToDialogIndex: 16
+        updateDatabase: 1
+        newStates:
+        - Key: MAPA
+          Value: TRUE
+      - Text: "Sua mulher? Voc\xEA disse que esta sozinho aqui. "
+        jumpToDialogIndex: 0
+        updateDatabase: 0
+        newStates: []
+      WaitingForAnswer: 0
+      Answer: 0
+    FinishDialog: 0
+    WaitForVariableToChange: 0
+    GameStateToCheck: []
+    AreGameStatesSet: 0
+    GameStateToSet: []
+    jumpToDialogIndex: 0
+    lastAnswer: 0
+  - Text: "Ent\xE3o qual \xE9 o nome da sua m\xE3e?"
+    IncrementDialog: 0
+    resetDialog: 0
+    Value:
+      triggerPlayerChoice: 1
+      Choices:
+      - Text: "Ok, eu n\xE3o sou o Morrice. "
+        jumpToDialogIndex: 10
+        updateDatabase: 0
+        newStates: []
+      - Text: Svetlana?
+        jumpToDialogIndex: 10
+        updateDatabase: 0
+        newStates: []
+      WaitingForAnswer: 0
+      Answer: 0
+    FinishDialog: 0
+    WaitForVariableToChange: 0
+    GameStateToCheck: []
+    AreGameStatesSet: 0
+    GameStateToSet: []
+    jumpToDialogIndex: 0
+    lastAnswer: 0
+  - Text: "Base Americana?! Minha mulh... nos est\xE1vamos procurando ela tamb\xE9m,
+      mas n\xE3o achamos, ent\xE3o achamos esse lugar, mas a comida acabou..."
+    IncrementDialog: 0
+    resetDialog: 0
+    Value:
+      triggerPlayerChoice: 1
+      Choices:
+      - Text: Comida?
+        jumpToDialogIndex: 4
+        updateDatabase: 0
+        newStates: []
+      - Text: "Sua mulher? Me parece que voc\xEA esta sozinho aqui."
+        jumpToDialogIndex: 7
+        updateDatabase: 0
+        newStates: []
+      WaitingForAnswer: 0
+      Answer: 0
+    FinishDialog: 0
+    WaitForVariableToChange: 0
+    GameStateToCheck: []
+    AreGameStatesSet: 0
+    GameStateToSet: []
+    jumpToDialogIndex: 0
+    lastAnswer: 0
+  - Text: Ela... Marianne... ela morreu.
+    IncrementDialog: 0
+    resetDialog: 0
+    Value:
+      triggerPlayerChoice: 1
+      Choices:
+      - Text: '...o que aconteceu? '
+        jumpToDialogIndex: 8
+        updateDatabase: 0
+        newStates: []
+      - Text: Oh... Ok, eu te ajudo [Pegar Mapa]
+        jumpToDialogIndex: 16
+        updateDatabase: 1
+        newStates:
+        - Key: MAPA
+          Value: TRUE
+      WaitingForAnswer: 0
+      Answer: 0
+    FinishDialog: 0
+    WaitForVariableToChange: 0
+    GameStateToCheck: []
+    AreGameStatesSet: 0
+    GameStateToSet: []
+    jumpToDialogIndex: 0
+    lastAnswer: 0
+  - Text: "Aquela coisa no andar de baixo... Mary achou que era algu\xE9m pedindo
+      socorro... essas maquinas desgra\xE7adas n\xE3o s\xE3o mais as mesmas, alguma
+      coisa mudou nelas... por favor, meu filho \xE9 a \xFAnica cosia que eu tenho,
+      por favor encontre-o.. eu... eu n\xE3o sei o que fazer se ele n\xE3o voltar."
+    IncrementDialog: 0
+    resetDialog: 0
+    Value:
+      triggerPlayerChoice: 1
+      Choices:
+      - Text: '... Ok, me de o mapa, eu te ajudo. [Pegar Mapa] '
+        jumpToDialogIndex: 16
+        updateDatabase: 1
+        newStates:
+        - Key: MAPA
+          Value: TRUE
+      - Text: Eu te ajudo, mas o que exatamente mudou nas maquinas?
+        jumpToDialogIndex: 9
+        updateDatabase: 0
+        newStates: []
+      WaitingForAnswer: 0
+      Answer: 0
+    FinishDialog: 0
+    WaitForVariableToChange: 0
+    GameStateToCheck: []
+    AreGameStatesSet: 0
+    GameStateToSet: []
+    jumpToDialogIndex: 0
+    lastAnswer: 0
+  - Text: "Oh obrigado. Muito obrigado mesmo... hum... Eu lembro que as maquinas,
+      h\xE1 muitos anos atr\xE1s, quando eu ainda enxergava, elas eram menores, com
+      formas estranhas, alguns se pareciam com animais, elas geralmente iam atr\xE1s
+      de soldados armados, mas h\xE1 quase dois anos eu acho, elas come\xE7aram a
+      mudar, pareciam imitar pessoas cada vez mais, primeiro com palavras, depois
+      com suas apar\xEAncias... n\xE3o confie em ningu\xE9m, nem crian\xE7as, minha
+      mulher confiou e a coisa o matou! Ela nem estava armada, essas maquinas n\xE3o
+      fazem mais sentido... nada faz."
+    IncrementDialog: 0
+    resetDialog: 0
+    Value:
+      triggerPlayerChoice: 1
+      Choices:
+      - Text: "Sinto muito... ent\xE3o me de o mapa, vou achar seu filho. [Pegar Mapa]"
+        jumpToDialogIndex: 16
+        updateDatabase: 1
+        newStates:
+        - Key: MAPA
+          Value: TRUE
+      WaitingForAnswer: 0
+      Answer: 0
+    FinishDialog: 0
+    WaitForVariableToChange: 0
+    GameStateToCheck: []
+    AreGameStatesSet: 0
+    GameStateToSet: []
+    jumpToDialogIndex: 0
+    lastAnswer: 0
+  - Text: "Porque voc\xEA mentiu? Meu fil... Voc\xEA \xE9 uma daquelas coisas n\xE3o
+      \xE9? Tentando imitar meu filho! V\xE1 embora daqui, por favor n\xE3o me mate!
+      Eu n\xE3o sou um soldado, voc\xEAs j\xE1 levaram minha mulher de mim, n\xE3o
+      \xE9 o suficiente?!"
+    IncrementDialog: 0
+    resetDialog: 0
+    Value:
+      triggerPlayerChoice: 1
+      Choices:
+      - Text: "N\xE3o, n\xE3o sou, pe\xE7o desculpas, minha base foi atacada por aquelas
+          coisas ent\xE3o n\xE3o confiei em voc\xEA, se eu fosse uma daquelas coisas,
+          eu teria te matado agora. "
+        jumpToDialogIndex: 11
+        updateDatabase: 0
+        newStates: []
+      - Text: "Sim eu sou uma daquelas coisas e se voc\xEA n\xE3o me disser onde a
+          base Americana esta e me der tudo o que voc\xEA tem, eu vou te matar tamb\xE9m! "
+        jumpToDialogIndex: 12
+        updateDatabase: 0
+        newStates: []
+      WaitingForAnswer: 0
+      Answer: 0
+    FinishDialog: 0
+    WaitForVariableToChange: 0
+    GameStateToCheck: []
+    AreGameStatesSet: 0
+    GameStateToSet: []
+    jumpToDialogIndex: 0
+    lastAnswer: 0
+  - Text: "...Ok, ent\xE3o ache meu filho, ele deve estar no circulo vermelho desse
+      mapa, ele tem 20 anos, camiseta amarela com um cora\xE7\xE3o estampado, se voc\xEA
+      \xE9 humano, por favor traga ele de volta!"
+    IncrementDialog: 0
+    resetDialog: 0
+    Value:
+      triggerPlayerChoice: 1
+      Choices:
+      - Text: "Eu vou, pe\xE7o desculpas por antes. [Pegar Mapa]"
+        jumpToDialogIndex: 16
+        updateDatabase: 1
+        newStates:
+        - Key: MAPA
+          Value: TRUE
+      WaitingForAnswer: 0
+      Answer: 0
+    FinishDialog: 0
+    WaitForVariableToChange: 0
+    GameStateToCheck: []
+    AreGameStatesSet: 0
+    GameStateToSet: []
+    jumpToDialogIndex: 0
+    lastAnswer: 0
+  - Text: "Ok, s\xF3 n\xE3o me mate! Pegue tudo que tenho..."
+    IncrementDialog: 0
+    resetDialog: 0
+    Value:
+      triggerPlayerChoice: 1
+      Choices:
+      - Text: '[Pegar Mapa e chave]'
+        jumpToDialogIndex: 17
+        updateDatabase: 1
+        newStates:
+        - Key: MAPA
+          Value: TRUE
+        - Key: CHAVE
+          Value: TRUE
+      WaitingForAnswer: 0
+      Answer: 0
+    FinishDialog: 0
+    WaitForVariableToChange: 0
+    GameStateToCheck: []
+    AreGameStatesSet: 0
+    GameStateToSet: []
+    jumpToDialogIndex: 0
+    lastAnswer: 0
+  - Text: "Filho! \xC9 voc\xEA! Eu achei que alguma coisa tinha acontecido, eu n\xE3o
+      sabia o que fazer, comecei a pensar que voc\xEA tinha tentado ir para a torre
+      sem a minha chave e o mapa... bem, voc\xEA conseguiu achar mais comida?"
+    IncrementDialog: 0
+    resetDialog: 0
+    Value:
+      triggerPlayerChoice: 1
+      Choices:
+      - Text: "Sim, eu vou guardar ela, tamb\xE9m vou para a torre mais tarde ent\xE3o
+          j\xE1 me de a chave [Pegar mapa e chave] "
+        jumpToDialogIndex: 16
+        updateDatabase: 1
+        newStates:
+        - Key: MAPA
+          Value: TRUE
+        - Key: CHAVE
+          Value: TRUE
+      - Text: "...Hum...n\xE3o posso fazer isso... pe\xE7o desculpas, mas n\xE3o sou
+          seu filho."
+        jumpToDialogIndex: 10
+        updateDatabase: 0
+        newStates: []
+      WaitingForAnswer: 0
+      Answer: 0
+    FinishDialog: 0
+    WaitForVariableToChange: 0
+    GameStateToCheck: []
+    AreGameStatesSet: 0
+    GameStateToSet: []
+    jumpToDialogIndex: 0
+    lastAnswer: 0
+  - Text: "Quem est\xE1 ai? Filho?"
+    IncrementDialog: 0
+    resetDialog: 0
+    Value:
+      triggerPlayerChoice: 1
+      Choices:
+      - Text: "N\xE3o, sou eu... hum... eu... achei seu filho, meus p\xEAsames, mas
+          ele esta morto. "
+        jumpToDialogIndex: 15
+        updateDatabase: 0
+        newStates: []
+      - Text: "N\xE3o, fui at\xE9 o lugar do mapa, seu filho esta morto. "
+        jumpToDialogIndex: 14
+        updateDatabase: 0
+        newStates: []
+      WaitingForAnswer: 0
+      Answer: 0
+    FinishDialog: 0
+    WaitForVariableToChange: 0
+    GameStateToCheck: []
+    AreGameStatesSet: 0
+    GameStateToSet: []
+    jumpToDialogIndex: 0
+    lastAnswer: 0
+  - Text: "... ele... minha mulher... eu esperava algo assim. Aqui, tome tudo o que
+      tenho, me deixe sozinho, continue com sua vida se quiser, eu desisto... e n\xE3o
+      tente me convencer de ir com voc\xEA, sou um homem cego que n\xE3o consegue
+      mais andar, apenas v\xE1 embora."
+    IncrementDialog: 0
+    resetDialog: 0
+    Value:
+      triggerPlayerChoice: 1
+      Choices:
+      - Text: '... Ok [Pegar chave]'
+        jumpToDialogIndex: 19
+        updateDatabase: 1
+        newStates:
+        - Key: CHAVE
+          Value: TRUE
+      WaitingForAnswer: 0
+      Answer: 0
+    FinishDialog: 0
+    WaitForVariableToChange: 0
+    GameStateToCheck: []
+    AreGameStatesSet: 0
+    GameStateToSet: []
+    jumpToDialogIndex: 0
+    lastAnswer: 0
+  - Text: "J\xE1 encontrou meu filho?"
+    IncrementDialog: 0
+    resetDialog: 0
+    Value:
+      triggerPlayerChoice: 0
+      Choices: []
+      WaitingForAnswer: 0
+      Answer: 0
+    FinishDialog: 0
+    WaitForVariableToChange: 1
+    GameStateToCheck:
+    - Key: EMBOSCADASTART
+      Value: TRUE
+    AreGameStatesSet: 0
+    GameStateToSet: []
+    jumpToDialogIndex: 14
+    lastAnswer: 0
+  - Text: "J\xE1 lhe dei tudo o que eu tinha, poupe a minha vida por favor!"
+    IncrementDialog: 0
+    resetDialog: 0
+    Value:
+      triggerPlayerChoice: 0
+      Choices: []
+      WaitingForAnswer: 0
+      Answer: 0
+    FinishDialog: 1
+    WaitForVariableToChange: 0
+    GameStateToCheck: []
+    AreGameStatesSet: 0
+    GameStateToSet: []
+    jumpToDialogIndex: 0
+    lastAnswer: 0
+  - Text: Que bom que eu lhe encontrei meu filho!
+    IncrementDialog: 0
+    resetDialog: 0
+    Value:
+      triggerPlayerChoice: 0
+      Choices: []
+      WaitingForAnswer: 0
+      Answer: 0
+    FinishDialog: 1
+    WaitForVariableToChange: 0
+    GameStateToCheck: []
+    AreGameStatesSet: 0
+    GameStateToSet: []
+    jumpToDialogIndex: 0
+    lastAnswer: 0
+  - Text: "... ele... minha mulher... eu esperava algo assim. Aqui, tome tudo o que
+      tenho, me deixe sozinho, continue com sua vida se quiser, eu desisto... e n\xE3o
+      tente me convencer de ir com voc\xEA, sou um homem cego que n\xE3o consegue
+      mais andar, apenas v\xE1 embora."
+    IncrementDialog: 0
+    resetDialog: 0
+    Value:
+      triggerPlayerChoice: 0
+      Choices: []
+      WaitingForAnswer: 0
+      Answer: 0
+    FinishDialog: 1
+    WaitForVariableToChange: 0
+    GameStateToCheck: []
+    AreGameStatesSet: 0
+    GameStateToSet: []
+    jumpToDialogIndex: 0
+    lastAnswer: 0
+  _stateNotSetText: NOT USED
+  _stateSetText: Aperte (e) para conversar
+  _ObjectActiveText: 
+  _activationDelay: 0
+  _deactivationDelay: 0
+  _activationSounds: {fileID: 0}
+  _audioSource: {fileID: 0}
+  _startActivated: 0
+  _canToggle: 0
+  _animations: []
+  _materialControllers: []
+  _objectActivators: []
+  _objectDeactivators: []
+--- !u!1 &1042895191
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1042895192}
+  - component: {fileID: 1042895193}
+  m_Layer: 0
+  m_Name: voice
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1042895192
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1042895191}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8172132439431288496}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &1042895193
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1042895191}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!1001 &8172132439430892598
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 100006, guid: f93897b4804829b4f82b7e02fbbfd280, type: 3}
+      propertyPath: m_Name
+      value: swat (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 400006, guid: f93897b4804829b4f82b7e02fbbfd280, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -37.88
+      objectReference: {fileID: 0}
+    - target: {fileID: 400006, guid: f93897b4804829b4f82b7e02fbbfd280, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.905
+      objectReference: {fileID: 0}
+    - target: {fileID: 400006, guid: f93897b4804829b4f82b7e02fbbfd280, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 18.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400006, guid: f93897b4804829b4f82b7e02fbbfd280, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400006, guid: f93897b4804829b4f82b7e02fbbfd280, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.4570388
+      objectReference: {fileID: 0}
+    - target: {fileID: 400006, guid: f93897b4804829b4f82b7e02fbbfd280, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400006, guid: f93897b4804829b4f82b7e02fbbfd280, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.8894468
+      objectReference: {fileID: 0}
+    - target: {fileID: 400006, guid: f93897b4804829b4f82b7e02fbbfd280, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400006, guid: f93897b4804829b4f82b7e02fbbfd280, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400006, guid: f93897b4804829b4f82b7e02fbbfd280, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 54.392002
+      objectReference: {fileID: 0}
+    - target: {fileID: 400006, guid: f93897b4804829b4f82b7e02fbbfd280, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9500000, guid: f93897b4804829b4f82b7e02fbbfd280, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 7e3e59dddef397d4ca29999281875f3b, type: 2}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f93897b4804829b4f82b7e02fbbfd280, type: 3}
+--- !u!4 &8172132439431288496 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400006, guid: f93897b4804829b4f82b7e02fbbfd280,
+    type: 3}
+  m_PrefabInstance: {fileID: 8172132439430892598}
+  m_PrefabAsset: {fileID: 0}
