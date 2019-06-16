@@ -11,6 +11,7 @@ using System.Collections.Generic;
 
 public class WeaponSystem : MonoBehaviour
 {
+    [SerializeField] CharacterManager _charManager;
     public GameObject[] weapons;                // The array that holds all the weapons that the player has
     public int startingWeaponIndex = 0;         // The weapon index that the player will start with
     public int weaponIndex;              // The current index of the active weapon
@@ -36,9 +37,7 @@ public class WeaponSystem : MonoBehaviour
         // Make sure the starting active weapon is the one selected by the user in startingWeaponIndex
         weaponIndex = startingWeaponIndex;
         SetActiveWeapon(weaponIndex);
-
-
-
+        _charManager = GetComponent<CharacterManager>();
     }
 
 

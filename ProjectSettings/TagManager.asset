@@ -16,6 +16,7 @@ TagManager:
   - Head
   - AICars
   - Button Choice
+  - Ground
   layers:
   - Default
   - TransparentFX
@@ -34,7 +35,7 @@ TagManager:
   - AI Body Part
   - Interactive
   - Dialog
-  - 
+  - Arma
   - 
   - 
   - 

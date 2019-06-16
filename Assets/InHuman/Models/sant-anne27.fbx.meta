@@ -1,0 +1,635 @@
+fileFormatVersion: 2
+guid: 25a40c975befee84ba0be4c540503028
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: arbusto front
+    100002: armario blocker
+    100004: armario sals cirurgia
+    100006: armario sals cirurgia 2
+    100008: banner
+    100010: 'batente porta 1 cima '
+    100012: 'batente porta 2 cima '
+    100014: 'batente porta baixo sala '
+    100016: batente porta baixo sala 2
+    100018: batente porta cirurgia
+    100020: batente porta consultorios
+    100022: cabide cortina
+    100024: cabide cortina 2
+    100026: cabide cortina 2.001
+    100028: cabide cortina 2.004
+    100030: cabide cortina.001
+    100032: cabide cortina.004
+    100034: cama
+    100036: 'cama caida '
+    100038: cama npc cego
+    100040: cama npc cego colchao
+    100042: cama npc cego colchao.001
+    100044: cama npc cego colchao.002
+    100046: cama npc cego colchao.003
+    100048: cama npc cego colchao.004
+    100050: cama npc cego.001
+    100052: cama npc cego.002
+    100054: cama npc cego.003
+    100056: cama npc cego.004
+    100058: cama npc cego.005
+    100060: cama_colchao
+    100062: Camera
+    100064: cancela entrance
+    100066: cancela entrance door
+    100068: cancela exit
+    100070: cancela exit door
+    100072: carrinho medico
+    100074: carrinho medico.001
+    100076: chamine
+    100078: corrimao escada cirurgia
+    100080: cortina 1
+    100082: cortina 1.001
+    100084: cortina 1.004
+    100086: cortina 2
+    100088: cortina 2.001
+    100090: cortina 2.004
+    100092: curva_sala_cirurgia
+    100094: entrance_barrer 1
+    100096: entrance_barrer 2
+    100098: entrance_barrer 3
+    100100: entrance_barrer 4
+    100102: entrance_barrer 5
+    100104: entrance_barrer 6
+    100106: escada
+    100108: escada cirurgia sala
+    100110: fence
+    100112: guarita entrada
+    100114: guarita saida
+    100116: hospital 2 floor
+    100118: hospital cirurgia walls
+    100120: hospital frame
+    100122: lampada sala cirurgia
+    100124: luz_render 1
+    100126: luz_render 3
+    100128: luz_render 3.001
+    100130: luz_render 3.002
+    100132: maca cirurgia metade 1
+    100134: maca cirurgia metade 2
+    100136: monitor_sala_cirurgia 1
+    100138: monitor_sala_cirurgia 2
+    100140: mureta segundo andar cirurgia
+    100142: oarede sala cirurgia
+    100144: pano consultorio room
+    100146: parede 1 sala esquerda .000
+    100148: parede 1 sala esquerda .001
+    100150: parede sala cirurgia
+    100152: parede sala esquerda primeiro andar
+    100154: parede sala esquerda primeiro andar.001
+    100156: parede sala esquerda primeiro andar.002
+    100158: park ground
+    100160: pia_sala_cirurgia
+    100162: Point
+    100164: Point.001
+    100166: Point.002
+    100168: porta 1 segundo andar D
+    100170: porta 1 segundo andar E
+    100172: porta 2 segundo andar D
+    100174: porta 2 segundo andar E
+    100176: porta consultorio room 1
+    100178: porta consultorio room 2
+    100180: porta D cirurgia room
+    100182: porta D cirurgia room.001
+    100184: porta D sala consultorios
+    100186: porta E sala consultorios
+    100188: //RootNode
+    100190: sidewalk center
+    100192: sidewalk L
+    100194: sidewalk mid
+    100196: sidewalk R
+    100198: suporte lampada teto sala cirurgia 3
+    100200: suporte sala cirurgia
+    100202: telhado_D
+    100204: telhado_E
+    100206: telhado_MID
+    100208: teto entrada
+    100210: vridro_sala_cirurgia
+    100212: wood barrage door 1
+    100214: wood barrage door 2
+    100216: wood barrage door 3
+    400000: arbusto front
+    400002: armario blocker
+    400004: armario sals cirurgia
+    400006: armario sals cirurgia 2
+    400008: banner
+    400010: 'batente porta 1 cima '
+    400012: 'batente porta 2 cima '
+    400014: 'batente porta baixo sala '
+    400016: batente porta baixo sala 2
+    400018: batente porta cirurgia
+    400020: batente porta consultorios
+    400022: cabide cortina
+    400024: cabide cortina 2
+    400026: cabide cortina 2.001
+    400028: cabide cortina 2.004
+    400030: cabide cortina.001
+    400032: cabide cortina.004
+    400034: cama
+    400036: 'cama caida '
+    400038: cama npc cego
+    400040: cama npc cego colchao
+    400042: cama npc cego colchao.001
+    400044: cama npc cego colchao.002
+    400046: cama npc cego colchao.003
+    400048: cama npc cego colchao.004
+    400050: cama npc cego.001
+    400052: cama npc cego.002
+    400054: cama npc cego.003
+    400056: cama npc cego.004
+    400058: cama npc cego.005
+    400060: cama_colchao
+    400062: Camera
+    400064: cancela entrance
+    400066: cancela entrance door
+    400068: cancela exit
+    400070: cancela exit door
+    400072: carrinho medico
+    400074: carrinho medico.001
+    400076: chamine
+    400078: corrimao escada cirurgia
+    400080: cortina 1
+    400082: cortina 1.001
+    400084: cortina 1.004
+    400086: cortina 2
+    400088: cortina 2.001
+    400090: cortina 2.004
+    400092: curva_sala_cirurgia
+    400094: entrance_barrer 1
+    400096: entrance_barrer 2
+    400098: entrance_barrer 3
+    400100: entrance_barrer 4
+    400102: entrance_barrer 5
+    400104: entrance_barrer 6
+    400106: escada
+    400108: escada cirurgia sala
+    400110: fence
+    400112: guarita entrada
+    400114: guarita saida
+    400116: hospital 2 floor
+    400118: hospital cirurgia walls
+    400120: hospital frame
+    400122: lampada sala cirurgia
+    400124: luz_render 1
+    400126: luz_render 3
+    400128: luz_render 3.001
+    400130: luz_render 3.002
+    400132: maca cirurgia metade 1
+    400134: maca cirurgia metade 2
+    400136: monitor_sala_cirurgia 1
+    400138: monitor_sala_cirurgia 2
+    400140: mureta segundo andar cirurgia
+    400142: oarede sala cirurgia
+    400144: pano consultorio room
+    400146: parede 1 sala esquerda .000
+    400148: parede 1 sala esquerda .001
+    400150: parede sala cirurgia
+    400152: parede sala esquerda primeiro andar
+    400154: parede sala esquerda primeiro andar.001
+    400156: parede sala esquerda primeiro andar.002
+    400158: park ground
+    400160: pia_sala_cirurgia
+    400162: Point
+    400164: Point.001
+    400166: Point.002
+    400168: porta 1 segundo andar D
+    400170: porta 1 segundo andar E
+    400172: porta 2 segundo andar D
+    400174: porta 2 segundo andar E
+    400176: porta consultorio room 1
+    400178: porta consultorio room 2
+    400180: porta D cirurgia room
+    400182: porta D cirurgia room.001
+    400184: porta D sala consultorios
+    400186: porta E sala consultorios
+    400188: //RootNode
+    400190: sidewalk center
+    400192: sidewalk L
+    400194: sidewalk mid
+    400196: sidewalk R
+    400198: suporte lampada teto sala cirurgia 3
+    400200: suporte sala cirurgia
+    400202: telhado_D
+    400204: telhado_E
+    400206: telhado_MID
+    400208: teto entrada
+    400210: vridro_sala_cirurgia
+    400212: wood barrage door 1
+    400214: wood barrage door 2
+    400216: wood barrage door 3
+    2000000: Camera
+    2100000: default material
+    2100002: No Name
+    2100004: batente cirurgia room
+    2100006: doors sala cirurgia
+    2100008: armario cirurgia
+    2100010: mesa sul texture
+    2100012: monitor cirurgia room
+    2100014: cirurgia walls texture
+    2100016: banner sala cirurgia
+    2100018: lamp cirurgia mid
+    2100020: wall entrance cirurgia texture
+    2100022: pia cirurgia texture
+    2100024: glass_cirurgia_test
+    2100026: escada sala cirurgia
+    2100028: parede room cirurgia
+    2100030: u wall cirurgia
+    2100032: teto sala cirurgia
+    2100034: asphalt_park
+    2300000: arbusto front
+    2300002: armario blocker
+    2300004: armario sals cirurgia
+    2300006: armario sals cirurgia 2
+    2300008: banner
+    2300010: 'batente porta 1 cima '
+    2300012: 'batente porta 2 cima '
+    2300014: 'batente porta baixo sala '
+    2300016: batente porta baixo sala 2
+    2300018: batente porta cirurgia
+    2300020: batente porta consultorios
+    2300022: cabide cortina
+    2300024: cabide cortina 2
+    2300026: cabide cortina 2.001
+    2300028: cabide cortina 2.004
+    2300030: cabide cortina.001
+    2300032: cabide cortina.004
+    2300034: cama
+    2300036: 'cama caida '
+    2300038: cama npc cego
+    2300040: cama npc cego colchao
+    2300042: cama npc cego colchao.001
+    2300044: cama npc cego colchao.002
+    2300046: cama npc cego colchao.003
+    2300048: cama npc cego colchao.004
+    2300050: cama npc cego.001
+    2300052: cama npc cego.002
+    2300054: cama npc cego.003
+    2300056: cama npc cego.004
+    2300058: cama npc cego.005
+    2300060: cama_colchao
+    2300062: cancela entrance
+    2300064: cancela entrance door
+    2300066: cancela exit
+    2300068: cancela exit door
+    2300070: carrinho medico
+    2300072: carrinho medico.001
+    2300074: chamine
+    2300076: corrimao escada cirurgia
+    2300078: cortina 1
+    2300080: cortina 1.001
+    2300082: cortina 1.004
+    2300084: cortina 2
+    2300086: cortina 2.001
+    2300088: cortina 2.004
+    2300090: curva_sala_cirurgia
+    2300092: entrance_barrer 1
+    2300094: entrance_barrer 2
+    2300096: entrance_barrer 3
+    2300098: entrance_barrer 4
+    2300100: entrance_barrer 5
+    2300102: entrance_barrer 6
+    2300104: escada
+    2300106: escada cirurgia sala
+    2300108: fence
+    2300110: guarita entrada
+    2300112: guarita saida
+    2300114: hospital 2 floor
+    2300116: hospital cirurgia walls
+    2300118: hospital frame
+    2300120: lampada sala cirurgia
+    2300122: maca cirurgia metade 1
+    2300124: maca cirurgia metade 2
+    2300126: monitor_sala_cirurgia 1
+    2300128: monitor_sala_cirurgia 2
+    2300130: mureta segundo andar cirurgia
+    2300132: oarede sala cirurgia
+    2300134: pano consultorio room
+    2300136: parede 1 sala esquerda .000
+    2300138: parede 1 sala esquerda .001
+    2300140: parede sala cirurgia
+    2300142: parede sala esquerda primeiro andar
+    2300144: parede sala esquerda primeiro andar.001
+    2300146: parede sala esquerda primeiro andar.002
+    2300148: park ground
+    2300150: pia_sala_cirurgia
+    2300152: porta 1 segundo andar D
+    2300154: porta 1 segundo andar E
+    2300156: porta 2 segundo andar D
+    2300158: porta 2 segundo andar E
+    2300160: porta consultorio room 1
+    2300162: porta consultorio room 2
+    2300164: porta D cirurgia room
+    2300166: porta D cirurgia room.001
+    2300168: porta D sala consultorios
+    2300170: porta E sala consultorios
+    2300172: sidewalk center
+    2300174: sidewalk L
+    2300176: sidewalk mid
+    2300178: sidewalk R
+    2300180: suporte lampada teto sala cirurgia 3
+    2300182: suporte sala cirurgia
+    2300184: telhado_D
+    2300186: telhado_E
+    2300188: telhado_MID
+    2300190: teto entrada
+    2300192: vridro_sala_cirurgia
+    2300194: wood barrage door 1
+    2300196: wood barrage door 2
+    2300198: wood barrage door 3
+    3300000: arbusto front
+    3300002: armario blocker
+    3300004: armario sals cirurgia
+    3300006: armario sals cirurgia 2
+    3300008: banner
+    3300010: 'batente porta 1 cima '
+    3300012: 'batente porta 2 cima '
+    3300014: 'batente porta baixo sala '
+    3300016: batente porta baixo sala 2
+    3300018: batente porta cirurgia
+    3300020: batente porta consultorios
+    3300022: cabide cortina
+    3300024: cabide cortina 2
+    3300026: cabide cortina 2.001
+    3300028: cabide cortina 2.004
+    3300030: cabide cortina.001
+    3300032: cabide cortina.004
+    3300034: cama
+    3300036: 'cama caida '
+    3300038: cama npc cego
+    3300040: cama npc cego colchao
+    3300042: cama npc cego colchao.001
+    3300044: cama npc cego colchao.002
+    3300046: cama npc cego colchao.003
+    3300048: cama npc cego colchao.004
+    3300050: cama npc cego.001
+    3300052: cama npc cego.002
+    3300054: cama npc cego.003
+    3300056: cama npc cego.004
+    3300058: cama npc cego.005
+    3300060: cama_colchao
+    3300062: cancela entrance
+    3300064: cancela entrance door
+    3300066: cancela exit
+    3300068: cancela exit door
+    3300070: carrinho medico
+    3300072: carrinho medico.001
+    3300074: chamine
+    3300076: corrimao escada cirurgia
+    3300078: cortina 1
+    3300080: cortina 1.001
+    3300082: cortina 1.004
+    3300084: cortina 2
+    3300086: cortina 2.001
+    3300088: cortina 2.004
+    3300090: curva_sala_cirurgia
+    3300092: entrance_barrer 1
+    3300094: entrance_barrer 2
+    3300096: entrance_barrer 3
+    3300098: entrance_barrer 4
+    3300100: entrance_barrer 5
+    3300102: entrance_barrer 6
+    3300104: escada
+    3300106: escada cirurgia sala
+    3300108: fence
+    3300110: guarita entrada
+    3300112: guarita saida
+    3300114: hospital 2 floor
+    3300116: hospital cirurgia walls
+    3300118: hospital frame
+    3300120: lampada sala cirurgia
+    3300122: maca cirurgia metade 1
+    3300124: maca cirurgia metade 2
+    3300126: monitor_sala_cirurgia 1
+    3300128: monitor_sala_cirurgia 2
+    3300130: mureta segundo andar cirurgia
+    3300132: oarede sala cirurgia
+    3300134: pano consultorio room
+    3300136: parede 1 sala esquerda .000
+    3300138: parede 1 sala esquerda .001
+    3300140: parede sala cirurgia
+    3300142: parede sala esquerda primeiro andar
+    3300144: parede sala esquerda primeiro andar.001
+    3300146: parede sala esquerda primeiro andar.002
+    3300148: park ground
+    3300150: pia_sala_cirurgia
+    3300152: porta 1 segundo andar D
+    3300154: porta 1 segundo andar E
+    3300156: porta 2 segundo andar D
+    3300158: porta 2 segundo andar E
+    3300160: porta consultorio room 1
+    3300162: porta consultorio room 2
+    3300164: porta D cirurgia room
+    3300166: porta D cirurgia room.001
+    3300168: porta D sala consultorios
+    3300170: porta E sala consultorios
+    3300172: sidewalk center
+    3300174: sidewalk L
+    3300176: sidewalk mid
+    3300178: sidewalk R
+    3300180: suporte lampada teto sala cirurgia 3
+    3300182: suporte sala cirurgia
+    3300184: telhado_D
+    3300186: telhado_E
+    3300188: telhado_MID
+    3300190: teto entrada
+    3300192: vridro_sala_cirurgia
+    3300194: wood barrage door 1
+    3300196: wood barrage door 2
+    3300198: wood barrage door 3
+    4300000: cama npc cego.005
+    4300002: cama npc cego.004
+    4300004: cama npc cego colchao.004
+    4300006: carrinho medico.001
+    4300008: pano consultorio room
+    4300010: cortina 2.004
+    4300012: cortina 1.004
+    4300014: cabide cortina 2.004
+    4300016: cabide cortina.004
+    4300018: cabide cortina.001
+    4300020: cabide cortina 2.001
+    4300022: cortina 1.001
+    4300024: cortina 2.001
+    4300026: cama npc cego colchao.003
+    4300028: cama npc cego.003
+    4300030: cama npc cego.002
+    4300032: cama npc cego colchao.002
+    4300034: cama npc cego colchao.001
+    4300036: cama npc cego.001
+    4300038: cortina 2
+    4300040: cortina 1
+    4300042: cabide cortina 2
+    4300044: cabide cortina
+    4300046: 'cama caida '
+    4300048: cama npc cego
+    4300050: cama npc cego colchao
+    4300052: armario blocker
+    4300054: cama
+    4300056: cama_colchao
+    4300058: carrinho medico
+    4300060: wood barrage door 3
+    4300062: wood barrage door 2
+    4300064: wood barrage door 1
+    4300066: porta consultorio room 2
+    4300068: parede 1 sala esquerda .000
+    4300070: 'batente porta baixo sala '
+    4300072: porta consultorio room 1
+    4300074: 'batente porta 1 cima '
+    4300076: porta 1 segundo andar D
+    4300078: porta 1 segundo andar E
+    4300080: porta E sala consultorios
+    4300082: porta D sala consultorios
+    4300084: batente porta baixo sala 2
+    4300086: parede 1 sala esquerda .001
+    4300088: batente porta consultorios
+    4300090: corrimao escada cirurgia
+    4300092: mureta segundo andar cirurgia
+    4300094: porta D cirurgia room.001
+    4300096: porta 2 segundo andar E
+    4300098: porta 2 segundo andar D
+    4300100: 'batente porta 2 cima '
+    4300102: parede sala esquerda primeiro andar.002
+    4300104: parede sala esquerda primeiro andar.001
+    4300106: porta D cirurgia room
+    4300108: batente porta cirurgia
+    4300110: armario sals cirurgia 2
+    4300112: maca cirurgia metade 2
+    4300114: monitor_sala_cirurgia 1
+    4300116: maca cirurgia metade 1
+    4300118: hospital cirurgia walls
+    4300120: banner
+    4300122: armario sals cirurgia
+    4300124: suporte lampada teto sala cirurgia 3
+    4300126: lampada sala cirurgia
+    4300128: parede sala esquerda primeiro andar
+    4300130: parede sala cirurgia
+    4300132: suporte sala cirurgia
+    4300134: monitor_sala_cirurgia 2
+    4300136: pia_sala_cirurgia
+    4300138: vridro_sala_cirurgia
+    4300140: escada cirurgia sala
+    4300142: oarede sala cirurgia
+    4300144: curva_sala_cirurgia
+    4300146: hospital 2 floor
+    4300148: escada
+    4300150: guarita saida
+    4300152: guarita entrada
+    4300154: hospital frame
+    4300156: arbusto front
+    4300158: teto entrada
+    4300160: sidewalk center
+    4300162: entrance_barrer 6
+    4300164: entrance_barrer 5
+    4300166: entrance_barrer 3
+    4300168: entrance_barrer 4
+    4300170: entrance_barrer 2
+    4300172: entrance_barrer 1
+    4300174: cancela exit door
+    4300176: cancela entrance door
+    4300178: cancela exit
+    4300180: cancela entrance
+    4300182: sidewalk mid
+    4300184: sidewalk R
+    4300186: sidewalk L
+    4300188: fence
+    4300190: park ground
+    4300192: chamine
+    4300194: telhado_MID
+    4300196: telhado_D
+    4300198: telhado_E
+    10800000: luz_render 1
+    10800002: luz_render 3
+    10800004: luz_render 3.001
+    10800006: luz_render 3.002
+    10800008: Point
+    10800010: Point.001
+    10800012: Point.002
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 1
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

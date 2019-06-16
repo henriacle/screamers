@@ -5,6 +5,7 @@ using UnityEngine;
 public class a_machinegun : MonoBehaviour
 {
     Animator animator;
+    [SerializeField] CharacterManager _characterManager;
 
     private bool shoot;
     private bool reload;
@@ -52,7 +53,7 @@ public class a_machinegun : MonoBehaviour
         }
 
 
-            if  (_wp.fireTimer >= 0f && (Input.GetMouseButton(0)) && !reload)
+        if  (_wp.fireTimer >= 0f && (Input.GetMouseButton(0)) && !reload)
         {
             shoot = true;
 
@@ -72,7 +73,7 @@ public class a_machinegun : MonoBehaviour
 
         if (Input.GetButtonDown("Weapon 2")) // Troca para outras armas
         {
-
+            Debug.Log("firing");
             change = true;
             reload = false;
             canshoot = true;
