@@ -24,10 +24,13 @@ public class Pulseira : MonoBehaviour
                 if(pulseiraLigada == "False")
                 {
                     Debug.Log("ligar Pulseira");
+                    _appManager.SetGameState("pulseiraLigada", "True");
                 }
+
                 if (pulseiraLigada == "True")
                 {
                     Debug.Log("Desligar Pulseira");
+                    _appManager.SetGameState("pulseiraLigada", "False");
                 }
             }
         }
