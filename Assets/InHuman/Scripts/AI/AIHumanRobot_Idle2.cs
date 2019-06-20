@@ -43,26 +43,48 @@ public class AIHumanRobot_Idle2 : AIHumanRobotState
             return AIStateType.Idle;
 
         ApplicationManager appManager = ApplicationManager.instance;
-
-        if(appManager != null)
+        if (appManager.GetGameState(_keyToDestinationReached) == null)
         {
+            appManager.SetGameState(_keyToDestinationReached, "FALSE");
+        }
 
-
-            Debug.Log(_keyToDestinationReached);
-            Debug.Log(appManager.GetGameState(_keyToDestinationReached));
-            if (appManager.GetGameState(_keyToDestinationReached) == null)
-            {
-                appManager.SetGameState(_keyToDestinationReached, "FALSE");
-            }
+        if (appManager != null)
+        {
 
             if (appManager.GetGameState(_keyToDestinationReached) == "TRUE")
             {
-                return AIStateType.Idle;
-            }
+                if (_humanRobotStateMachine == null)
+                    return AIStateType.Idle;
 
-            if (appManager.GetGameState(_keyToTrigger) == "TRUE")
+                if (_humanRobotStateMachine.VisualThreat.type == AITargetType.Visual_Player)
+                {
+                    _humanRobotStateMachine.SetTarget(_humanRobotStateMachine.VisualThreat);
+                    return AIStateType.Pursuit;
+                }
+
+                if (_humanRobotStateMachine.VisualThreat.type == AITargetType.Visual_Light)
+                {
+                    _humanRobotStateMachine.SetTarget(_humanRobotStateMachine.VisualThreat);
+                    return AIStateType.Alerted;
+                }
+
+                if (_humanRobotStateMachine.AudioThreat.type == AITargetType.Audio)
+                {
+                    _humanRobotStateMachine.SetTarget(_humanRobotStateMachine.AudioThreat);
+                    return AIStateType.Alerted;
+                }
+
+                if (_humanRobotStateMachine.VisualThreat.type == AITargetType.Visual_Food)
+                {
+                    _humanRobotStateMachine.SetTarget(_humanRobotStateMachine.VisualThreat);
+                    return AIStateType.Pursuit;
+                }
+            } else
             {
-                return AIStateType.Patrol;
+                if (appManager.GetGameState(_keyToTrigger) == "TRUE")
+                {
+                    return AIStateType.Patrol;
+                }
             }
         }
 

@@ -39,11 +39,48 @@ public class AIHumanRobot_Patrol2 : AIHumanRobotState
 
     public override AIStateType OnUpdate()
     {
-        float angle = Vector3.Angle(_humanRobotStateMachine.transform.forward, (_humanRobotStateMachine.navAgent.steeringTarget - _humanRobotStateMachine.transform.position));
+        ApplicationManager _appManager = ApplicationManager.instance;
 
+        Debug.Log(_appManager.GetGameState(_keyToDestinationReached));
+        if (_appManager.GetGameState(_keyToDestinationReached) == "TRUE")
+        {
+            if (_humanRobotStateMachine.VisualThreat.type == AITargetType.Visual_Player)
+            {
+                _humanRobotStateMachine.SetTarget(_humanRobotStateMachine.VisualThreat);
+                return AIStateType.Pursuit;
+            }
+
+            if (_humanRobotStateMachine.VisualThreat.type == AITargetType.Visual_Light)
+            {
+                _humanRobotStateMachine.SetTarget(_humanRobotStateMachine.VisualThreat);
+                return AIStateType.Alerted;
+            }
+
+            if (_humanRobotStateMachine.AudioThreat.type == AITargetType.Audio)
+            {
+                _humanRobotStateMachine.SetTarget(_humanRobotStateMachine.AudioThreat);
+                return AIStateType.Alerted;
+            }
+        }
+
+        float angle = Vector3.Angle(_humanRobotStateMachine.transform.forward, (_humanRobotStateMachine.navAgent.steeringTarget - _humanRobotStateMachine.transform.position));
 
         if (angle > _turnOnSpotThreshold)
         {
+            Debug.Log("caindo no turn on spot");
+            Debug.Log(_humanRobotStateMachine.navAgent.pathStatus);
+            Debug.Log(_appManager.GetGameState(_keyToDestinationReached));
+
+            if (_humanRobotStateMachine.navAgent.pathStatus == NavMeshPathStatus.PathComplete 
+                && _appManager.GetGameState(_keyToDestinationReached) == "FALSE")
+            {
+                if (_appManager != null)
+                {
+                    _appManager.SetGameState(_keyToDestinationReached, "TRUE");
+                    
+                }
+            }
+
             return AIStateType.Alerted;
         }
 
@@ -58,19 +95,16 @@ public class AIHumanRobot_Patrol2 : AIHumanRobotState
 
         if(_humanRobotStateMachine.navAgent.enabled)
         {
-            if (_humanRobotStateMachine.navAgent.isPathStale ||
-                !_humanRobotStateMachine.navAgent.hasPath ||
-                _humanRobotStateMachine.navAgent.pathStatus != NavMeshPathStatus.PathComplete)
+            
+            if (_humanRobotStateMachine.navAgent.isPathStale &&
+                !_humanRobotStateMachine.navAgent.hasPath && 
+                _humanRobotStateMachine.navAgent.pathStatus == NavMeshPathStatus.PathComplete)
             {
-                Debug.Log("pathcomplete");
-                ApplicationManager _appManager = ApplicationManager.instance;
                 if(_appManager != null)
                 {
-                    Debug.Log("finished");
                     _appManager.SetGameState(_keyToDestinationReached, "TRUE");
                     _appManager.GetGameState(_keyToDestinationReached);
                 }
-                return AIStateType.Idle;
             }
         }
 

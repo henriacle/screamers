@@ -146,7 +146,6 @@ public class InteractiveGenericSwitch : InteractiveItem
     // --------------------------------------------------------------------------
     public override string GetText(out bool doDialog)
     {
-        Debug.Log("caindo aqui");
         // If we have no application database or this switch is disabled then return null
         doDialog = _doDialog;
         if (!_doDialog) return null;

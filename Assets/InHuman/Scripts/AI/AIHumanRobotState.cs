@@ -29,7 +29,6 @@ public abstract class AIHumanRobotState : AIState
         if (_humanRobotStateMachine == null)
             return;
 
-        Debug.Log(eventType);
         if (eventType != AITriggerEventType.Exit)
         {
             AITargetType curType = _humanRobotStateMachine.VisualThreat.type;

@@ -23,9 +23,10 @@ public class CharacterManager : MonoBehaviour
     [SerializeField] private bool invencible = false;
 
     // Pain Damage Audio
-    [SerializeField] private AudioCollection _damageSounds = null;
-    [SerializeField] private AudioCollection _painSounds = null;
-    [SerializeField] private AudioCollection _tauntSounds = null;
+    [SerializeField] private AudioSource     _punchSound    = null;
+    [SerializeField] private AudioCollection _damageSounds  = null;
+    [SerializeField] private AudioCollection _painSounds    = null;
+    [SerializeField] private AudioCollection _tauntSounds   = null;
 
     RectTransform _lifeRect = null;
     float _lifeRectWidth = 0.0f;
@@ -83,6 +84,7 @@ public class CharacterManager : MonoBehaviour
 
     public void meleeDamage(float damage)
     {
+        _punchSound.Play();
         doDamage(damage);
     }
 
@@ -114,7 +116,7 @@ public class CharacterManager : MonoBehaviour
 
         if (_cameraBloodEffect != null)
         {
-            _cameraBloodEffect.minBloodAmount = (1.0f - playerCurrentHealth / 100.0f);
+            _cameraBloodEffect.minBloodAmount = (1.0f - 100 / 100.0f);
             _cameraBloodEffect.bloodAmount = Mathf.Min(_cameraBloodEffect.minBloodAmount + 0.3f, 1.0f);
         }
 
@@ -143,7 +145,6 @@ public class CharacterManager : MonoBehaviour
         // Process the hits for the one with the highest priorty
         if (hits.Length > 0)
         {
-            Debug.Log("hit");
             // Used to record the index of the highest priorty
             int highestPriority = int.MinValue;
             InteractiveItem priorityObject = null;

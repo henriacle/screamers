@@ -27,7 +27,7 @@ public class AIDamageTrigger : MonoBehaviour
         {
             Debug.Log("entrando aqui");
             CharacterManager charManager = other.GetComponent<CharacterManager>();
-            charManager.meleeDamage(5);
+            charManager.meleeDamage(2f);
         }
     }
 }
