@@ -5,9 +5,11 @@ using UnityEngine.AI;
 
 public class AIHumanRobot_Patrol2 : AIHumanRobotState
 {
-    [SerializeField] float _turnOnSpotThreshold = 80.0f;
-    [SerializeField] float _slerpSpeed = 5.0f;
-    [SerializeField] string _keyToDestinationReached = null;
+    [SerializeField] float _turnOnSpotThreshold         = 80.0f;
+    [SerializeField] float _slerpSpeed                  = 5.0f;
+    [SerializeField] string _keyToDestinationReached    = null;
+    [SerializeField] TurnIntoMetal _turnMetal           = null;
+
 
     [SerializeField] [Range(0.0f, 3.0f)] float _speed = 3.0f;
 
@@ -72,12 +74,16 @@ public class AIHumanRobot_Patrol2 : AIHumanRobotState
             Debug.Log(_appManager.GetGameState(_keyToDestinationReached));
 
             if (_humanRobotStateMachine.navAgent.pathStatus == NavMeshPathStatus.PathComplete 
-                && _appManager.GetGameState(_keyToDestinationReached) == "FALSE")
+                && _appManager.GetGameState(_keyToDestinationReached) == "FALSE" 
+                && _turnMetal.turnedIntoMetal)
             {
                 if (_appManager != null)
                 {
                     _appManager.SetGameState(_keyToDestinationReached, "TRUE");
-                    
+                    if (!_humanRobotStateMachine.animator.GetBool("Scream"))
+                    {
+                        return AIStateType.Scream;
+                    }
                 }
             }
 
@@ -111,8 +117,6 @@ public class AIHumanRobot_Patrol2 : AIHumanRobotState
 
         return AIStateType.Patrol;
     }
-
-
 
     public override void OnDestinationReached(bool isReached)
     {

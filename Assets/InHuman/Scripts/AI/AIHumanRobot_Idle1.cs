@@ -63,8 +63,9 @@ public class AIHumanRobot_Idle1 : AIHumanRobotState
             return AIStateType.Pursuit;
         }
 
+
         _timer += Time.deltaTime;
-        if(_timer > _idleTime)
+        if(_timer > _idleTime && _humanRobotStateMachine.waypointNetwork != null)
         {
             return AIStateType.Patrol;
         }

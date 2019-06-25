@@ -21,6 +21,7 @@ public class CharacterManager : MonoBehaviour
     [SerializeField] private float _bloodRadiusScale = 6.0f;
     [SerializeField] private PlayerHUD _playerHUD = null;
     [SerializeField] private bool invencible = false;
+    [SerializeField] private GameObject _playerObjects = null;
 
     // Pain Damage Audio
     [SerializeField] private AudioSource     _punchSound    = null;
@@ -93,12 +94,14 @@ public class CharacterManager : MonoBehaviour
         _fpsController.enabled = !freeze;
         if(!_fpsController.enabled)
         {
+            _playerObjects.SetActive(false);
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
             _fpsController.m_MouseLook.lockCursor = false;
             _fpsController.m_MouseLook.UpdateCursorLock();
         } else
         {
+            _playerObjects.SetActive(true);
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
             _fpsController.m_MouseLook.lockCursor = true;

@@ -3,7 +3,7 @@ using UnityEngine.AI;
 using System.Collections.Generic;
 
 // Public Enums of the AI System
-public enum AIStateType { None, Idle, Alerted, Patrol, Attack, Fire, Feeding, Pursuit, Dead }
+public enum AIStateType { None, Idle, Alerted, Patrol, Attack, Fire, Feeding, Pursuit, Dead, Scream }
 public enum AITargetType { None, Waypoint, Visual_Player, Visual_Light, Visual_Food, Audio }
 public enum AITriggerEventType { Enter, Stay, Exit }
 
@@ -104,7 +104,8 @@ public abstract class AIStateMachine : MonoBehaviour
 
     // Public Properties
     public bool isTargetReached         { get { return _isTargetReached; } }
-    public bool inMeleeRange            { get { return _isMeleeRange; }     set { _isMeleeRange = value; } }
+    public bool inMeleeRange { get { return _isMeleeRange; } set { _isMeleeRange = value; } }
+    public AIWaypointNetwork waypointNetwork { get { return _waypointNetwork; } }
     public bool inFireRange             { get { return _isFireRange; }      set { _isFireRange = value; } }
     public Animator animator            { get { return _animator; } }
     public NavMeshAgent navAgent        { get { return _navAgent; } }
@@ -249,6 +250,9 @@ public abstract class AIStateMachine : MonoBehaviour
     // -----------------------------------------------------------------------------
     public Vector3 GetWaypointPosition(bool increment)
     {
+        if (waypointNetwork == null)
+            return Vector3.zero;
+
         if (_currentWaypoint == -1)
         {
             if (_randomPatrol)

@@ -39,6 +39,11 @@ public class AIHumanRobot_Patrol1 : AIHumanRobotState
 
     public override AIStateType OnUpdate()
     {
+        if(_humanRobotStateMachine.waypointNetwork == null)
+        {
+            return AIStateType.Idle;
+        }
+
         if (_humanRobotStateMachine.VisualThreat.type == AITargetType.Visual_Player)
         {
             _humanRobotStateMachine.SetTarget(_humanRobotStateMachine.VisualThreat);

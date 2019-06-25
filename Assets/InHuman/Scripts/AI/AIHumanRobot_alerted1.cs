@@ -8,6 +8,12 @@ public class AIHumanRobot_alerted1 : AIHumanRobotState
     [SerializeField] float _waypointAngleThreshold = 90.0f;
     [SerializeField] float _threatAngleThreshold = 10.0f;
     [SerializeField] float _directionChangeTime = 1.5f;
+    [SerializeField] private Material _eyeColor = null;
+    [SerializeField] private GameObject leftEye = null;
+    [SerializeField] private GameObject rightEye = null;
+    Material leftEyeMaterial = null;
+    Material rightEyeMaterial = null;
+    private float _eyeIntensity = 5.0f;
 
     // Private Fields
     float _timer = 0.0f;
@@ -20,6 +26,15 @@ public class AIHumanRobot_alerted1 : AIHumanRobotState
     public override AIStateType GetStateType()
     {
         return AIStateType.Alerted;
+    }
+
+    public void setEyeColor(Color color, float intensity)
+    {
+        if (leftEyeMaterial != null && rightEyeMaterial != null)
+        {
+            leftEyeMaterial.SetColor("_EmissionColor", Color.red * _eyeIntensity);
+            rightEyeMaterial.SetColor("_EmissionColor", Color.red * _eyeIntensity);
+        }
     }
 
     // ------------------------------------------------------------------
@@ -82,7 +97,6 @@ public class AIHumanRobot_alerted1 : AIHumanRobotState
 
         if (_humanRobotStateMachine.VisualThreat.type == AITargetType.Visual_Light)
         {
-            Debug.Log("setting visual threat");
             _humanRobotStateMachine.SetTarget(_humanRobotStateMachine.VisualThreat);
             _timer = _maxDuration;
         }
@@ -109,6 +123,7 @@ public class AIHumanRobot_alerted1 : AIHumanRobotState
 
             if (_directionChangeTimer > _directionChangeTime)
             {
+                setEyeColor(Color.yellow, _eyeIntensity);
                 if (Random.value < _humanRobotStateMachine.intelligence)
                 {
                     _humanRobotStateMachine.seeking = (int)Mathf.Sign(angle);
@@ -141,7 +156,7 @@ public class AIHumanRobot_alerted1 : AIHumanRobotState
         {
             if (_directionChangeTimer > _directionChangeTime)
             {
-                Debug.Log("looking for a player!");
+                setEyeColor(Color.yellow, _eyeIntensity);
                 _humanRobotStateMachine.seeking = (int)Mathf.Sign(Random.Range(-1.0f, 1.0f));
                 _directionChangeTimer = 0.0f;       
             }
@@ -149,6 +164,7 @@ public class AIHumanRobot_alerted1 : AIHumanRobotState
 
         if(_directionChangeTimer > _directionChangeTime - 0.50f)
         {
+            setEyeColor(Color.blue, _eyeIntensity);
             _humanRobotStateMachine.seeking = 0;
         }
 

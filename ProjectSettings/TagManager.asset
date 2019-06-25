@@ -17,6 +17,8 @@ TagManager:
   - AICars
   - Button Choice
   - Ground
+  - Kid Evil
+  - kid
   layers:
   - Default
   - TransparentFX

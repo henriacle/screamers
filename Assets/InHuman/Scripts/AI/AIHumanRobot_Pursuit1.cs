@@ -15,7 +15,11 @@ public class AIHumanRobot_Pursuit1 : AIHumanRobotState
     [SerializeField] private float _repathAudioMinDuration = 0.25f;
     [SerializeField] private float _repathAudioMaxDuration = 5.0f;
     [SerializeField] private float _maxDuration = 40.0f;
-
+    [SerializeField] private GameObject leftEye  = null;
+    [SerializeField] private GameObject rightEye = null;
+    Material leftEyeMaterial = null;
+    Material rightEyeMaterial = null;
+    private float _eyeIntensity = 5.0f;
     // Private Fields
     private float _timer = 0.0f;
     private float _repathTimer = 0.0f;
@@ -24,6 +28,15 @@ public class AIHumanRobot_Pursuit1 : AIHumanRobotState
     // Mandatory Overrides
     public override AIStateType GetStateType() { return AIStateType.Pursuit; }
 
+    public void setEyeColor(Color color, float intensity)
+    {
+        if(leftEyeMaterial != null && rightEyeMaterial != null)
+        {
+            leftEyeMaterial.SetColor("_EmissionColor", Color.red * _eyeIntensity);
+            rightEyeMaterial.SetColor("_EmissionColor", Color.red * _eyeIntensity);
+        }
+    }
+
     // Default Handlers
     public override void OnEnterState()
     {
@@ -31,6 +44,13 @@ public class AIHumanRobot_Pursuit1 : AIHumanRobotState
         base.OnEnterState();
         if (_humanRobotStateMachine == null)
             return;
+
+        if(leftEye != null)
+            leftEyeMaterial     =   leftEye.GetComponent<Renderer>().material;
+        if(rightEye != null)
+            rightEyeMaterial    =   rightEye.GetComponent<Renderer>().material;
+
+        setEyeColor(Color.red, _eyeIntensity);
 
         _humanRobotStateMachine.NavAgentControl(true, false);
         _humanRobotStateMachine.seeking     = 0;
@@ -77,6 +97,7 @@ public class AIHumanRobot_Pursuit1 : AIHumanRobotState
 
                 case AITargetType.Visual_Light:
                     _stateMachine.ClearTarget();    // Clear the threat
+                    setEyeColor(Color.yellow, _eyeIntensity);
                     return AIStateType.Alerted;     // Become alert and scan for targets
 
                 case AITargetType.Visual_Food:
@@ -89,6 +110,7 @@ public class AIHumanRobot_Pursuit1 : AIHumanRobotState
             !_humanRobotStateMachine.navAgent.hasPath ||
             _humanRobotStateMachine.navAgent.pathStatus != NavMeshPathStatus.PathComplete)
         {
+            setEyeColor(Color.yellow, _eyeIntensity);
             return AIStateType.Alerted;
         }
 
@@ -219,7 +241,7 @@ public class AIHumanRobot_Pursuit1 : AIHumanRobotState
         return AIStateType.Pursuit;
     }
 
-   /* public override void OnAnimatorIKUpdated()
+    public override void OnAnimatorIKUpdated()
     {
         if (_humanRobotStateMachine == null)
             return;
@@ -235,5 +257,5 @@ public class AIHumanRobot_Pursuit1 : AIHumanRobotState
             _currentLookAtWeight = Mathf.Lerp(_currentLookAtWeight, 0.0f, Time.deltaTime);
             _humanRobotStateMachine.animator.SetLookAtWeight(_currentLookAtWeight);
         }
-    }*/
+    }
 }
