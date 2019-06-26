@@ -27,7 +27,7 @@ public class AIHumanRobot_Idle1 : AIHumanRobotState
 
         _humanRobotStateMachine.speed   = 0;
         _humanRobotStateMachine.seeking = 0;
-        _humanRobotStateMachine.firing = false;
+        _humanRobotStateMachine.firing = _humanRobotStateMachine.animator.GetBool("firing");
         _humanRobotStateMachine.reloading = false;
         _humanRobotStateMachine.crouching = false;
 

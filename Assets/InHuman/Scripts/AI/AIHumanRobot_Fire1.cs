@@ -36,6 +36,7 @@ public class AIHumanRobot_Fire1 : AIHumanRobotState
         leftHand    = _humanRobotStateMachine.animator.GetBoneTransform(HumanBodyBones.LeftUpperArm);
 
         _humanRobotStateMachine.NavAgentControl(true, false);
+        _humanRobotStateMachine.speed = _speed;
         _humanRobotStateMachine.seeking = 0;
         _humanRobotStateMachine.firing = true;
         _humanRobotStateMachine.attackType = 0;
@@ -80,7 +81,7 @@ public class AIHumanRobot_Fire1 : AIHumanRobotState
             _humanRobotStateMachine.speed = 4;
         } else if (Vector3.Distance(_humanRobotStateMachine.transform.position, _humanRobotStateMachine.targetPosition) > keepMaxDistance)
         {
-            _humanRobotStateMachine.speed = 3;
+            _humanRobotStateMachine.speed = _speed;
         } else
         {
             _humanRobotStateMachine.speed = 0;

@@ -72,7 +72,7 @@ public class AISoldierStateMachine : AIStateMachine
         if(_weaponType != EnemyWeaponType.UNARMED)
         {
             Debug.Log("caindo aqui");
-            _weaponSystem = gameObject.transform.root.GetComponentInChildren<OriginalWeaponSystem>();
+            _weaponSystem = gameObject.transform.GetComponentInChildren<OriginalWeaponSystem>();
             Debug.Log(_weaponSystem.weapons.Length);
             Debug.Log(_weaponSystem.weaponIndex);
             _npcWeapon = _weaponSystem.weapons[_weaponSystem.weaponIndex].GetComponent<Weapon>();
