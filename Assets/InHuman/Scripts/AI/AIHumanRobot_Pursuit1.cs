@@ -342,6 +342,7 @@ public class AIHumanRobot_Pursuit1 : AIHumanRobotState
         if (_humanRobotStateMachine == null)
             return;
 
+        /*
         if (Vector3.Angle(_humanRobotStateMachine.transform.forward, _humanRobotStateMachine.targetPosition - _humanRobotStateMachine.transform.position) < _lookAtAngleThreshold)
         {
             _humanRobotStateMachine.animator.SetLookAtPosition(_humanRobotStateMachine.targetPosition + Vector3.up);
@@ -353,6 +354,7 @@ public class AIHumanRobot_Pursuit1 : AIHumanRobotState
             _currentLookAtWeight = Mathf.Lerp(_currentLookAtWeight, 0.0f, Time.deltaTime);
             _humanRobotStateMachine.animator.SetLookAtWeight(_currentLookAtWeight);
         }
+        */
     }
 
     public override void LateUpdate()

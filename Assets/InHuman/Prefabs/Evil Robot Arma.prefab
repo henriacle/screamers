@@ -3723,7 +3723,6 @@ GameObject:
   - component: {fileID: 3104380491727343982}
   - component: {fileID: 3104380491727343981}
   - component: {fileID: 3104380491727343980}
-  - component: {fileID: 3104380491727343979}
   - component: {fileID: 3104380491727343978}
   - component: {fileID: 3104380491727343976}
   - component: {fileID: 3104380491727344273}
@@ -3896,27 +3895,6 @@ MonoBehaviour:
   _eyeColor: {fileID: 2100000, guid: 5c43e7d5b436b6a4b96f8e37f3a9a321, type: 2}
   leftEye: {fileID: 937966418223560721}
   rightEye: {fileID: 1293630097571865860}
---- !u!114 &3104380491727343979
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3104380493445818730}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8393dd17ecad7ca4ab9761b2fc4d6553, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _speed: 3
-  _stoppingDistance: 5
-  _lookAtWeight: 0.7
-  keepMinDistance: 5
-  keepMaxDistance: 7
-  _lookAtAngleThreshold: 15
-  _slerpSpeed: 7
-  chest: {fileID: 2044572905249508989}
-  Offset: {x: 21.08, y: 25.7, z: 0}
 --- !u!114 &3104380491727343978
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3936,7 +3914,7 @@ MonoBehaviour:
   _waypointNetwork: {fileID: 0}
   _randomPatrol: 0
   _currentWaypoint: -1
-  _stoppingDistance: 5
+  _stoppingDistance: 1
   _fov: 200
   _sight: 1
   _hearing: 0.5
