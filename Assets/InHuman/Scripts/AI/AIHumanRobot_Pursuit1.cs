@@ -93,7 +93,7 @@ public class AIHumanRobot_Pursuit1 : AIHumanRobotState
             _humanRobotStateMachine.navAgent.isStopped = false;
         }
         _weaponSystem = gameObject.GetComponentInChildren<OriginalWeaponSystem>();
-        if(_weaponSystem.weapons.Length > 0)
+        if(_weaponSystem != null && _weaponSystem.weapons.Length > 0)
         {
             _npcWeapon = _weaponSystem.weapons[_weaponSystem.weaponIndex].GetComponent<Weapon>();
             _npcWeapon.reloadAutomatically = true;

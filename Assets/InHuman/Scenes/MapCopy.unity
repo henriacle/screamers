@@ -163,6 +163,12 @@ Transform:
   m_Father: {fileID: 2015442866}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &20612018 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2029810371244520774, guid: 237d9e70a50f1a9449acf7c4a80ed7f3,
+    type: 3}
+  m_PrefabInstance: {fileID: 286602757}
+  m_PrefabAsset: {fileID: 0}
 --- !u!111 &24260826
 Animation:
   m_ObjectHideFlags: 0
@@ -1699,6 +1705,11 @@ PrefabInstance:
       propertyPath: m_LocalRotation.w
       value: 0.38548863
       objectReference: {fileID: 0}
+    - target: {fileID: 2050532608498349242, guid: 237d9e70a50f1a9449acf7c4a80ed7f3,
+        type: 3}
+      propertyPath: chest
+      value: 
+      objectReference: {fileID: 20612018}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 237d9e70a50f1a9449acf7c4a80ed7f3, type: 3}
 --- !u!1 &286602758 stripped
@@ -3946,6 +3957,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 567867468}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &570280163 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 8076982156221553712, guid: e886160013e4ec44db42dcf1914355e3,
+    type: 3}
+  m_PrefabInstance: {fileID: 1795908110}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &579093343
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4458,6 +4475,9 @@ MonoBehaviour:
   _resetDialog: 0
   _characterManager: {fileID: 0}
   _currentDialog: 0
+  _dialogAnimator:
+    Animator: {fileID: 0}
+    AnimatorParams: []
   _currentDialogIndex: 0
   _dialogLines: []
   _stateNotSetText: "Chave necess\xE1ria"
@@ -4475,6 +4495,7 @@ MonoBehaviour:
     - Type: 1
       Name: open
       Value: true
+      timeToReset: 0
   _materialControllers: []
   _objectActivators:
   - {fileID: 0}
@@ -4824,6 +4845,9 @@ MonoBehaviour:
   _resetDialog: 0
   _characterManager: {fileID: 0}
   _currentDialog: 0
+  _dialogAnimator:
+    Animator: {fileID: 0}
+    AnimatorParams: []
   _currentDialogIndex: 0
   _dialogLines: []
   _stateNotSetText: "N\xE3o \xE9 poss\xEDvel abrir a porta."
@@ -5123,6 +5147,9 @@ MonoBehaviour:
   _resetDialog: 0
   _characterManager: {fileID: 0}
   _currentDialog: 0
+  _dialogAnimator:
+    Animator: {fileID: 0}
+    AnimatorParams: []
   _currentDialogIndex: 0
   _dialogLines: []
   _stateNotSetText: "Chave necess\xE1ria"
@@ -5140,6 +5167,7 @@ MonoBehaviour:
     - Type: 1
       Name: open
       Value: true
+      timeToReset: 0
   _materialControllers: []
   _objectActivators:
   - {fileID: 0}
@@ -5408,6 +5436,9 @@ MonoBehaviour:
   _resetDialog: 0
   _characterManager: {fileID: 0}
   _currentDialog: 0
+  _dialogAnimator:
+    Animator: {fileID: 0}
+    AnimatorParams: []
   _currentDialogIndex: 0
   _dialogLines: []
   _stateNotSetText: 
@@ -8492,11 +8523,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3104380491727343978, guid: d9f58fb48472d7046ad759118a43b133,
-        type: 3}
-      propertyPath: _stoppingDistance
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d9f58fb48472d7046ad759118a43b133, type: 3}
 --- !u!1 &1461920667
@@ -9072,6 +9098,9 @@ MonoBehaviour:
   _resetDialog: 0
   _characterManager: {fileID: 0}
   _currentDialog: 0
+  _dialogAnimator:
+    Animator: {fileID: 0}
+    AnimatorParams: []
   _currentDialogIndex: 0
   _dialogLines: []
   _stateNotSetText: 
@@ -9929,6 +9958,22 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 805708316, guid: e886160013e4ec44db42dcf1914355e3, type: 3}
+      propertyPath: _dialogLines.Array.data[13].GameStateToSet.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 805708316, guid: e886160013e4ec44db42dcf1914355e3, type: 3}
+      propertyPath: _dialogLines.Array.data[12].AnimatorParams.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 805708316, guid: e886160013e4ec44db42dcf1914355e3, type: 3}
+      propertyPath: _activateStates.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 805708316, guid: e886160013e4ec44db42dcf1914355e3, type: 3}
+      propertyPath: _dialogLines.Array.data[13].AnimatorParams.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 805708316, guid: e886160013e4ec44db42dcf1914355e3, type: 3}
       propertyPath: _characterManager
       value: 
       objectReference: {fileID: 3433540222969195084}
@@ -10111,7 +10156,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 805708316, guid: e886160013e4ec44db42dcf1914355e3, type: 3}
       propertyPath: _dialogLines.Array.data[13].Text
-      value: ...
+      value: "A not\xEDcia foi muito dura para o velho, o cora\xE7\xE3o dele n\xE3o
+        aguentou"
       objectReference: {fileID: 0}
     - target: {fileID: 805708316, guid: e886160013e4ec44db42dcf1914355e3, type: 3}
       propertyPath: _dialogLines.Array.data[13].Value.triggerPlayerChoice
@@ -10297,7 +10343,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 805708316, guid: e886160013e4ec44db42dcf1914355e3, type: 3}
       propertyPath: _dialogLines.Array.data[12].Value.Choices.Array.data[1].Text
-      value: "Realmente esse mundo \xE9 um inferno, fa\xE7a o que quiser."
+      value: "Realmente esse mundo \xE9 um inferno, fez uma crian\xE7a inocente sofrer,
+        o futiro da nossa na\xE7\xE3o, que est\xE1 em frangalhos agora."
       objectReference: {fileID: 0}
     - target: {fileID: 805708316, guid: e886160013e4ec44db42dcf1914355e3, type: 3}
       propertyPath: _dialogLines.Array.data[12].Value.Choices.Array.data[1].jumpToDialogIndex
@@ -10353,6 +10400,50 @@ PrefabInstance:
     - target: {fileID: 805708316, guid: e886160013e4ec44db42dcf1914355e3, type: 3}
       propertyPath: _dialogLines.Array.data[14].Value.triggerPlayerChoice
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 805708316, guid: e886160013e4ec44db42dcf1914355e3, type: 3}
+      propertyPath: _dialogLines.Array.data[13].GameStateToSet.Array.data[0].Key
+      value: VELHO_MORREU
+      objectReference: {fileID: 0}
+    - target: {fileID: 805708316, guid: e886160013e4ec44db42dcf1914355e3, type: 3}
+      propertyPath: _dialogLines.Array.data[13].GameStateToSet.Array.data[0].Value
+      value: TRUE
+      objectReference: {fileID: 0}
+    - target: {fileID: 805708316, guid: e886160013e4ec44db42dcf1914355e3, type: 3}
+      propertyPath: Animator
+      value: 
+      objectReference: {fileID: 570280163}
+    - target: {fileID: 805708316, guid: e886160013e4ec44db42dcf1914355e3, type: 3}
+      propertyPath: _dialogLines.Array.data[12].AnimatorParams.Array.data[0].Name
+      value: surpreso
+      objectReference: {fileID: 0}
+    - target: {fileID: 805708316, guid: e886160013e4ec44db42dcf1914355e3, type: 3}
+      propertyPath: _dialogAnimator.Animator
+      value: 
+      objectReference: {fileID: 570280163}
+    - target: {fileID: 805708316, guid: e886160013e4ec44db42dcf1914355e3, type: 3}
+      propertyPath: _dialogLines.Array.data[12].AnimatorParams.Array.data[0].timeToReset
+      value: 1.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 805708316, guid: e886160013e4ec44db42dcf1914355e3, type: 3}
+      propertyPath: _activateStates.Array.data[5].Key
+      value: FILHOMORTO
+      objectReference: {fileID: 0}
+    - target: {fileID: 805708316, guid: e886160013e4ec44db42dcf1914355e3, type: 3}
+      propertyPath: _activateStates.Array.data[5].Value
+      value: TRUE
+      objectReference: {fileID: 0}
+    - target: {fileID: 805708316, guid: e886160013e4ec44db42dcf1914355e3, type: 3}
+      propertyPath: _dialogLines.Array.data[13].AnimatorParams.Array.data[0].Type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 805708316, guid: e886160013e4ec44db42dcf1914355e3, type: 3}
+      propertyPath: _dialogLines.Array.data[13].AnimatorParams.Array.data[0].Name
+      value: morreu
+      objectReference: {fileID: 0}
+    - target: {fileID: 805708316, guid: e886160013e4ec44db42dcf1914355e3, type: 3}
+      propertyPath: _dialogLines.Array.data[13].AnimatorParams.Array.data[0].Value
+      value: true
       objectReference: {fileID: 0}
     - target: {fileID: 8172132439421450582, guid: e886160013e4ec44db42dcf1914355e3,
         type: 3}

@@ -29,6 +29,7 @@ public class Choice
 [System.Serializable]
 public class DialogState
 {
+    public List<AnimatorParameter> AnimatorParams = new List<AnimatorParameter>();
     public string           Text                    = null;
     public bool             IncrementDialog         = true;
     public bool             resetDialog             = true;

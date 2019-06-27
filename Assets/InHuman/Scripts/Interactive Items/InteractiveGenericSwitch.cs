@@ -10,6 +10,7 @@ public class AnimatorParameter
     public AnimatorParameterType Type = AnimatorParameterType.Bool;
     public string Name = null;
     public string Value = null;
+    public float timeToReset = 0.0f;
 }
 
 [System.Serializable]
@@ -34,6 +35,7 @@ public class InteractiveGenericSwitch : InteractiveItem
     [SerializeField] protected bool _resetDialog = false;
     [SerializeField] protected CharacterManager _characterManager = null;
     [SerializeField] protected int _currentDialog = 0;
+    [SerializeField] public AnimatorConfigurator _dialogAnimator = null;
     [SerializeField] protected int _currentDialogIndex = 0;
     [SerializeField] protected List<DialogState> _dialogLines = new List<DialogState>();
 
@@ -139,11 +141,12 @@ public class InteractiveGenericSwitch : InteractiveItem
         }
     }
 
-    // --------------------------------------------------------------------------
-    // Name	:	GetText
-    // Desc	:	Return different hint text depending on whether the object
-    //			is currently able to be activated
-    // --------------------------------------------------------------------------
+    IEnumerator resetTrigger(float timeToWait, string paramName)
+    {
+        yield return new WaitForSeconds(timeToWait);
+        _dialogAnimator.Animator.ResetTrigger(paramName);
+    }
+
     public override string GetText(out bool doDialog)
     {
         // If we have no application database or this switch is disabled then return null
@@ -155,6 +158,30 @@ public class InteractiveGenericSwitch : InteractiveItem
         _resetDialog = _dialogLines[_currentDialogIndex].resetDialog;
         if (_activated && _doDialog)
         {
+
+
+                if (_dialogAnimator != null)
+                {
+
+                foreach (AnimatorParameter parameter in _dialogLines[_currentDialogIndex].AnimatorParams)
+                {
+                    switch (parameter.Type)
+                    {
+                        case AnimatorParameterType.Bool:
+                            bool boolean = bool.Parse(parameter.Value);
+                            _dialogAnimator.Animator.SetBool(parameter.Name, boolean);
+                            break;
+                        case AnimatorParameterType.Trigger:
+                            if(parameter.Value.Length == 0)
+                            {
+                                _dialogAnimator.Animator.SetTrigger(parameter.Name);
+                                parameter.Value = "run";
+                            }
+                            break;
+                    }
+                }
+            }
+
             if (_dialogLines[_currentDialogIndex].FinishDialog == false)
             {
                 if (_dialogLines[_currentDialogIndex].Value.Answer > 0)
