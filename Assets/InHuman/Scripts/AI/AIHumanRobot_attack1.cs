@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class AIHumanRobot_attack1 : AIHumanRobotState
 {
-    [SerializeField] [Range(0, 10)]             float _speed                = 0.0f;
-    [SerializeField]                            float _stoppingDistance     = 1.0f;                        
-    [SerializeField] [Range(0.0f, 1.0f)]        float _lookAtWeight         = 0.7f;
-    [SerializeField] [Range(0.0f, 90.0f)]       float _lookAtAngleThreshold = 15.0f;
-    [SerializeField]                            float _slerpSpeed           = 5.0f;
+    [SerializeField] [Range(0, 10)]             float       _speed                  = 0.0f;
+    [SerializeField]                            float       _stoppingDistance       = 1.0f;                        
+    [SerializeField] [Range(0.0f, 1.0f)]        float       _lookAtWeight           = 0.7f;
+    [SerializeField] [Range(0.0f, 90.0f)]       float       _lookAtAngleThreshold   = 15.0f;
+    [SerializeField]                            float       _slerpSpeed             = 5.0f;
+    [SerializeField] private                    AudioSource _robotScream            = null;
 
     // Private Variables
     private float _currentLookAtWeight = 0.0f;
-
 
     public override AIStateType GetStateType()
     {

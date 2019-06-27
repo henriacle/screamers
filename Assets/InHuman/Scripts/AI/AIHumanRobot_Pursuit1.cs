@@ -17,13 +17,17 @@ public class AIHumanRobot_Pursuit1 : AIHumanRobotState
     [SerializeField] private float _maxDuration = 40.0f;
     [SerializeField] private GameObject leftEye  = null;
     [SerializeField] private GameObject rightEye = null;
+    [SerializeField] private AudioSource _robotScream = null;
+
     Material leftEyeMaterial = null;
     Material rightEyeMaterial = null;
     private float _eyeIntensity = 5.0f;
+    private bool _screamPlayer = false;
     // Private Fields
     private float _timer = 0.0f;
     private float _repathTimer = 0.0f;
     private float _currentLookAtWeight = 0.0f;
+
 
     // Mandatory Overrides
     public override AIStateType GetStateType() { return AIStateType.Pursuit; }
@@ -32,15 +36,22 @@ public class AIHumanRobot_Pursuit1 : AIHumanRobotState
     {
         if(leftEyeMaterial != null && rightEyeMaterial != null)
         {
-            leftEyeMaterial.SetColor("_EmissionColor", Color.red * _eyeIntensity);
-            rightEyeMaterial.SetColor("_EmissionColor", Color.red * _eyeIntensity);
+            leftEyeMaterial.SetColor("_EmissionColor", color * _eyeIntensity);
+            rightEyeMaterial.SetColor("_EmissionColor", color * _eyeIntensity);
         }
     }
 
     // Default Handlers
     public override void OnEnterState()
     {
-        Debug.Log("Entering Pursuit state");
+        if (!_robotScream.isPlaying 
+            && !_humanRobotStateMachine.dead 
+            && !_humanRobotStateMachine.scream)
+        {
+            _humanRobotStateMachine.scream = true;
+            _robotScream.Play();
+        }
+
         base.OnEnterState();
         if (_humanRobotStateMachine == null)
             return;

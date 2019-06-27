@@ -9,15 +9,31 @@ public class AIHumanRobot_Patrol1 : AIHumanRobotState
     [SerializeField] float _slerpSpeed = 5.0f;
 
     [SerializeField] [Range(0.0f, 3.0f)] float _speed = 1.0f;
+    [SerializeField] private GameObject leftEye = null;
+    [SerializeField] private GameObject rightEye = null;
+    Material leftEyeMaterial = null;
+    Material rightEyeMaterial = null;
+    private float _eyeIntensity = 5.0f;
 
     public override AIStateType GetStateType()
     {
         return AIStateType.Patrol;
     }
 
+    public void setEyeColor(Color color, float intensity)
+    {
+        if (leftEyeMaterial != null && rightEyeMaterial != null)
+        {
+            leftEyeMaterial.SetColor("_EmissionColor", color * _eyeIntensity);
+            rightEyeMaterial.SetColor("_EmissionColor", color * _eyeIntensity);
+        }
+    }
+
     public override void OnEnterState()
     {
         Debug.Log("Entering Patrol State");
+        setEyeColor(Color.blue, _eyeIntensity);
+
         base.OnEnterState();
         if (_humanRobotStateMachine == null)
             return;

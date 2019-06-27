@@ -32,8 +32,8 @@ public class AIHumanRobot_alerted1 : AIHumanRobotState
     {
         if (leftEyeMaterial != null && rightEyeMaterial != null)
         {
-            leftEyeMaterial.SetColor("_EmissionColor", Color.red * _eyeIntensity);
-            rightEyeMaterial.SetColor("_EmissionColor", Color.red * _eyeIntensity);
+            leftEyeMaterial.SetColor("_EmissionColor", color * _eyeIntensity);
+            rightEyeMaterial.SetColor("_EmissionColor", color * _eyeIntensity);
         }
     }
 

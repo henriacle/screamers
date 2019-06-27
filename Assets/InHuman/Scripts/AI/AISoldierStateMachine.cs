@@ -13,6 +13,7 @@ public class AISoldierStateMachine : AIStateMachine
     [SerializeField] [Range(0.0f, 1.0f)]    float       _agression      = 0.5f;
     [SerializeField] [Range(0, 100)]        float       _health         = 100.0f;
     [SerializeField] [Range(0.0f, 1.0f)]    float       _intelligence   = 1.0f;
+    [SerializeField]                        bool        _is_robot       = true;
     [SerializeField]                        EnemyWeaponType   _weaponType     = EnemyWeaponType.UNARMED;
     GameObject   _weapon                                                = null;
     AttachWeapon attachWeapon                                           = null;
@@ -24,6 +25,8 @@ public class AISoldierStateMachine : AIStateMachine
     private bool    _dying      = false;
     private bool    _headShot   = false;
     private bool    _crouching  = false;
+    private bool    _isDead     = false;
+    private bool    _scream     = false;
     private int     _hitType    = 0;
     private int     _attackType = 0;
     private float   _speed      = 0;
@@ -40,13 +43,22 @@ public class AISoldierStateMachine : AIStateMachine
     private OriginalWeaponSystem _weaponSystem = null;
     private Weapon _npcWeapon = null;
 
+
+    public bool replaceWhenDead = false;        // Whether or not a dead replacement should be instantiated.  (Useful for breaking/shattering/exploding effects)
+    public GameObject deadReplacement;          // The prefab to instantiate when this GameObject dies
+    public bool makeExplosion = false;          // Whether or not an explosion prefab should be instantiated
+    public GameObject explosion;				// The explosion prefab to be instantiated
+
+
     //public properties
     public float        fov             { get { return _fov; } }
     public float        sight           { get { return _sight; } }
     public float        hearing         { get { return _hearing; } }
     public float        intelligence    { get { return _intelligence; } }
     public bool         headShot        { get { return _headShot; }}
-    public bool         dying           { get { return _dying; }}
+    public bool         dying           { get { return _dying; } }
+    public bool         dead            { get { return _isDead; } }
+    public bool         scream          { get { return _scream; } set { _scream = value; } }
     public EnemyWeaponType weaponType      {
         get { return _weaponType; }
         set { _weaponType = value; }
@@ -118,25 +130,45 @@ public class AISoldierStateMachine : AIStateMachine
         health = _health + damage;
         bool shouldRagdoll = (health <= 0) ? true : false;
 
-        if (_navAgent)
-            _navAgent.speed = 0;
+        //if (_navAgent)
+            //_navAgent.speed = 0;
+
 
         if (shouldRagdoll)
         {
-            _navAgent.enabled = false;
-            _animator.enabled = false;
-            _collider.enabled = false;
-
-            inMeleeRange    = false;
-            inFireRange     = false;
-
-            foreach (Rigidbody body in _bodyParts)
+            if(_is_robot)
             {
-                if (body)
+                Die();
+            }
+            else
+            {
+                _navAgent.enabled = false;
+                _animator.enabled = false;
+                _collider.enabled = false;
+                _isDead = true;
+                inMeleeRange = false;
+                inFireRange = false;
+
+                foreach (Rigidbody body in _bodyParts)
                 {
-                    body.isKinematic = false;
+                    if (body)
+                    {
+                        body.isKinematic = false;
+                    }
                 }
             }
         }
+    }
+
+    public void Die()
+    {
+        // Make death effects
+        if (replaceWhenDead)
+            Instantiate(deadReplacement, transform.position, transform.rotation);
+        if (makeExplosion)
+            Instantiate(explosion, transform.position, transform.rotation);
+
+        // Remove this GameObject from the scene
+        Destroy(gameObject);
     }
 }
