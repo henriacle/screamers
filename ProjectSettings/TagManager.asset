@@ -19,6 +19,7 @@ TagManager:
   - Ground
   - Kid Evil
   - kid
+  - inimigo
   layers:
   - Default
   - TransparentFX

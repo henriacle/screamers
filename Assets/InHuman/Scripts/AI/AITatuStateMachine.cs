@@ -23,6 +23,7 @@ public class AITatuStateMachine : AIStateMachine
     private int _attackHash = Animator.StringToHash("Attack");
     private int _crouchingHash = Animator.StringToHash("Crouching");
     private int _weaponTypeHash = Animator.StringToHash("Weapon Type");
+    private int _headbuttHash = Animator.StringToHash("headbutt");
     private OriginalWeaponSystem _weaponSystem = null;
     private Weapon _npcWeapon = null;
     [SerializeField] bool _is_robot = true;
@@ -43,6 +44,7 @@ public class AITatuStateMachine : AIStateMachine
     private bool _scream = false;
     private int _hitType = 0;
     private int _attackType = 0;
+    private int _headbutt = 0;
 
 
     //public properties
@@ -51,6 +53,7 @@ public class AITatuStateMachine : AIStateMachine
     public float hearing { get { return _hearing; } }
     public float intelligence { get { return _intelligence; } }
     public int seeking { get { return _seeking; } set { _seeking = value; } }
+    public int headbutt { get { return _headbutt; } set { _headbutt = value; } }
     public float health { get { return _health; } set { _health = value; } }
     public float speed
     {
@@ -61,7 +64,7 @@ public class AITatuStateMachine : AIStateMachine
     public void gameObjectHit(HitInfo hit)
     {
         AIStateMachine stateMachine = _gameSceneManager.GetAIStateMachine(hit.hit.rigidbody.GetInstanceID());
-        if (hit.aiBodyPart > 0)
+        if (hit.tag == "inimigo")
         {
             takeDamage(hit.hit.point, 5.0f, hit.damage, hit.hit.rigidbody);
         }
@@ -134,6 +137,7 @@ public class AITatuStateMachine : AIStateMachine
             _animator.SetBool(_crouchingHash, _crouching);
             _animator.SetInteger(_seekingHash, _seeking);
             _animator.SetInteger(_attackHash, _attackType);
+            _animator.SetInteger(_headbuttHash, _headbutt);
         }
     }
 }

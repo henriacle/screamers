@@ -96,7 +96,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1178887343988977052
 Transform:
   m_ObjectHideFlags: 0
@@ -192,9 +192,9 @@ MonoBehaviour:
   shellSpitTorqueY: 5
   shellTorqueRandom: 1
   shellSpitPosition: {fileID: 1178887344983304568}
-  makeMuzzleEffects: 0
+  makeMuzzleEffects: 1
   muzzleEffects:
-  - {fileID: 100002, guid: e840492206edf364baccc15150e2cc63, type: 3}
+  - {fileID: 100002, guid: c109a314fe7c44240a4b14cc569cb261, type: 3}
   muzzleEffectsPosition: {fileID: 1178887344858355781}
   makeHitEffects: 1
   hitEffects:
@@ -357,7 +357,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1178887344858355786}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0.017, y: 0.593, z: -0.051}
+  m_LocalPosition: {x: -0.116, y: 0.646, z: -0.032}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1178887343988977052}
@@ -496,7 +496,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1178887345419715459}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0.282, y: 0.467, z: -0.307}
+  m_LocalPosition: {x: -0.142, y: 0.467, z: -0.104}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1178887343988977052}
@@ -604,8 +604,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1178887345545932854}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0.17, y: 0.12, z: 0.11}
+  m_LocalRotation: {x: -0.5, y: 0.5, z: 0.5, w: 0.5}
+  m_LocalPosition: {x: 0.07, y: 0.12, z: 0.11}
   m_LocalScale: {x: 1.3, y: 1.3, z: 1.3}
   m_Children:
   - {fileID: 1178887345545440284}
@@ -614,7 +614,7 @@ Transform:
   - {fileID: 1178887345545440272}
   m_Father: {fileID: 1178887343988977052}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 90, z: 0}
 --- !u!1 &1178887345545932856
 GameObject:
   m_ObjectHideFlags: 0
@@ -3729,7 +3729,7 @@ GameObject:
   - component: {fileID: 1610597251}
   m_Layer: 8
   m_Name: AI Entity
-  m_TagString: Untagged
+  m_TagString: inimigo
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

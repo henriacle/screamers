@@ -20,6 +20,8 @@ public class AITatuIdle : AITatuState
         if (_tatuStateMachine == null)
             return;
 
+        _tatuStateMachine.headbutt = 1;
+
         _idleTime = Random.Range(_idleTimeRange.x, _idleTimeRange.y);
         _timer = 0.0f;
 

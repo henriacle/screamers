@@ -46,6 +46,7 @@ public class HitInfo {
     public int aiBodyPart;
     public int playerLayer;
     public int flashLightLayer;
+    public string tag;
 }
 
 [System.Serializable]
@@ -633,8 +634,10 @@ public class Weapon : MonoBehaviour
 					damage *= heat * powerMultiplier;
 					heat = 0.0f;
 				}
+                
 
                 HitInfo hitInfo = new HitInfo();
+                hitInfo.tag = hit.collider.tag;
                 hitInfo.damage = -damage;
                 hitInfo.hit = hit;
                 hitInfo.force = power;
@@ -644,6 +647,7 @@ public class Weapon : MonoBehaviour
                 hitInfo.flashLightLayer = 1 << _flashlightLayer;
 
                 // Damage
+                Debug.Log(hit.collider.name);
                 hit.collider.gameObject.SendMessageUpwards("ChangeHealth", -damage, SendMessageOptions.DontRequireReceiver);
                 hit.collider.gameObject.SendMessageUpwards("gameObjectHit", hitInfo, SendMessageOptions.DontRequireReceiver);
 

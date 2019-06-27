@@ -36,6 +36,7 @@ public class AiTatu_attack1 : AITatuState
         _directionChangeTimer   = 0.0f;
         _body                   = gameObject.GetComponent<Rigidbody>();
         _attackAudio            = gameObject.GetComponent<AudioSource>();
+        _tatuStateMachine.headbutt = 1;
 
         // Configure State Machine
         _tatuStateMachine.NavAgentControl(false, false);
@@ -93,48 +94,31 @@ public class AiTatu_attack1 : AITatuState
         return AIStateType.Attack;
     }
 
-    // ---------------------------------------------------------
-    // Name	:	Jump
-    // Desc	:	Manual OffMeshLInk traversal using an Animation
-    //			Curve to control agent height.
-    // ---------------------------------------------------------
     IEnumerator Jump(float duration)
     {
         waitToAttackAgain = true;
         _attackAudio.Play();
-        // Get the current OffMeshLink data
-        // OffMeshLinkData data = _navAgent.currentOffMeshLinkData;
 
-        // Start Position is agent current position
         Vector3 startPos = _tatuStateMachine.transform.position;
 
-        // End position is fetched from OffMeshLink data and adjusted for baseoffset of agent
         Vector3 endPos = _tatuStateMachine.targetPosition + (_tatuStateMachine.navAgent.baseOffset * Vector3.up);
         endPos.x = endPos.x - 1.0f;
         endPos.z = endPos.z - 1.0f;
         endPos.y = endPos.y - 1.0f;
-        // Used to keep track of time
+
         float time = 0.0f;
 
-        // Keeo iterating for the passed duration
+
         while (time <= duration)
         {
-            // Calculate normalized time
             float t = time / duration;
             
-            // Lerp between start position and end position and adjust height based on evaluation of t on Jump Curve
             _tatuStateMachine.transform.position = Vector3.Lerp(startPos, endPos, t) + (JumpCurve.Evaluate(t) * Vector3.up);
 
-            // Accumulate time and yield each frame
             time += Time.deltaTime;
             yield return null;
         }
 
-        // NOTE : Added this for a bit of stability to make sure the
-        //        Agent is EXACTLY on the end position of the off mesh
-        //		  link before completeing the link.
         _tatuStateMachine.navAgent.transform.position = endPos;
-        //_body.useGravity = true;
-        //_body.velocity.Set(_body.velocity.x, 0, _body.velocity.z);
     }
 }

@@ -295,12 +295,12 @@ GameObject:
   - component: {fileID: 2870776175141200405}
   - component: {fileID: 2870776175141299390}
   - component: {fileID: 2870776175141299385}
-  - component: {fileID: 2870776175141299384}
   - component: {fileID: 2870776175141299386}
   - component: {fileID: 2217587771777227363}
+  - component: {fileID: 2217587771777227362}
   m_Layer: 8
   m_Name: tatu
-  m_TagString: Untagged
+  m_TagString: inimigo
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -469,19 +469,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &2870776175141299384
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2870776175141299389}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.88, y: 0.63, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!82 &2870776175141299386
 AudioSource:
   m_ObjectHideFlags: 0
@@ -597,6 +584,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!135 &2217587771777227362
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2870776175141299389}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2870776175706369899
 GameObject:
   m_ObjectHideFlags: 0
@@ -770,7 +770,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2541797543917750515}
-  m_Layer: 0
+  - component: {fileID: 1082333449395367795}
+  - component: {fileID: 1082333449395367794}
+  m_Layer: 10
   m_Name: Bone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -792,6 +794,33 @@ Transform:
   m_Father: {fileID: 3640650621135479375}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &1082333449395367795
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3896818077978874285}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 71.9
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1082333449395367794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3896818077978874285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d29943ffe8d3cb24194f601538c5436c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _parameter: headbutt
+  _animator: {fileID: 2217587771777227363}
 --- !u!1 &3935232968163969631
 GameObject:
   m_ObjectHideFlags: 0
