@@ -625,7 +625,7 @@ public class Weapon : MonoBehaviour
 			Ray ray = new Ray(raycastStartSpot.position, direction);
 			RaycastHit hit;
 
-            if (Physics.Raycast(ray, out hit, range, LayerMask.GetMask("AI Entity", "Player")))
+            if (Physics.Raycast(ray, out hit, range, LayerMask.GetMask("AI Entity", "Player", "Default")))
 			{
 				// Warmup heat
 				float damage = power;
