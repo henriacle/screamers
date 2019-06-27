@@ -625,7 +625,7 @@ public class Weapon : MonoBehaviour
 			Ray ray = new Ray(raycastStartSpot.position, direction);
 			RaycastHit hit;
 
-			if (Physics.Raycast(ray, out hit, range))
+            if (Physics.Raycast(ray, out hit, range, LayerMask.GetMask("AI Entity", "Player")))
 			{
 				// Warmup heat
 				float damage = power;
@@ -647,10 +647,9 @@ public class Weapon : MonoBehaviour
                 hitInfo.flashLightLayer = 1 << _flashlightLayer;
 
                 // Damage
-                Debug.Log(hit.collider.name);
-                Debug.Log(hit.collider.tag);
                 hit.collider.gameObject.SendMessageUpwards("ChangeHealth", -damage, SendMessageOptions.DontRequireReceiver);
                 hit.collider.gameObject.SendMessageUpwards("gameObjectHit", hitInfo, SendMessageOptions.DontRequireReceiver);
+
 
                 if (shooterAIEnabled)
 				{

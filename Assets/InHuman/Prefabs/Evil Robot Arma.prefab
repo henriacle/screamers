@@ -3662,7 +3662,7 @@ GameObject:
   - component: {fileID: 3104380493408093684}
   m_Layer: 10
   m_Name: Sensor
-  m_TagString: Untagged
+  m_TagString: Sensor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

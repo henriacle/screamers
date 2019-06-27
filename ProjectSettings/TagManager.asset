@@ -20,6 +20,7 @@ TagManager:
   - Kid Evil
   - kid
   - inimigo
+  - Sensor
   layers:
   - Default
   - TransparentFX
