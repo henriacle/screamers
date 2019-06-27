@@ -648,6 +648,7 @@ public class Weapon : MonoBehaviour
 
                 // Damage
                 Debug.Log(hit.collider.name);
+                Debug.Log(hit.collider.tag);
                 hit.collider.gameObject.SendMessageUpwards("ChangeHealth", -damage, SendMessageOptions.DontRequireReceiver);
                 hit.collider.gameObject.SendMessageUpwards("gameObjectHit", hitInfo, SendMessageOptions.DontRequireReceiver);
 

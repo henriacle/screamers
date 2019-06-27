@@ -36,7 +36,7 @@ public class AiTatu_attack1 : AITatuState
         _directionChangeTimer   = 0.0f;
         _body                   = gameObject.GetComponent<Rigidbody>();
         _attackAudio            = gameObject.GetComponent<AudioSource>();
-        _tatuStateMachine.headbutt = 1;
+        _tatuStateMachine.headbutt = 1.0f;
 
         // Configure State Machine
         _tatuStateMachine.NavAgentControl(false, false);
@@ -72,6 +72,7 @@ public class AiTatu_attack1 : AITatuState
             
             if (!waitToAttackAgain)
             {
+                _tatuStateMachine.jump = true;
                 StartCoroutine(Jump(0.3f));
                 return AIStateType.Pursuit;
             }
@@ -96,6 +97,7 @@ public class AiTatu_attack1 : AITatuState
 
     IEnumerator Jump(float duration)
     {
+        _tatuStateMachine.jump = false;
         waitToAttackAgain = true;
         _attackAudio.Play();
 
@@ -120,5 +122,6 @@ public class AiTatu_attack1 : AITatuState
         }
 
         _tatuStateMachine.navAgent.transform.position = endPos;
+        _tatuStateMachine.headbutt = 0.0f;
     }
 }

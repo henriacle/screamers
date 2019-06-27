@@ -9,7 +9,7 @@ public class AIDamageTrigger : MonoBehaviour
     //private
     private AIStateMachine      _stateMachine   = null;
     [SerializeField] Animator   _animator       = null;
-    int                         _parameterHash = -1;
+    int                         _parameterHash  = -1;
 
     private void Start()
     {
@@ -21,11 +21,9 @@ public class AIDamageTrigger : MonoBehaviour
         if (!_animator)
             return;
 
-        Debug.Log(_animator.GetFloat(_parameterHash));
-
         if (other.gameObject.CompareTag("Player") && _animator.GetFloat(_parameterHash) > 0.9f)
         {
-            Debug.Log("entrando aqui");
+            Debug.Log("batendo damage");
             CharacterManager charManager = other.GetComponent<CharacterManager>();
             charManager.meleeDamage(2f);
         }

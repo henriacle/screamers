@@ -24,6 +24,7 @@ public class AITatuStateMachine : AIStateMachine
     private int _crouchingHash = Animator.StringToHash("Crouching");
     private int _weaponTypeHash = Animator.StringToHash("Weapon Type");
     private int _headbuttHash = Animator.StringToHash("headbutt");
+    private int _jumpHash = Animator.StringToHash("jump");
     private OriginalWeaponSystem _weaponSystem = null;
     private Weapon _npcWeapon = null;
     [SerializeField] bool _is_robot = true;
@@ -42,9 +43,10 @@ public class AITatuStateMachine : AIStateMachine
     private bool _crouching = false;
     private bool _isDead = false;
     private bool _scream = false;
+    private bool _jump = false;
     private int _hitType = 0;
     private int _attackType = 0;
-    private int _headbutt = 0;
+    private float _headbutt = 0;
 
 
     //public properties
@@ -53,7 +55,8 @@ public class AITatuStateMachine : AIStateMachine
     public float hearing { get { return _hearing; } }
     public float intelligence { get { return _intelligence; } }
     public int seeking { get { return _seeking; } set { _seeking = value; } }
-    public int headbutt { get { return _headbutt; } set { _headbutt = value; } }
+    public float headbutt { get { return _headbutt; } set { _headbutt = value; } }
+    public bool jump { get { return _jump; } set { _jump = value; } }
     public float health { get { return _health; } set { _health = value; } }
     public float speed
     {
@@ -132,12 +135,13 @@ public class AITatuStateMachine : AIStateMachine
         if (_animator != null)
         {
             _animator.SetFloat(_speedHash, _speed);
+            _animator.SetBool(_jumpHash, _jump);
             _animator.SetBool(_firingHash, _firing);
             _animator.SetBool(_reloadingHash, _reloading);
             _animator.SetBool(_crouchingHash, _crouching);
             _animator.SetInteger(_seekingHash, _seeking);
             _animator.SetInteger(_attackHash, _attackType);
-            _animator.SetInteger(_headbuttHash, _headbutt);
+            _animator.SetFloat(_headbuttHash, _headbutt);
         }
     }
 }

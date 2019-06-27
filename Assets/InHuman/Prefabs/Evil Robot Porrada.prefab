@@ -2673,7 +2673,7 @@ GameObject:
   - component: {fileID: 4923985977977209}
   m_Layer: 14
   m_Name: mixamorig:Hips
-  m_TagString: Untagged
+  m_TagString: inimigo
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2985,7 +2985,7 @@ GameObject:
   - component: {fileID: 7160757522541592989}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: inimigo
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
