@@ -18,6 +18,14 @@ public class AIHumanRobot_Pursuit1 : AIHumanRobotState
     [SerializeField] private GameObject leftEye  = null;
     [SerializeField] private GameObject rightEye = null;
     [SerializeField] private AudioSource _robotScream = null;
+    [SerializeField] float _stoppingDistance = 1.0f;
+    [SerializeField] float keepMinDistance = 5f;
+    [SerializeField] float keepMaxDistance = 9f;
+    private OriginalWeaponSystem _weaponSystem = null;
+    private Weapon _npcWeapon = null;
+    [SerializeField] Transform chest;
+    private Transform rightHand;
+    private Transform leftHand;
 
     Material leftEyeMaterial = null;
     Material rightEyeMaterial = null;
@@ -27,6 +35,7 @@ public class AIHumanRobot_Pursuit1 : AIHumanRobotState
     private float _timer = 0.0f;
     private float _repathTimer = 0.0f;
     private float _currentLookAtWeight = 0.0f;
+    public Vector3 Offset;
 
 
     // Mandatory Overrides
@@ -44,6 +53,10 @@ public class AIHumanRobot_Pursuit1 : AIHumanRobotState
     // Default Handlers
     public override void OnEnterState()
     {
+        chest = _humanRobotStateMachine.animator.GetBoneTransform(HumanBodyBones.Chest);
+        rightHand = _humanRobotStateMachine.animator.GetBoneTransform(HumanBodyBones.RightUpperArm);
+        leftHand = _humanRobotStateMachine.animator.GetBoneTransform(HumanBodyBones.LeftUpperArm);
+
         if (!_robotScream.isPlaying 
             && !_humanRobotStateMachine.dead 
             && !_humanRobotStateMachine.scream)
@@ -79,7 +92,37 @@ public class AIHumanRobot_Pursuit1 : AIHumanRobotState
             _humanRobotStateMachine.navAgent.SetDestination(_humanRobotStateMachine.targetPosition);
             _humanRobotStateMachine.navAgent.isStopped = false;
         }
+        _weaponSystem = gameObject.GetComponentInChildren<OriginalWeaponSystem>();
+        if(_weaponSystem.weapons.Length > 0)
+        {
+            _npcWeapon = _weaponSystem.weapons[_weaponSystem.weaponIndex].GetComponent<Weapon>();
+            _npcWeapon.reloadAutomatically = true;
+        }
+    }
 
+    public override void OnExitState()
+    {
+        _humanRobotStateMachine.attackType = 0;
+    }
+
+    public void OnEasyWeaponsLaunch()
+    {
+        Debug.Log("easy weapons launch");
+    }
+
+    IEnumerator OnEasyWeaponsFire()
+    {
+        yield return new WaitForSeconds(1.5f);
+        _npcWeapon.canFire = true;
+    }
+
+    IEnumerator OnEasyWeaponsReload()
+    {
+        _humanRobotStateMachine.reloading = true;
+        yield return new WaitForSeconds(1.5f);
+        _npcWeapon.currentAmmo = _npcWeapon.ammoCapacity;
+        _humanRobotStateMachine.reloading = false;
+        _npcWeapon.canFire = true;
     }
 
     public override AIStateType OnUpdate()
@@ -95,10 +138,52 @@ public class AIHumanRobot_Pursuit1 : AIHumanRobotState
             return AIStateType.Attack;
         }
 
-        if (_stateMachine.targetType == AITargetType.Visual_Player && _humanRobotStateMachine.inFireRange && _humanRobotStateMachine.weaponType != EnemyWeaponType.UNARMED)
+        if (_stateMachine.targetType == AITargetType.Visual_Player 
+            && _humanRobotStateMachine.inFireRange 
+            && _humanRobotStateMachine.weaponType != EnemyWeaponType.UNARMED)
         {
+            Vector3 targetPos;
+            Quaternion newRot;
+
             _humanRobotStateMachine.firing = true;
-            return AIStateType.Fire;
+            if (Vector3.Distance(_humanRobotStateMachine.transform.position, _humanRobotStateMachine.targetPosition) < keepMinDistance)
+            {
+                _humanRobotStateMachine.speed = 4;
+            }
+            else if (Vector3.Distance(_humanRobotStateMachine.transform.position, _humanRobotStateMachine.targetPosition) > keepMaxDistance)
+            {
+                _humanRobotStateMachine.speed = _speed;
+            }
+            else
+            {
+                _humanRobotStateMachine.speed = 0;
+            }
+
+            _humanRobotStateMachine.SetTarget(_stateMachine.VisualThreat);
+
+            if (_humanRobotStateMachine.inMeleeRange)
+            {
+                return AIStateType.Attack;
+            };
+
+            if (!_humanRobotStateMachine.reloading)
+            {
+                _humanRobotStateMachine.firing = true;
+            }
+
+            targetPos = _humanRobotStateMachine.targetPosition;
+            targetPos.y = _humanRobotStateMachine.transform.position.y - 20.0f;
+            newRot = Quaternion.LookRotation(targetPos - _humanRobotStateMachine.transform.position);
+            _humanRobotStateMachine.transform.rotation = Quaternion.Slerp(_humanRobotStateMachine.transform.rotation, newRot, Time.deltaTime * _slerpSpeed);
+
+            _humanRobotStateMachine.attackType = 0;
+
+            if (_npcWeapon.currentAmmo > 0 && _npcWeapon.canFire)
+            {
+                _npcWeapon.AIFiring();
+            }
+
+            return AIStateType.Pursuit;
         }
 
         if (_humanRobotStateMachine.isTargetReached)
@@ -267,6 +352,20 @@ public class AIHumanRobot_Pursuit1 : AIHumanRobotState
         {
             _currentLookAtWeight = Mathf.Lerp(_currentLookAtWeight, 0.0f, Time.deltaTime);
             _humanRobotStateMachine.animator.SetLookAtWeight(_currentLookAtWeight);
+        }
+    }
+
+    public override void LateUpdate()
+    {
+        if (!_humanRobotStateMachine) return;
+
+        if (_humanRobotStateMachine.VisualThreat.type == AITargetType.Visual_Player
+        && _humanRobotStateMachine.targetPosition != null
+        && _humanRobotStateMachine.inFireRange
+        && chest != null)
+        {
+            chest.LookAt(_humanRobotStateMachine.targetPosition);
+            chest.rotation = chest.rotation * Quaternion.Euler(Offset);
         }
     }
 }

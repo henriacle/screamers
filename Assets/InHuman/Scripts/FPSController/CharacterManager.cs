@@ -79,7 +79,6 @@ public class CharacterManager : MonoBehaviour
 
     public void takeDamage(Vector3 position, float force, float damage, Rigidbody bodyPart, int hitDirection = 0)
     {
-        if (invencible) return;
         doDamage(damage);
     }
 
@@ -112,7 +111,11 @@ public class CharacterManager : MonoBehaviour
 
     private void doDamage(float damage)
     {
-        playerCurrentHealth = _currentHealth - damage;
+        if (!invencible)
+        {
+            playerCurrentHealth = _currentHealth - damage;
+        };
+
         _lifeRectWidth = 250 - (250 - (250 * playerCurrentHealth / 100));
         _lifeRect.sizeDelta = new Vector2(_lifeRectWidth, _lifeRect.rect.height);
         _lifeRect.ForceUpdateRectTransforms();
