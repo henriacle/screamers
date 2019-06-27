@@ -122,8 +122,8 @@ public class CharacterManager : MonoBehaviour
 
         if (_cameraBloodEffect != null)
         {
-            _cameraBloodEffect.minBloodAmount = (1.0f - 100 / 100.0f);
-            _cameraBloodEffect.bloodAmount = Mathf.Min(_cameraBloodEffect.minBloodAmount + 0.3f, 1.0f);
+            _cameraBloodEffect.minBloodAmount = 0;
+            _cameraBloodEffect.bloodAmount = Mathf.Min((1.5f - 100 / 100.0f) + 0.3f, 1.0f);
         }
 
         if (playerCurrentHealth <= 0)
