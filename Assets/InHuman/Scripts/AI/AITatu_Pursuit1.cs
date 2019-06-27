@@ -28,7 +28,6 @@ public class AITatu_Pursuit1 : AITatuState
     // Default Handlers
     public override void OnEnterState()
     {
-        Debug.Log("entering pursuit state");
         base.OnEnterState();
         if (_tatuStateMachine == null)
             return;
@@ -36,7 +35,6 @@ public class AITatu_Pursuit1 : AITatuState
         _tatuStateMachine.NavAgentControl(true, false);
         _tatuStateMachine.seeking = 0;
         _currentLookAtWeight = 0.0f;
-
         _timer = 0.0f;
         _repathTimer = 0.0f;
 
@@ -63,20 +61,6 @@ public class AITatu_Pursuit1 : AITatuState
             return AIStateType.Attack;
         }
 
-        if (_tatuStateMachine.isTargetReached)
-        {
-            switch (_stateMachine.targetType)
-            {
-
-                case AITargetType.Visual_Light:
-                    _stateMachine.ClearTarget();    // Clear the threat
-                    return AIStateType.Alerted;     // Become alert and scan for targets
-
-                case AITargetType.Visual_Food:
-                    return AIStateType.Feeding;
-            }
-        }
-
 
         if (_tatuStateMachine.navAgent.isPathStale ||
             !_tatuStateMachine.navAgent.hasPath ||
@@ -87,10 +71,13 @@ public class AITatu_Pursuit1 : AITatuState
 
 
         if (_tatuStateMachine.navAgent.pathPending)
+        {
             _tatuStateMachine.speed = 0;
+        }
         else
         {
             _tatuStateMachine.speed = _speed;
+            _tatuStateMachine.animator.SetFloat("Speed", _speed);
 
             if (!_tatuStateMachine.useRootRotation &&
                 _tatuStateMachine.targetType == AITargetType.Visual_Player
