@@ -1129,7 +1129,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.000018651364, y: 0.25672853, z: 0.000024363399}
+  m_ConnectedAnchor: {x: 0.000002349494, y: 0.2567299, z: 0.0000070035458}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: -1, z: 0}
   m_TwistLimitSpring:
@@ -1393,7 +1393,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.0039672176, y: 0.38270527, z: 0.013812393}
+  m_ConnectedAnchor: {x: 0.00396723, y: 0.38270724, z: 0.013824412}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: 1}
   m_TwistLimitSpring:
@@ -1502,7 +1502,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: -1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.14397, y: 0.23438963, z: 0.01146689}
+  m_ConnectedAnchor: {x: -0.14397573, y: 0.23438968, z: 0.011465359}
   serializedVersion: 2
   m_SwingAxis: {x: 1, y: 0, z: 0}
   m_TwistLimitSpring:
@@ -1797,7 +1797,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: -1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.14071602, y: 0.23186934, z: 0.020868924}
+  m_ConnectedAnchor: {x: 0.1407248, y: 0.23186928, z: 0.02087089}
   serializedVersion: 2
   m_SwingAxis: {x: -1, y: 0, z: 0}
   m_TwistLimitSpring:
@@ -1937,7 +1937,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: -1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.000024169218, y: 0.25672564, z: 0.000019952655}
+  m_ConnectedAnchor: {x: 0.00000019837171, y: 0.25672925, z: 0.00000032782555}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: -1, z: 0}
   m_TwistLimitSpring:
@@ -2138,7 +2138,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: -1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.09237245, y: -0.057474192, z: -0.025159016}
+  m_ConnectedAnchor: {x: -0.09239133, y: -0.057473697, z: -0.025154019}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: 1}
   m_TwistLimitSpring:
@@ -2340,7 +2340,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: -1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.0000019669533, y: 0.55367595, z: -0.00002026558}
+  m_ConnectedAnchor: {x: 0.00001065433, y: 0.55367935, z: -0.0000030472875}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: 1}
   m_TwistLimitSpring:
@@ -2602,7 +2602,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: -1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.0000012665987, y: 0.5531742, z: 0.000011503696}
+  m_ConnectedAnchor: {x: -0.0000053346157, y: 0.55317193, z: 0.0000036358833}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: 1}
   m_TwistLimitSpring:
@@ -3321,7 +3321,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: -1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.092399, y: -0.05747519, z: -0.02090545}
+  m_ConnectedAnchor: {x: 0.09238867, y: -0.057474162, z: -0.020891286}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: 1}
   m_TwistLimitSpring:
@@ -3460,7 +3460,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.0001779669, y: 0.22449142, z: -0.01717466}
+  m_ConnectedAnchor: {x: 0.00018460199, y: 0.2244933, z: -0.017174372}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: 1}
   m_TwistLimitSpring:
@@ -3831,8 +3831,8 @@ MonoBehaviour:
   _turnOnSpotThreshold: 85
   _slerpSpeed: 5
   _speed: 1
-  leftEye: {fileID: 0}
-  rightEye: {fileID: 0}
+  leftEye: {fileID: 937966418223560721}
+  rightEye: {fileID: 1293630097571865860}
 --- !u!114 &3104380491727343982
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3946,7 +3946,7 @@ MonoBehaviour:
   _lookAtWeight: 0.7
   _lookAtAngleThreshold: 15
   _slerpSpeed: 5
-  _robotScream: {fileID: 0}
+  _robotScream: {fileID: 1610597251}
 --- !u!195 &3104380491727344273
 NavMeshAgent:
   m_ObjectHideFlags: 0
