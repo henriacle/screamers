@@ -74,7 +74,7 @@ public class AIHumanRobot_Patrol2 : AIHumanRobotState
             Debug.Log(_appManager.GetGameState(_keyToDestinationReached));
 
             if (_humanRobotStateMachine.navAgent.pathStatus == NavMeshPathStatus.PathComplete 
-                && _appManager.GetGameState(_keyToDestinationReached) == "FALSE" 
+                && _appManager.GetGameState(_keyToDestinationReached) == "TRUE" 
                 && _turnMetal.turnedIntoMetal)
             {
                 if (_appManager != null)

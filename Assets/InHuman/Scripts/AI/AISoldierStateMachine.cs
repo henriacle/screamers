@@ -117,7 +117,8 @@ public class AISoldierStateMachine : AIStateMachine
     public void gameObjectHit(HitInfo hit)
     {
         AIStateMachine stateMachine = _gameSceneManager.GetAIStateMachine(hit.hit.rigidbody.GetInstanceID());
-        if(hit.tag == "inimigo")
+        Debug.Log(hit.tag);
+        if (hit.tag == "inimigo")
         {
             takeDamage(hit.hit.point, 5.0f, hit.damage, hit.hit.rigidbody);
         }

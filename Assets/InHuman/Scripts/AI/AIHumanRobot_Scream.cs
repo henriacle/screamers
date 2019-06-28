@@ -39,13 +39,13 @@ public class AIHumanRobot_Scream : AIHumanRobotState
             return AIStateType.Idle;
 
         StartCoroutine(Scream());
-
         return AIStateType.Patrol;
     }
 
     IEnumerator Scream()
     {
         _humanRobotStateMachine.animator.SetBool("Scream", true);
+        _humanRobotStateMachine.animator.SetFloat("Speed", 0.0f);
         yield return new WaitForSeconds(1.3f);
         _humanRobotStateMachine.animator.SetBool("Scream", false);
     }
