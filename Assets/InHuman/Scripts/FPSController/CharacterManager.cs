@@ -22,6 +22,7 @@ public class CharacterManager : MonoBehaviour
     [SerializeField] private PlayerHUD _playerHUD = null;
     [SerializeField] private bool invencible = false;
     [SerializeField] private GameObject _playerObjects = null;
+    [SerializeField] private float hpup = 33.0f;
 
     // Pain Damage Audio
     [SerializeField] private AudioSource     _punchSound    = null;
@@ -52,6 +53,21 @@ public class CharacterManager : MonoBehaviour
     public UnityStandardAssets.Characters.FirstPerson.FirstPersonController controller;
 
     public FirstPersonController fpsController { get { return _fpsController; } }
+
+
+    public void medpick()
+    {
+        playerCurrentHealth = _currentHealth + hpup;
+
+        if(playerCurrentHealth > 100.0f)
+        {
+            playerCurrentHealth = 100.0f;
+        }
+
+        _lifeRectWidth = 250 - (250 - (250 * playerCurrentHealth / 100));
+        _lifeRect.sizeDelta = new Vector2(_lifeRectWidth, _lifeRect.rect.height);
+        _lifeRect.ForceUpdateRectTransforms();
+    }
 
     private void Start()
     {
@@ -128,7 +144,7 @@ public class CharacterManager : MonoBehaviour
 
         if (playerCurrentHealth <= 0)
         {
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene(1);
         }
     }
 

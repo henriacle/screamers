@@ -6,9 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/InHuman/Scenes/MapCopy.unity
-    guid: 4c8db163800cf934a942d861f87b0e3a
-  - enabled: 0
-    path: Assets/InHuman/Scenes/Map1.unity
-    guid: 898d9683b18fd0f4aa6ef55bcefbcab2
+    path: Assets/InHuman_novo/Menu/Intro.unity
+    guid: 16539671136a32f4e937afe706e10666
+  - enabled: 1
+    path: Assets/InHuman_novo/fase main.unity
+    guid: 131255a148da6b14385fb0f5a000733d
+  - enabled: 1
+    path: Assets/InHuman_novo/Creditos.unity
+    guid: af12b84fe721d744692ef0202d2d5602
   m_configObjects: {}

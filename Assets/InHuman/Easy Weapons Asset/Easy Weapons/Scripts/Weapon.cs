@@ -222,6 +222,7 @@ public class Weapon : MonoBehaviour
     private int _aiBodyPartLayer = -1;
     private int _playerLayer = -1;
     private int _flashlightLayer = -1;
+    internal bool activeInHierarchy;
 
     // Use this for initialization
     void Start()

@@ -8,6 +8,8 @@ public class checkchave : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _mapText = null;
 
+    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +25,7 @@ public class checkchave : MonoBehaviour
         if(appManager.GetGameState("CHAVE") == "TRUE")
         {
             _mapText.text = "Chave Obtida";
+           
         }
     }
 }

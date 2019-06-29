@@ -7,6 +7,7 @@ using TMPro;
 public class checkmapa : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _mapText = null;
+    public bool pausablemap = false;
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +24,9 @@ public class checkmapa : MonoBehaviour
         if (appManager.GetGameState("MAPA") == "TRUE")
         {
             _mapText.text = "Mapa Obtido";
+
+            pausablemap = true;
+
         }
     }
 }
